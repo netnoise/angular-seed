@@ -1,0 +1,29 @@
+<mat-toolbar class="header__toolbar" color="primary" role="banner">
+  <div class="header__logo-section" (click)="onLogoClick()">
+    <!-- If logo were an image: <img src="assets/logo.svg" alt="Demo Project Home"> -->
+    <span>Demo Project</span>
+  </div>
+
+  <nav class="header__navigation" aria-label="Main navigation">
+    <ul>
+      <li><a mat-button routerLink="/" routerLinkActive="active-link" #rlaHome="routerLinkActive" [attr.aria-current]="rlaHome.isActive ? 'page' : null">Home</a></li>
+      <li><a mat-button routerLink="/features" routerLinkActive="active-link" #rlaFeatures="routerLinkActive" [attr.aria-current]="rlaFeatures.isActive ? 'page' : null">Features</a></li>
+      <li><a mat-button routerLink="/about" routerLinkActive="active-link" #rlaAbout="routerLinkActive" [attr.aria-current]="rlaAbout.isActive ? 'page' : null">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="header__settings-section">
+    <button mat-button class="language-selector" aria-label="Select language, current: English">
+      <mat-icon>language</mat-icon> EN
+    </button>
+    <!-- Example:
+    <button mat-icon-button aria-label="Settings">
+      <mat-icon>settings</mat-icon>
+    </button>
+    -->
+  </div>
+
+  <button mat-icon-button class="header__burger-menu" (click)="onToggleSidenav()" aria-label="Toggle navigation menu" [attr.aria-expanded]="ariaExpandedState" aria-controls="appSidenav">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>

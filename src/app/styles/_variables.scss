@@ -1,0 +1,37 @@
+// --- Color Palette (SCSS Variables) ---
+// Inspired by Material Design - using Indigo/Pink theme as a base
+$primary-color: #3f51b5; // Indigo 500
+$primary-color-light: #7986cb; // Indigo 300
+$primary-color-dark: #303f9f; // Indigo 700
+
+$accent-color: #ff4081; // Pink A200
+$accent-color-light: #ff80ab; // Pink A100
+$accent-color-dark: #f50057; // Pink A400
+
+$warn-color: #f44336; // Red 500
+
+$text-color-primary: rgba(0, 0, 0, 0.87); // Standard text
+$text-color-secondary: rgba(0, 0, 0, 0.54); // Lighter text for secondary info
+$text-color-disabled: rgba(0, 0, 0, 0.38); // Disabled text
+
+$background-color: #fafafa; // Very light grey, almost white
+$surface-color: #ffffff; // For cards, dialogs, etc.
+$divider-color: rgba(0, 0, 0, 0.12);
+
+// --- Typography ---
+$font-family-base: 'Roboto', "Helvetica Neue", sans-serif;
+
+// --- Layout ---
+$sidebar-width: 250px;
+$sidebar-width-collapsed: 80px; // Example for a collapsed sidebar
+$header-height: 60px;
+$footer-height: 50px;
+
+// --- Spacing ---
+$gutter-base: 20px; // Base gutter for padding/margins
+
+// --- Breakpoints for Responsiveness ---
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

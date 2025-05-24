@@ -1,0 +1,29 @@
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav #sidenav
+               [mode]="isSmallScreen ? 'over' : 'side'"
+               [opened]="!isSmallScreen && !isSidebarCollapsed"
+               [class.layout-sidenav--collapsed]="isSidebarCollapsed && !isSmallScreen"
+               class="layout-sidenav"
+               id="appSidenav"
+               role="navigation"
+               aria-label="Main navigation panel">
+    <app-sidebar (itemClicked)="onSidebarItemClicked()"></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="layout-sidenav-content">
+    <!-- Header's mat-toolbar will have role="banner" -->
+    <div class="app-header-area">
+      <!-- Pass sidenav.opened status to HeaderComponent -->
+      <app-header (toggleSidenav)="handleSidenavToggle()" [isSidenavOpened]="sidenav.opened"></app-header>
+    </div>
+
+    <main class="app-main-content-area" role="main">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- FooterComponent's template will use the <footer> element -->
+    <div class="app-footer-area">
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

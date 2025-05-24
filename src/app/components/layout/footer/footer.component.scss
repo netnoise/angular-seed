@@ -1,0 +1,55 @@
+@import '../../../../styles/variables'; // Adjust path as necessary
+
+:host {
+  display: block;
+  // background-color will be on .footer itself
+}
+
+.footer {
+  &__container {
+    background-color: darken($surface-color, 80%); // Example: very dark grey, almost black
+    color: $text-color-secondary; // Use secondary text color which is lighter
+    padding: $footer-height/2.5 $gutter-base; // Use variables for padding, assuming $gutter-base exists
+    text-align: center;
+    height: $footer-height;
+    display: flex;
+    flex-direction: column; // Stack paragraphs
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1); // Subtle top shadow
+  }
+
+  &__text {
+    margin: 4px 0; // Small margin between text lines
+    font-size: 0.875rem; // ~14px
+
+    &--light { // Modifier for lighter text if needed, e.g. copyright year
+        color: $text-color-disabled;
+    }
+  }
+
+  &__links {
+    margin-top: 4px;
+    a {
+      color: $primary-color-light; // Use a lighter shade of primary for links on dark background
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 0.8125rem; // ~13px
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: lighten($primary-color-light, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Assuming $gutter-base might be missing from _variables.scss, add it or use a fixed value.
+// For now, I'll use a fixed value for padding if $gutter-base is not defined.
+// Fallback if $gutter-base is not available in _variables.scss
+$gutter-base-fallback: 20px;
+
+.footer__container {
+  padding: $footer-height/2.5 $gutter-base-fallback;
+}

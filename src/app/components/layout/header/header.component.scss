@@ -1,0 +1,106 @@
+@import '../../../../styles/variables'; // Adjust path as necessary
+
+:host {
+  display: block;
+  // The background color and other overall container styles will be handled by mat-toolbar
+}
+
+.header {
+  &__toolbar {
+    // This class will be applied to mat-toolbar
+    background-color: $primary-color;
+    color: white; // Text color on primary background
+    height: $header-height;
+    padding: 0 16px; // Standard padding for toolbars
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    // Example:
+    // img {
+    //   height: 32px; // Adjust as needed
+    //   margin-right: 8px;
+    // }
+    span {
+      font-size: 1.25rem; // ~20px
+      font-weight: 500; // Medium weight for brand name
+    }
+  }
+
+  &__navigation {
+    ul {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin-left: 16px;
+
+        a {
+          color: white;
+          text-decoration: none;
+          font-size: 0.9rem; // ~14px
+          padding: 8px 12px;
+          border-radius: 4px;
+          transition: background-color 0.2s ease-in-out;
+
+          &:hover,
+          &.active { // Example active class
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+    // Hide navigation on smaller screens, to be replaced by a burger menu
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &__settings-section {
+    display: flex;
+    align-items: center;
+
+    // Example for icons or buttons:
+    // button {
+    //   margin-left: 8px;
+    //   color: white;
+    // }
+    .language-selector { // Example class for a language span/button
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  &__burger-menu {
+    display: none; // Hidden by default
+    // Styles for burger icon button
+    // Example:
+    // background: none;
+    // border: none;
+    // color: white;
+    // cursor: pointer;
+    // padding: 8px;
+    // mat-icon { font-size: 24px; }
+
+    @media (max-width: $breakpoint-md) {
+      display: block; // Show on smaller screens
+    }
+  }
+}

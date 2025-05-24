@@ -1,0 +1,38 @@
+<!-- The mat-sidenav element in layout.component.html already has role="navigation" -->
+<div class="sidebar">
+  <h3 class="sidebar__title" id="sidebarNavigationLabel">Menu</h3>
+  <mat-nav-list class="sidebar__nav-list" aria-labelledby="sidebarNavigationLabel">
+    <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link"
+       class="sidebar__nav-item" (click)="onItemClick()"
+       #rlaDashboard="routerLinkActive" [attr.aria-current]="rlaDashboard.isActive ? 'page' : null">
+      <mat-icon matListItemIcon class="sidebar__nav-icon" aria-hidden="true">dashboard</mat-icon>
+      <span matListItemTitle class="sidebar__nav-text">Dashboard</span>
+    </a>
+    <a mat-list-item routerLink="/profile" routerLinkActive="active-link"
+       class="sidebar__nav-item" (click)="onItemClick()"
+       #rlaProfile="routerLinkActive" [attr.aria-current]="rlaProfile.isActive ? 'page' : null">
+      <mat-icon matListItemIcon class="sidebar__nav-icon" aria-hidden="true">account_circle</mat-icon>
+      <span matListItemTitle class="sidebar__nav-text">Profile</span>
+    </a>
+    <a mat-list-item routerLink="/settings" routerLinkActive="active-link"
+       class="sidebar__nav-item" (click)="onItemClick()"
+       #rlaSettings="routerLinkActive" [attr.aria-current]="rlaSettings.isActive ? 'page' : null">
+      <mat-icon matListItemIcon class="sidebar__nav-icon" aria-hidden="true">settings</mat-icon>
+      <span matListItemTitle class="sidebar__nav-text">Settings</span>
+    </a>
+    <mat-divider class="sidebar__divider"></mat-divider>
+    <a mat-list-item routerLink="/messages" routerLinkActive="active-link"
+       class="sidebar__nav-item" (click)="onItemClick()"
+       #rlaMessages="routerLinkActive" [attr.aria-current]="rlaMessages.isActive ? 'page' : null">
+      <mat-icon matListItemIcon class="sidebar__nav-icon" aria-hidden="true">email</mat-icon>
+      <span matListItemTitle class="sidebar__nav-text">Messages</span>
+      <span matListItemMeta class="sidebar__nav-meta" aria-label="3 unread messages">3</span>
+    </a>
+    <a mat-list-item routerLink="/analytics" routerLinkActive="active-link"
+       class="sidebar__nav-item" (click)="onItemClick()"
+       #rlaAnalytics="routerLinkActive" [attr.aria-current]="rlaAnalytics.isActive ? 'page' : null">
+      <mat-icon matListItemIcon class="sidebar__nav-icon" aria-hidden="true">analytics</mat-icon>
+      <span matListItemTitle class="sidebar__nav-text">Analytics</span>
+    </a>
+  </mat-nav-list>
+</div>

@@ -1,0 +1,87 @@
+@import '../../../styles/variables'; // Adjust path as necessary
+
+:host {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-rows: $header-height 1fr $footer-height; // Use variables for heights
+  grid-template-columns: $sidebar-width 1fr; // Use variable for sidebar width
+  min-height: 100vh;
+  transition: grid-template-columns 0.3s ease-in-out; // Smooth transition for sidebar collapse
+
+  // Styles when sidebar is collapsed
+  &.sidebar-collapsed {
+    grid-template-columns: $sidebar-width-collapsed 1fr;
+  }
+}
+
+// No specific styles needed for .app-header, .app-sidebar, etc. in this file
+// as they are just placeholders for the actual components <app-header>, <app-sidebar>.
+// The components themselves will have their own styling.
+// However, we can define background colors or basic padding for the grid areas if needed.
+
+.app-header-area { // Assuming this class is applied to the <app-header> element or its wrapper in LayoutComponent's template
+  grid-area: header;
+  // background-color: $surface-color; // Example, actual header component will have its own background
+  // box-shadow: 0 2px 4px $divider-color; // Example shadow
+  z-index: 1000; // Ensure header is above other content
+}
+
+.app-sidebar-area { // Assuming this class is applied to the <app-sidebar> element
+  grid-area: sidebar;
+  // background-color: $surface-color; // Example, actual sidebar component will have its own background
+  // border-right: 1px solid $divider-color; // Example border
+  overflow-y: auto; // Allow sidebar content to scroll if it overflows
+  transition: width 0.3s ease-in-out; // For sidebar internal width changes if any
+}
+
+.app-main-content-area { // Assuming this class is applied to the <main> element
+  grid-area: main;
+  padding: 20px; // Add some padding to the main content area
+  background-color: $background-color;
+  overflow-y: auto; // Allow main content to scroll
+}
+
+.app-footer-area { // Assuming this class is applied to the <app-footer> element
+  grid-area: footer;
+  // background-color: darken($background-color, 5%); // Example, actual footer component will have its own background
+  // border-top: 1px solid $divider-color; // Example border
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-md) {
+  :host {
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-rows: $header-height 1fr $footer-height;
+    grid-template-columns: 1fr; // Single column layout
+
+    // Sidebar would be hidden or overlaid in this mode.
+    // For now, we just remove it from the explicit grid layout.
+    // Actual hiding/overlaying mechanism would be handled by component logic and different CSS.
+    &.sidebar-collapsed {
+      grid-template-columns: 1fr; // Ensure it stays single column
+    }
+  }
+
+  .app-sidebar-area {
+    // On smaller screens, the sidebar might become an overlay drawer.
+    // For this subtask, we'll assume it's hidden by default.
+    // A button in the header would toggle its visibility.
+    // Example: position absolute, transform translateX(-100%)
+    // For now, just hiding it from the grid.
+    display: none; // Simplest way to hide it in this grid-only setup
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .app-main-content-area {
+    padding: 15px; // Reduce padding on very small screens
+  }
+
+  // Header and Footer might also need reduced padding, handled in their respective components.
+}
