@@ -6,6 +6,7 @@ import { takeUntil, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
+  standalone: false,
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'] // Corrected 'styleUrl' to 'styleUrls'
 })

@@ -1,7 +1,7 @@
 /* Global Styles for Angular Demo Project */
 
 // Import variables (this should be at the top)
-@import 'app/styles/variables'; // Adjust path if _variables.scss is elsewhere
+@use 'app/styles/variables' as *;
 
 // --- 1. Resets/Normalizations ---
 html, body {
