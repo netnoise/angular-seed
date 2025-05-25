@@ -3,9 +3,9 @@
 :host {
   display: grid;
   grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
+    'header header'
+    'sidebar main'
+    'footer footer';
   grid-template-rows: $header-height 1fr $footer-height; // Use variables for heights
   grid-template-columns: $sidebar-width 1fr; // Use variable for sidebar width
   min-height: 100vh;
@@ -22,14 +22,16 @@
 // The components themselves will have their own styling.
 // However, we can define background colors or basic padding for the grid areas if needed.
 
-.app-header-area { // Assuming this class is applied to the <app-header> element or its wrapper in LayoutComponent's template
+.app-header-area {
+  // Assuming this class is applied to the <app-header> element or its wrapper in LayoutComponent's template
   grid-area: header;
   // background-color: $surface-color; // Example, actual header component will have its own background
   // box-shadow: 0 2px 4px $divider-color; // Example shadow
   z-index: 1000; // Ensure header is above other content
 }
 
-.app-sidebar-area { // Assuming this class is applied to the <app-sidebar> element
+.app-sidebar-area {
+  // Assuming this class is applied to the <app-sidebar> element
   grid-area: sidebar;
   // background-color: $surface-color; // Example, actual sidebar component will have its own background
   // border-right: 1px solid $divider-color; // Example border
@@ -37,14 +39,16 @@
   transition: width 0.3s ease-in-out; // For sidebar internal width changes if any
 }
 
-.app-main-content-area { // Assuming this class is applied to the <main> element
+.app-main-content-area {
+  // Assuming this class is applied to the <main> element
   grid-area: main;
   padding: 20px; // Add some padding to the main content area
   background-color: $background-color;
   overflow-y: auto; // Allow main content to scroll
 }
 
-.app-footer-area { // Assuming this class is applied to the <app-footer> element
+.app-footer-area {
+  // Assuming this class is applied to the <app-footer> element
   grid-area: footer;
   // background-color: darken($background-color, 5%); // Example, actual footer component will have its own background
   // border-top: 1px solid $divider-color; // Example border
@@ -54,9 +58,9 @@
 @media (max-width: $breakpoint-md) {
   :host {
     grid-template-areas:
-      "header"
-      "main"
-      "footer";
+      'header'
+      'main'
+      'footer';
     grid-template-rows: $header-height 1fr $footer-height;
     grid-template-columns: 1fr; // Single column layout
 

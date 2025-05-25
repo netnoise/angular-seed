@@ -4,7 +4,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   selector: 'app-sidebar',
   standalone: false,
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'] // Corrected 'styleUrl' to 'styleUrls'
+  styleUrls: ['./sidebar.component.scss'], // Corrected 'styleUrl' to 'styleUrls'
 })
 export class SidebarComponent {
   @Output() itemClicked = new EventEmitter<void>();

@@ -8,7 +8,7 @@ import { takeUntil, delay } from 'rxjs/operators';
   selector: 'app-layout',
   standalone: false,
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'] // Corrected 'styleUrl' to 'styleUrls'
+  styleUrls: ['./layout.component.scss'], // Corrected 'styleUrl' to 'styleUrls'
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -21,17 +21,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall, // (max-width: 599.98px)
-      Breakpoints.Small   // (min-width: 600px) and (max-width: 959.98px)
-    ]).pipe(
-      takeUntil(this.destroy$),
-      delay(0) // Introduce a small delay to avoid ExpressionChangedAfterItHasBeenCheckedError
-    )
+    this.breakpointObserver
+      .observe([
+        Breakpoints.XSmall, // (max-width: 599.98px)
+        Breakpoints.Small, // (min-width: 600px) and (max-width: 959.98px)
+      ])
+      .pipe(
+        takeUntil(this.destroy$),
+        delay(0), // Introduce a small delay to avoid ExpressionChangedAfterItHasBeenCheckedError
+      )
       .subscribe(result => {
         this.isSmallScreen = result.matches;
         if (this.isSmallScreen) {
@@ -47,12 +49,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
           // This part depends on how you want to manage collapsed state for large screens.
           // For now, if not small screen, ensure it's open (unless you implement persistence for isSidebarCollapsed)
           if (this.sidenav) {
-             if(this.isSidebarCollapsed) {
-                // If you have specific logic for a "mini" sidebar variant that's always "open" but visually collapsed
-                // this.sidenav.open(); // Ensure it's technically open
-             } else {
-                this.sidenav.open();
-             }
+            if (this.isSidebarCollapsed) {
+              // If you have specific logic for a "mini" sidebar variant that's always "open" but visually collapsed
+              // this.sidenav.open(); // Ensure it's technically open
+            } else {
+              this.sidenav.open();
+            }
           }
         }
         this.cdRef.detectChanges(); // Manually trigger change detection

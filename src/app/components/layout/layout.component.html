@@ -1,12 +1,14 @@
 <mat-sidenav-container class="layout-container">
-  <mat-sidenav #sidenav
-               [mode]="isSmallScreen ? 'over' : 'side'"
-               [opened]="!isSmallScreen && !isSidebarCollapsed"
-               [class.layout-sidenav--collapsed]="isSidebarCollapsed && !isSmallScreen"
-               class="layout-sidenav"
-               id="appSidenav"
-               role="navigation"
-               aria-label="Main navigation panel">
+  <mat-sidenav
+    #sidenav
+    [mode]="isSmallScreen ? 'over' : 'side'"
+    [opened]="!isSmallScreen && !isSidebarCollapsed"
+    [class.layout-sidenav--collapsed]="isSidebarCollapsed && !isSmallScreen"
+    class="layout-sidenav"
+    id="appSidenav"
+    role="navigation"
+    aria-label="Main navigation panel"
+  >
     <app-sidebar (itemClicked)="onSidebarItemClicked()"></app-sidebar>
   </mat-sidenav>
 
@@ -14,7 +16,10 @@
     <!-- Header's mat-toolbar will have role="banner" -->
     <div class="app-header-area">
       <!-- Pass sidenav.opened status to HeaderComponent -->
-      <app-header (toggleSidenav)="handleSidenavToggle()" [isSidenavOpened]="sidenav.opened"></app-header>
+      <app-header
+        (toggleSidenav)="handleSidenavToggle()"
+        [isSidenavOpened]="sidenav.opened"
+      ></app-header>
     </div>
 
     <main class="app-main-content-area" role="main">

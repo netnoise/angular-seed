@@ -23,8 +23,9 @@
     margin: 4px 0; // Small margin between text lines
     font-size: 0.875rem; // ~14px
 
-    &--light { // Modifier for lighter text if needed, e.g. copyright year
-        color: $text-color-disabled;
+    &--light {
+      // Modifier for lighter text if needed, e.g. copyright year
+      color: $text-color-disabled;
     }
   }
 

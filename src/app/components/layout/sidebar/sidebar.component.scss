@@ -48,7 +48,8 @@
       background-color: rgba(0, 0, 0, 0.04); // Subtle hover effect
     }
 
-    &.active-link { // Class applied by routerLinkActive
+    &.active-link {
+      // Class applied by routerLinkActive
       background-color: rgba($primary-color, 0.1); // Light primary background for active
       .sidebar__nav-icon,
       .sidebar__nav-text {
