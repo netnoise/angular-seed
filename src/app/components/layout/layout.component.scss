@@ -1,51 +1,37 @@
 @use '../../styles/variables' as *;
 
-:host {
-  display: block;
-  height: 100vh;
-  width: 100%;
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  min-height: 100vh;
 }
 
-.layout-container {
-  height: 100%;
-  width: 100%;
+.content-wrapper {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.layout-sidenav {
-  width: $sidebar-width;
-  background-color: $surface-color;
-  border-right: 1px solid $divider-color;
+.main-content {
+  flex: 1;
+  padding: 3rem 2rem; /* Default padding */
+  background: white;
+}
 
-  &--collapsed {
-    width: $sidebar-width-collapsed;
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  .main-content {
+    // Sidebar order is handled in its own component or via a class on sidebar
+    padding: 2rem 1rem;
   }
 }
 
-.layout-sidenav-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.app-header-area {
-  flex: 0 0 auto;
-}
-
-.app-main-content-area {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: $gutter-base;
-  background-color: $background-color;
-}
-
-.app-footer-area {
-  flex: 0 0 auto;
-}
-
-// Responsive adjustments
-@media (max-width: $breakpoint-md) {
-  .layout-sidenav {
-    width: 100%;
-    max-width: 300px;
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1.5rem 1rem;
   }
 }

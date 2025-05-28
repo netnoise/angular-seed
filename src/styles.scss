@@ -1,21 +1,15 @@
 /* Global Styles for Angular Demo Project */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 // Import variables (this should be at the top)
 @use 'app/styles/variables' as *;
 
 // --- 1. Resets/Normalizations ---
-html,
-body {
+* {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; // Apply border-box globally
-  height: 100%; // Ensure html and body take full height
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 // Remove default list styles
@@ -33,13 +27,11 @@ a {
 }
 
 // --- 3. Typography ---
-// Using Roboto as it's the default for Angular Material
 body {
-  font-family: $font-family-base;
-  font-size: 16px; // Base font size
-  line-height: 1.6;
-  color: $text-color-primary;
-  background-color: $background-color;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background-color: #fefefe;
+  color: #2d3748;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,0 +1,69 @@
+.sidebar {
+  width: 280px;
+  background: #f9fafb;
+  border-right: 1px solid #f0f0f0;
+  padding: 2rem 0;
+  min-height: calc(100vh - 80px); // Assuming header height is approx 80px. Adjust if necessary.
+  // This min-height might need to be coordinated with the actual header height.
+  // For sticky header, this calculation is relevant.
+}
+
+.sidebar-section {
+  margin-bottom: 2rem;
+  padding: 0 1.5rem;
+}
+
+.sidebar-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0; // Reset default padding
+}
+
+.sidebar-menu li {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #4a5568;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.sidebar-menu a:hover {
+  background: white;
+  color: #3182ce;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-menu a.active {
+  background: #3182ce;
+  color: white;
+}
+
+// Responsive adjustments for sidebar
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    order: 2; // To appear below main content if flex-direction is column
+    border-right: none; // No right border when full width
+    border-top: 1px solid #f0f0f0; // Add a top border to separate from content
+    padding: 1.5rem 0; // Adjust padding for mobile
+  }
+  .sidebar-section {
+    padding: 0 1rem; // Adjust padding for mobile
+  }
+}

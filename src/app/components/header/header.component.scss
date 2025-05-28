@@ -1,0 +1,129 @@
+.header {
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  letter-spacing: -0.025em;
+}
+
+.mobile-menu-btn {
+  display: none; // Hidden by default, shown in media query
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.main-nav {
+  display: flex;
+  list-style: none;
+  gap: 3rem; // Adjust gap as needed
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+  padding-bottom: 8px; // Space for the underline
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; // Adjusted to align with padding-bottom
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3182ce;
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: #3182ce;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.action-btn {
+  background: none;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568; // Icon color
+}
+
+.action-btn:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+// Mobile styles for header navigation
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+    order: 1; // Ensure it can be positioned if needed, though flex order might be enough
+  }
+
+  .main-nav {
+    display: none; // Hidden by default on mobile
+    flex-direction: column;
+    position: absolute;
+    top: 100%; // Position below the header
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  nav.mobile-nav-open .main-nav { // Show nav when class is applied
+    display: flex;
+  }
+
+  .header-actions {
+    order: 0; // Example: if logo is order -1, actions order 0, menu button order 1
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem;
+  }
+  // Any other specific adjustments for .header-content, .logo etc. at this breakpoint
+}
