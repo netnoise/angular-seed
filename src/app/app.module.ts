@@ -10,12 +10,12 @@ import { SidebarComponent } from './components/layout/sidebar/sidebar.component'
 import { FooterComponent } from './components/layout/footer/footer.component';
 
 // Angular Material Modules
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatSidenavModule } from '@angular/material/sidenav';
-// import { MatListModule } from '@angular/material/list';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, HeaderComponent, SidebarComponent, FooterComponent],
@@ -23,12 +23,12 @@ import { FooterComponent } from './components/layout/footer/footer.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]), // Add RouterModule with empty routes for now
-    // MatToolbarModule,
-    // MatIconModule,
-    // MatSidenavModule,
-    // MatListModule,
-    // MatButtonModule,
-    // MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

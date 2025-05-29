@@ -1,12 +1,16 @@
+@use '@angular/material' as mat;
+@use '../../../custom-theme' as app-theme; // Assuming custom-theme.scss is in src/
+
 .footer {
-  background: #f9fafb;
-  border-top: 1px solid #f0f0f0;
-  padding: 3rem 2rem;
+  // Accessing colors from the custom theme defined in custom-theme.scss
+  background: mat.get-color-from-palette(map-get(app-theme.$custom-theme, color, background), 'background');
+  border-top: 1px solid mat.get-color-from-palette(map-get(app-theme.$custom-theme, color, background), 'divider');
+  padding: 2rem 1.5rem;
   text-align: center;
+  color: mat.get-color-from-palette(map-get(app-theme.$custom-theme, color, foreground), 'secondary-text');
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  color: #718096;
 }

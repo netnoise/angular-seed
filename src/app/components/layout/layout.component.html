@@ -1,10 +1,14 @@
-<div class="app-container">
-  <app-header></app-header>
-  <div class="content-wrapper">
-    <app-sidebar></app-sidebar>
-    <main class="main-content">
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened" class="layout-sidenav" role="navigation">
+    <app-sidebar (navLinkClick)="handleSidenavLinkClick()"></app-sidebar>
+    <!-- Added (navLinkClick) to close sidenav on mobile after click -->
+  </mat-sidenav>
+
+  <mat-sidenav-content class="layout-sidenav-content">
+    <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+    <main class="app-main-content" role="main">
       <router-outlet></router-outlet>
     </main>
-  </div>
-  <app-footer></app-footer>
-</div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

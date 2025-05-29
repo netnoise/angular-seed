@@ -1,37 +1,22 @@
-@use '../../styles/variables' as *;
-
-.app-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  background: white;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
-  min-height: 100vh;
+.layout-container {
+  height: 100vh;
 }
 
-.content-wrapper {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
+.layout-sidenav {
+  width: 280px; // Or your desired sidebar width
+  // Potentially add border-right or box-shadow if desired for 'side' mode
+  // e.g., border-right: 1px solid rgba(0,0,0,0.12);
 }
 
-.main-content {
-  flex: 1;
-  padding: 3rem 2rem; /* Default padding */
-  background: white;
+.layout-sidenav-content {
+  // If app-header and app-footer are outside mat-sidenav-content,
+  // this element might need display:flex, flex-direction:column
+  // but in the current HTML, they are inside.
 }
 
-@media (max-width: 768px) {
-  .content-wrapper {
-    flex-direction: column;
-  }
-  .main-content {
-    // Sidebar order is handled in its own component or via a class on sidebar
-    padding: 2rem 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding: 1.5rem 1rem;
-  }
+.app-main-content {
+  padding: 24px; // Adjust as per Material Design guidelines or preference
+  // This ensures content isn't flush against header/footer or sidebar.
+  // flex: 1 1 auto; /* If using flex column for sidenav-content */
+  // overflow-y: auto; /* If using flex column for sidenav-content */
 }

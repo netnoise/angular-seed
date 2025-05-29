@@ -1,20 +1,18 @@
-<aside class="sidebar">
-  <div class="sidebar-section">
-    <div class="sidebar-title">Main</div>
-    <ul class="sidebar-menu">
-      <li><a href="#" class="active" (click)="onNavLinkClick($event)" aria-current="page">Dashboard</a></li>
-      <li><a href="#" (click)="onNavLinkClick($event)">Analytics</a></li>
-      <li><a href="#" (click)="onNavLinkClick($event)">Projects</a></li>
-      <li><a href="#" (click)="onNavLinkClick($event)">Tasks</a></li>
-    </ul>
-  </div>
+<div class="sidebar-container">
+  <h3 mat-subheader>Main</h3>
+  <mat-nav-list>
+    <a mat-list-item routerLink="/dashboard" routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page" (click)="onItemClick()">Dashboard</a>
+    <a mat-list-item routerLink="/analytics" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Analytics</a>
+    <a mat-list-item routerLink="/projects" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Projects</a>
+    <a mat-list-item routerLink="/tasks" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Tasks</a>
+  </mat-nav-list>
 
-  <div class="sidebar-section">
-    <div class="sidebar-title">Management</div>
-    <ul class="sidebar-menu">
-      <li><a href="#" (click)="onNavLinkClick($event)">Users</a></li>
-      <li><a href="#" (click)="onNavLinkClick($event)">Settings</a></li>
-      <li><a href="#" (click)="onNavLinkClick($event)">Reports</a></li>
-    </ul>
-  </div>
-</aside>
+  <mat-divider></mat-divider>
+
+  <h3 mat-subheader>Management</h3>
+  <mat-nav-list>
+    <a mat-list-item routerLink="/users" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Users</a>
+    <a mat-list-item routerLink="/settings" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Settings</a>
+    <a mat-list-item routerLink="/reports-management" routerLinkActive="active-list-item" ariaCurrentWhenActive="page" (click)="onItemClick()">Reports</a>
+  </mat-nav-list>
+</div>

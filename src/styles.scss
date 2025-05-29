@@ -1,6 +1,8 @@
+
 /* Global Styles for Angular Demo Project */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@use './custom-theme' as theme;
 
 // Import variables (this should be at the top)
 @use 'app/styles/variables' as *;
@@ -36,52 +38,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 0.5em 0; // Add some bottom margin
-  font-weight: 400; // Lighter than default bold for a modern look
-  color: $text-color-primary;
-}
+// Apply Material Design typography hierarchy
+@include mat.typography-hierarchy(theme.$custom-theme);
 
-h1 {
-  font-size: 2.25rem;
-  line-height: 1.2;
-} // ~36px
-h2 {
-  font-size: 1.875rem;
-  line-height: 1.25;
-} // ~30px
-h3 {
-  font-size: 1.5rem;
-  line-height: 1.3;
-} // ~24px
-h4 {
-  font-size: 1.25rem;
-  line-height: 1.35;
-} // ~20px
-h5 {
-  font-size: 1.125rem;
-  line-height: 1.4;
-} // ~18px
-h6 {
-  font-size: 1rem;
-  line-height: 1.4;
-} // ~16px
-
-p {
-  margin: 0 0 1em 0; // Bottom margin for paragraphs
-}
-
+// Specific 'a' tag styling (can be kept or adapted)
+// Ensure this doesn't conflict too much with Material's link styling if components are used for links
 a {
-  color: $primary-color;
+  color: $primary-color; // This uses a variable from _variables.scss, ensure it's desired
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: $primary-color-dark;
+    color: $primary-color-dark; // This uses a variable from _variables.scss, ensure it's desired
   }
 }
 
