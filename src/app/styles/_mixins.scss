@@ -1,0 +1,33 @@
+// BEM Mixins
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+// Responsive Mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint ==sm {
+    @media (max-width: 576px) {
+      @content;
+    }
+  } @else if $breakpoint ==md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint ==lg {
+    @media (max-width: 992px) {
+      @content;
+    }
+  } @else if $breakpoint ==xl {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+}

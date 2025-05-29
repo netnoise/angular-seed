@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   isMobileMenuOpen = false;
 
-  constructor() { }
+  constructor() {}
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -32,8 +32,8 @@ export class HeaderComponent {
     const clickedLink = event.currentTarget as HTMLElement;
     clickedLink.classList.add('active');
     clickedLink.setAttribute('aria-current', 'page'); // Set aria-current
-    
+
     // Prevent default if it's a '#' link and you're handling navigation differently
-    // event.preventDefault(); 
+    // event.preventDefault();
   }
 }

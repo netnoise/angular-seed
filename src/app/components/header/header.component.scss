@@ -109,10 +109,11 @@
     border-bottom: 1px solid #f0f0f0;
     padding: 1rem;
     gap: 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  nav.mobile-nav-open .main-nav { // Show nav when class is applied
+
+  nav.mobile-nav-open .main-nav {
+    // Show nav when class is applied
     display: flex;
   }
 

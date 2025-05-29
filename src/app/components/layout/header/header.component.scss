@@ -1,4 +1,7 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+@use 'sass:color';
+@use 'sass:math';
 
 :host {
   display: block;
@@ -6,19 +9,19 @@
 }
 
 .header {
-  &__toolbar {
+  @include element(toolbar) {
     // This class will be applied to mat-toolbar
     background-color: $primary-color;
-    color: white; // Text color on primary background
+    color: $surface-color;
     height: $header-height;
-    padding: 0 16px; // Standard padding for toolbars
+    padding: 0 math.div(16px, 1);
 
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  &__logo-section {
+  @include element(logo-section) {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -33,7 +36,7 @@
     }
   }
 
-  &__navigation {
+  @include element(navigation) {
     ul {
       display: flex;
       align-items: center;
@@ -42,31 +45,31 @@
       list-style: none;
 
       li {
-        margin-left: 16px;
+        margin-left: math.div(16px, 1);
 
         a {
-          color: white;
+          color: $surface-color;
           text-decoration: none;
           font-size: 0.9rem; // ~14px
-          padding: 8px 12px;
+          padding: math.div(8px, 1) math.div(12px, 1);
           border-radius: 4px;
           transition: background-color 0.2s ease-in-out;
 
           &:hover,
           &.active {
             // Example active class
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: color.change($surface-color, $alpha: 0.1);
           }
         }
       }
     }
     // Hide navigation on smaller screens, to be replaced by a burger menu
-    @media (max-width: $breakpoint-md) {
+    @include respond-to(md) {
       display: none;
     }
   }
 
-  &__settings-section {
+  @include element(settings-section) {
     display: flex;
     align-items: center;
 
@@ -78,19 +81,19 @@
     .language-selector {
       // Example class for a language span/button
       font-size: 0.9rem;
-      padding: 8px 12px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: math.div(8px, 1) math.div(12px, 1);
+      border: 1px solid color.change($surface-color, $alpha: 0.5);
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s ease-in-out;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: color.change($surface-color, $alpha: 0.1);
       }
     }
   }
 
-  &__burger-menu {
+  @include element(burger-menu) {
     display: none; // Hidden by default
     // Styles for burger icon button
     // Example:
@@ -101,7 +104,7 @@
     // padding: 8px;
     // mat-icon { font-size: 24px; }
 
-    @media (max-width: $breakpoint-md) {
+    @include respond-to(md) {
       display: block; // Show on smaller screens
     }
   }

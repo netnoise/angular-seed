@@ -1,9 +1,11 @@
 @use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use 'sass:math';
 
 .app-container {
   max-width: 1400px;
   margin: 0 auto;
-  background: white;
+  background: $surface-color;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
   min-height: 100vh;
 }
@@ -16,22 +18,21 @@
 
 .main-content {
   flex: 1;
-  padding: 3rem 2rem; /* Default padding */
-  background: white;
+  padding: math.div(3rem, 1) math.div(2rem, 1);
+  background: $surface-color;
 }
 
-@media (max-width: 768px) {
+@include respond-to(md) {
   .content-wrapper {
     flex-direction: column;
   }
   .main-content {
-    // Sidebar order is handled in its own component or via a class on sidebar
-    padding: 2rem 1rem;
+    padding: math.div(2rem, 1) math.div(1rem, 1);
   }
 }
 
-@media (max-width: 480px) {
+@include respond-to(sm) {
   .main-content {
-    padding: 1.5rem 1rem;
+    padding: math.div(1.5rem, 1) math.div(1rem, 1);
   }
 }

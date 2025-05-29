@@ -1,9 +1,11 @@
 /* Global Styles for Angular Demo Project */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 // Import variables (this should be at the top)
 @use 'app/styles/variables' as *;
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:meta';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 // --- 1. Resets/Normalizations ---
 * {
@@ -28,7 +30,18 @@ a {
 
 // --- 3. Typography ---
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
   background-color: #fefefe;
   color: #2d3748;
   line-height: 1.7;
@@ -133,3 +146,38 @@ textarea:focus,
 //   outline: 2px solid $primary-color-dark !important;
 //   outline-offset: 1px !important;
 // }
+
+:root {
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
+}
+
+$primary-color: rgb(63, 81, 181); // Instead of #3f51b5
+
+$gutter: if(meta.global-variable-exists('gutter-base'), $gutter-base, 20px);
+
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint ==sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint ==md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+
+  // ... etc
+}

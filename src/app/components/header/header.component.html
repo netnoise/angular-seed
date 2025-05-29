@@ -1,10 +1,20 @@
 <header class="header">
   <div class="header-content">
     <div class="logo">CleanApp</div>
-    <button class="mobile-menu-btn" aria-label="Open navigation menu" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen" [attr.aria-controls]="isMobileMenuOpen ? 'mainNavMenu' : null">☰</button>
+    <button
+      class="mobile-menu-btn"
+      aria-label="Open navigation menu"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      [attr.aria-controls]="isMobileMenuOpen ? 'mainNavMenu' : null"
+    >
+      ☰
+    </button>
     <nav [class.mobile-nav-open]="isMobileMenuOpen" id="mainNavMenu">
       <ul class="main-nav">
-        <li><a href="#" class="active" (click)="onNavLinkClick($event)" aria-current="page">Home</a></li>
+        <li>
+          <a href="#" class="active" (click)="onNavLinkClick($event)" aria-current="page">Home</a>
+        </li>
         <li><a href="#" (click)="onNavLinkClick($event)">Projects</a></li>
         <li><a href="#" (click)="onNavLinkClick($event)">Tasks</a></li>
         <li><a href="#" (click)="onNavLinkClick($event)">Reports</a></li>

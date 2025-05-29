@@ -3,16 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-
-  constructor() { }
+  constructor() {}
 
   onNavLinkClick(event: MouseEvent): void {
     // Manage active class
     // Remove 'active' class and aria-current from all links
-    const allLinks = (event.currentTarget as HTMLElement).closest('.sidebar')?.querySelectorAll('.sidebar-menu a');
+    const allLinks = (event.currentTarget as HTMLElement)
+      .closest('.sidebar')
+      ?.querySelectorAll('.sidebar-menu a');
     allLinks?.forEach(link => {
       link.classList.remove('active');
       link.removeAttribute('aria-current'); // Remove aria-current

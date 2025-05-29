@@ -10,9 +10,9 @@ export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
   @Input() isSidenavOpened = false; // Renamed to match input from LayoutComponent
 
-  onLogoClick(): void {
+  onLogoClick(event: Event): void {
     // For now, just log to console. Later, this could navigate to the home page.
-    console.log('Logo clicked');
+    console.log('Logo clicked', event);
     // Example: this.router.navigate(['/']);
   }
 
