@@ -134,7 +134,7 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 ## 6. Technology Stack (Baseline)
 
-> Note: Concrete versions and tools are intentionally abstracted here and should be specified in a separate technical specification document.
+> **Note**: Concrete versions and tools are intentionally abstracted here and should be specified in a separate technical specification document.
 
 ### 6.1 Core
 
@@ -144,11 +144,11 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 ### 6.2 Tooling (Indicative, to be finalized)
 
-- Linting: TypeScript/Angular-compatible linter.
-- Formatting: Common formatter (e.g., opinionated, enforced in CI).
-- Unit Testing: Angular-compatible test runner and assertion library.
-- E2E Testing: Headless browser-based or modern web testing framework.
-- Package Management: Node-based package manager.
+- **Linting**: TypeScript/Angular-compatible linter.
+- **Formatting**: Common formatter (e.g., opinionated, enforced in CI).
+- **Unit Testing**: Angular-compatible test runner and assertion library.
+- **E2E Testing**: Headless browser-based or modern web testing framework.
+- **Package Management**: Node-based package manager.
 
 ### 6.3 Optional / Extensible
 
@@ -163,7 +163,7 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 A conceptual directory layout (subject to refinement):
 
-```text
+```
 root/
   src/
     app/
@@ -178,204 +178,233 @@ root/
     environments/      # Environment-specific configuration
   tools/               # Custom scripts or tooling (optional)
   config/              # Linting, formatting, build configs (optional)
-Key characteristics:
+```
 
-Feature Modules under features/ representing business domains or application sections.
+---
 
-Core Module for singleton services and global application concerns.
+## 8. Getting Started
 
-Shared Module/Layer for cross-feature UI elements and helpers.
+### 8.1 Prerequisites
 
-Environment-specific configurations to support multiple deployment targets.
+Before using Angular Seed, ensure you have the following installed:
 
-8. Development Workflow (High-Level)
-Angular Seed is optimized for a specification-driven workflow where requirements precede implementation.
+- **Node.js**: Version 18.x or higher (LTS recommended).
+- **npm** or **yarn**: Package manager for dependency management.
+- **Git**: Version control system.
 
-8.1 Typical Flow
-Specification
+### 8.2 Installation
 
-Define feature requirements, user stories, and acceptance criteria.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd angular-seed
+   ```
 
-Capture API contracts and data models where applicable.
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-Design & Architecture
+3. Verify installation:
+   ```bash
+   npm run verify
+   # or
+   yarn verify
+   ```
 
-Map requirements to feature modules and components.
+### 8.3 Development Server
 
-Identify required services, interfaces, and integration points.
+Start the development server:
 
-Scaffolding
+```bash
+npm start
+# or
+yarn start
+```
 
-Generate new modules, components, and services using CLI commands.
+The application will be available at `http://localhost:4200` by default.
 
-Place new code in appropriate feature folders.
+### 8.4 Building for Production
 
-Implementation
+Create a production build:
 
-Implement logic with adherence to coding standards and architectural patterns.
+```bash
+npm run build
+# or
+yarn build
+```
 
-Ensure traceability from requirements to implementation artifacts.
+Production artifacts will be generated in the `dist/` directory.
 
-Testing
+---
 
-Write or update unit tests and, where relevant, E2E tests reflecting acceptance criteria.
+## 9. Development Workflow
 
-Maintain a minimum testing baseline (to be defined in detailed specs).
+### 9.1 Code Quality
 
-Review & Integration
+The project enforces code quality through:
 
-Code review focusing on correctness, maintainability, and consistency.
+- **Linting**: Automated code analysis using ESLint or similar.
+- **Formatting**: Consistent code style via Prettier or similar.
+- **Type Checking**: Strict TypeScript configuration.
+- **Pre-commit Hooks**: Automated checks before commits (optional).
 
-Continuous integration runs automated checks (lint, tests, build).
+### 9.2 Testing
 
-9. Quality & Testing Strategy
-High-level testing and quality expectations:
+Run tests using the following commands:
 
-Static Analysis
+```bash
+# Unit tests
+npm run test
 
-Linting must be part of the default CI pipeline.
+# E2E tests
+npm run e2e
 
-Code formatting is enforced and non-negotiable.
+# Test coverage
+npm run test:coverage
+```
 
-Unit & Component Testing
+### 9.3 Feature Development
 
-Aim for meaningful coverage on:
+When adding new features:
 
-Core services and utilities.
+1. Create a feature branch from `main`.
+2. Follow the feature-based structure in `src/app/features/`.
+3. Write tests alongside implementation.
+4. Update documentation as needed.
+5. Submit a pull request for review.
 
-Key components and feature flows.
+### 9.4 Spec-Driven Development
 
-Focus on behavior and contracts over implementation details.
+This project supports spec-driven development workflows:
 
-E2E / Integration Testing
+- Use `/speckit.specify` to create feature specifications.
+- Use `/speckit.plan` to generate implementation plans.
+- Use `/speckit.tasks` to break down work into actionable tasks.
+- Reference `.specify/memory/constitution.md` for project principles.
 
-Minimal E2E smoke tests validating key user journeys.
+---
 
-Expandable for projects that require deeper coverage.
+## 10. Configuration
 
-Documentation
+### 10.1 Environment Configuration
 
-Self-documenting code with type annotations and clear naming.
+Environment-specific settings are managed through:
 
-Minimal but precise README or feature-level docs as needed.
+- `src/environments/environment.ts` - Development defaults.
+- `src/environments/environment.prod.ts` - Production overrides.
 
-Quality thresholds (e.g., coverage percentages, linting rules) should be defined in a separate quality specification.
+### 10.2 Build Configuration
 
-10. Extensibility & Customization
-Angular Seed is designed to be adapted per project:
+Build settings are configured in:
 
-Configurable Stack Components
+- `angular.json` - Angular CLI workspace configuration.
+- `tsconfig.json` - TypeScript compiler options.
+- `tsconfig.app.json` - Application-specific TypeScript settings.
 
-Swappable/testing frameworks, state management libraries, and UI kits.
+### 10.3 Linting and Formatting
 
-Extension Points
+Code style is enforced via:
 
-Guidelines for adding:
+- `.eslintrc.json` or similar - Linting rules.
+- `.prettierrc` or similar - Code formatting rules.
+- Editor configuration files (`.editorconfig`, `.vscode/settings.json`).
 
-New feature modules.
+---
 
-Shared utilities.
+## 11. Contributing
 
-Cross-cutting services (e.g., auth, analytics).
+### 11.1 Contribution Guidelines
 
-Upgrade Strategy
+Contributions are welcome! Please follow these guidelines:
 
-Encourage periodic stack updates aligned with Angular’s release cadence.
+1. **Fork and Branch**: Create a feature branch from `main`.
+2. **Follow Standards**: Adhere to the project's coding standards and conventions.
+3. **Write Tests**: Include tests for new features and bug fixes.
+4. **Update Documentation**: Keep documentation current with code changes.
+5. **Submit PR**: Open a pull request with a clear description of changes.
 
-Keep project-specific overrides minimal to ease upgrades.
+### 11.2 Code Review Process
 
-11. Security & Compliance (High-Level Expectations)
-While the seed does not implement domain-specific security, it must:
+All contributions require:
 
-Follow secure coding defaults recommended by Angular (e.g., built-in XSS protection patterns).
+- Passing CI/CD checks.
+- Code review approval.
+- Compliance with project constitution principles.
+- Updated documentation where applicable.
 
-Avoid insecure patterns (e.g., direct DOM manipulation without sanitization).
+### 11.3 Reporting Issues
 
-Provide hooks for:
+When reporting issues, please include:
 
-Authentication and authorization integration.
+- Clear description of the problem.
+- Steps to reproduce.
+- Expected vs. actual behavior.
+- Environment details (OS, Node version, etc.).
+- Relevant logs or error messages.
 
-Secure storage of tokens and secrets (delegated to infrastructure).
+---
 
-Any regulatory or compliance requirements (e.g., GDPR) are to be addressed at the project level, building on this foundation.
+## 12. Documentation
 
-12. Performance & Observability
-Baseline expectations:
+### 12.1 Project Documentation
 
-Performance
+Additional documentation can be found in:
 
-Reasonable default bundle size for a seed project.
+- `docs/` - Detailed guides and references.
+- `.specify/` - Specification-driven development artifacts.
+- `.cursor/rules/` - Cursor AI agent rules and guidelines.
 
-Support for lazy-loading of feature modules where appropriate.
+### 12.2 API Documentation
 
-Basic performance budgets or checks can be integrated in CI.
+Generate API documentation:
 
-Observability Hooks
+```bash
+npm run docs
+# or
+yarn docs
+```
 
-Clear places to plug in:
+### 12.3 Architecture Decision Records
 
-Logging services.
+Significant architectural decisions are documented in:
 
-Error monitoring tools.
+- `docs/adr/` - Architecture Decision Records (ADRs).
 
-Analytics instrumentation.
+---
 
-Detailed performance budgets and observability tools are to be selected per concrete project.
+## 13. License
 
-13. Roadmap (Initial)
-The following items outline potential evolutions of Angular Seed:
+[License information to be specified]
 
-Versioned Stack Profiles
+---
 
-Profiles for different project types (e.g., “minimal”, “enterprise”, “experimental”).
+## 14. Acknowledgments
 
-Optional Add-on Blueprints
+- Built with [Angular](https://angular.io/).
+- Inspired by modern frontend development practices.
+- Community contributions and feedback.
 
-Generators or presets for:
+---
 
-Authentication module.
+## 15. Changelog
 
-Common dashboard layout.
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes, features, and bug fixes.
 
-API integration templates.
+---
 
-Documentation Enhancements
+## 16. Support
 
-Additional guides for:
+For questions, issues, or contributions:
 
-Onboarding new developers.
+- **Issues**: Open an issue on the repository.
+- **Discussions**: Use repository discussions for questions.
+- **Documentation**: Check the `docs/` directory for detailed guides.
 
-Recommended patterns and anti-patterns.
+---
 
-Upgrade and migration strategies.
-
-Tooling Integration
-
-Opinionated CI configuration examples.
-
-Example Dockerfile and deployment scaffold (non-mandatory).
-
-14. Acceptance Criteria for Angular Seed v0.1
-Angular Seed is considered “ready for use” when:
-
-A new Angular project can be bootstrapped from this template with:
-
-Successful local development start.
-
-Successful test run.
-
-Successful production build.
-
-The template includes:
-
-A clearly defined folder structure and example feature module.
-
-Configured linting and formatting.
-
-At least one example unit test and one example E2E/smoke test.
-
-This high-level overview is accompanied by:
-
-A concise README for developers.
-
-At least one detailed technical specification document (covering exact tools, versions, and commands).
+**Last Updated**: 2026-01-25  
+**Version**: 0.1.0  
+**Status**: Draft
