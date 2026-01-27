@@ -1,17 +1,20 @@
 <!--
 Sync Impact Report:
-Version change: N/A → 1.0.0 (Initial constitution)
-Modified principles: N/A (all new)
-Added sections: Core Principles (5 principles), Technology Stack Standards, Development Workflow, Governance
-Removed sections: N/A
+Version change: 1.0.0 → 1.0.1 (PATCH)
+Modified principles: II (Template Reusability) – expanded with feature-based structure, separation of concerns
+Added sections: Spec-Driven Development (Development Workflow); project reference to README
+Removed sections: None
 Templates requiring updates:
-  ✅ plan-template.md - Constitution Check section already references constitution file
-  ✅ spec-template.md - No direct constitution references, compatible
-  ✅ tasks-template.md - No direct constitution references, compatible
+  ✅ plan-template.md – Constitution Check compatible
+  ✅ spec-template.md – No direct constitution references, compatible
+  ✅ tasks-template.md – No direct constitution references, compatible
+  ⚠ .specify/templates/commands/ – directory not present (plan-template references plan.md there)
 Follow-up TODOs: None
 -->
 
 # Angular Seed Constitution
+
+This constitution governs development principles for **Angular Seed**. See `README.md` for project overview, scope, getting started, and architecture.
 
 ## Core Principles
 
@@ -21,7 +24,7 @@ All code MUST follow the latest Angular best practices and patterns. Standalone 
 **Rationale**: As a seed project, Angular Seed must demonstrate current best practices and serve as a reference implementation for modern Angular development.
 
 ### II. Template Reusability
-Every feature, component, and pattern MUST be designed for easy extraction and reuse in other projects. Code organization must be clear and modular. Configuration should be externalized and well-documented. Avoid project-specific hardcoding that would prevent reuse.
+Every feature, component, and pattern MUST be designed for easy extraction and reuse in other projects. Code organization must be clear and modular. Structure MUST follow feature-based modularization (e.g. `core/`, `shared/`, `features/`) and clear separation of presentation and domain logic, as described in the project overview. Configuration MUST be externalized and well-documented. Avoid project-specific hardcoding that would prevent reuse.
 
 **Rationale**: Angular Seed serves as a template for future projects, so all code must be adaptable and reusable without significant refactoring.
 
@@ -77,6 +80,9 @@ When adding experimental features:
 4. Mark clearly in documentation as experimental
 5. Plan for either adoption or removal based on evaluation
 
+### Spec-Driven Development
+Use spec-driven workflows (e.g. `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`) when defining and implementing features. Validate scope, plans, and tasks against this constitution. The Constitution Check in implementation plans serves as a gate before development.
+
 ## Governance
 
 This constitution supersedes all other coding practices and project guidelines. All development work must comply with these principles.
@@ -94,4 +100,4 @@ This constitution supersedes all other coding practices and project guidelines. 
 
 **Compliance Review**: All pull requests and feature implementations must verify compliance with the constitution. The Constitution Check section in implementation plans serves as a gate before proceeding with development.
 
-**Version**: 1.0.0 | **Ratified**: 2026-01-25 | **Last Amended**: 2026-01-25
+**Version**: 1.0.1 | **Ratified**: 2026-01-25 | **Last Amended**: 2026-01-27
