@@ -1,9 +1,17 @@
 # Feature Specification: Initial App Bootstrap
 
-**Feature Branch**: `feature/#001-ai-plan`  
-**Created**: 2026-01-27  
-**Status**: Draft  
+**Feature Branch**: `feature/#001-ai-plan`
+**Created**: 2026-01-27
+**Status**: Draft
 **Input**: Initial app bootstrap with considerations for extensions, libraries, design layer, frontend frameworks
+
+## Clarifications
+
+### Session 2026-02-01
+
+- Q: What Angular version should be targeted? → A: Angular 19.x with default test runner (Karma/Jasmine) and 2016 file naming convention (app.component.ts style)
+- Q: What styling technology and methodology should be used? → A: SCSS (Sass) with CSS custom properties for theming, plus BEM methodology when applicable
+- Q: What Node.js and npm versions are required? → A: Node.js 18.x LTS (npm 9.x+)
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -20,7 +28,7 @@ As a developer, I can clone the Angular Seed repository, install dependencies, a
 1. **Given** a fresh clone, **When** I run `npm install` and `npm start`, **Then** the app builds successfully and is served.
 2. **Given** a running dev server, **When** I open the app in a browser, **Then** I see a minimal shell (e.g. root component with placeholder content).
 3. **Given** the project, **When** I run `npm run build`, **Then** a production build completes without errors.
-4. **Given** baseline Vitest tests exist, **When** I run `npm test`, **Then** tests pass and demonstrate testing setup works.
+4. **Given** baseline Karma/Jasmine tests exist, **When** I run `npm test`, **Then** tests pass and demonstrate testing setup works.
 
 ---
 
@@ -75,7 +83,7 @@ As a developer, I can apply or swap design approaches through CSS variables, the
 
 ### Edge Cases
 
-- What happens when a required Node/npm version is not met? → Clear error message and documented prerequisites (e.g. in README).
+- What happens when a required Node/npm version is not met? → Clear error message and documented prerequisites (Node.js 18.x LTS with npm 9.x+ minimum) in README and optionally enforced via `.nvmrc` file.
 - How does the system handle conflicting or duplicate dependencies when extending? → Document peer dependency ranges and integration patterns; consider lockfile and upgrade guidance.
 - What if a developer removes an optional extension? → Core app MUST still run; extensions MUST be additive and optional.
 - How does the build behave with missing environment config? → Sensible defaults for dev; clear errors or fallbacks for production.
@@ -92,20 +100,20 @@ As a developer, I can apply or swap design approaches through CSS variables, the
 - **FR-003**: The project MUST provide extension points or documentation for integrating libraries (state management, HTTP, forms, etc.).
 - **FR-004**: The project MUST provide a design layer abstraction (theming, styling strategy, or UI component integration) with documented extension approach.
 - **FR-005**: The project MUST include TypeScript strict mode (no `any` usage), ESLint 9 with angular-eslint and flat config, Prettier 3 integrated with ESLint, and editor configuration files (.editorconfig, .vscode/settings.json) for consistent development experience. Angular coding standards from `angular_guidelines.md` MUST be enforced via ESLint rules including: OnPush change detection for all components, modern control flow syntax (@if/@for/@switch), functional APIs (input()/output()/inject()), signals for state management, and prohibition of deprecated patterns (ngClass/ngStyle/@HostBinding/@HostListener/structural directives).
-- **FR-006**: The project MUST include Vitest for unit and component testing with at least one passing baseline test (e.g., AppComponent test). The project structure MUST accommodate future E2E test integration but E2E framework setup is out of scope for initial bootstrap.
+- **FR-006**: The project MUST include unit and component testing using Angular 19's default test runner (Karma with Jasmine) with at least one passing baseline test (e.g., AppComponent test). The project structure MUST accommodate future E2E test integration but E2E framework setup is out of scope for initial bootstrap.
 - **FR-007**: The project MUST include environment-based configuration (e.g. `environment.ts`, `environment.prod.ts`).
 - **FR-008**: Core functionality MUST remain runnable when optional extensions are not added or are removed.
 - **FR-009**: All structure, extension points, and design layer choices MUST be documented with examples.
 - **FR-010**: The project MUST use Husky to enforce pre-commit hooks that run lint-staged, which executes ESLint and Prettier checks on staged files only. Hooks MUST prevent commits that fail linting or formatting checks.
 - **FR-011**: The project MUST include documentation (in README or docs/) showing concrete examples of how to extend the template with: (a) a state management library, (b) a UI component library, and (c) HTTP interceptors. Examples MUST include file locations, provider configuration, and integration patterns.
-- **FR-012**: The project MUST include CSS custom properties (variables) for theming with at least one example theme configuration. The styling approach (SCSS/CSS, architecture pattern) MUST be documented with examples of component styling and theme customization.
+- **FR-012**: The project MUST use SCSS (Sass) as the styling technology with CSS custom properties (variables) for theming and at least one example theme configuration. BEM methodology MUST be applied when applicable for CSS class naming. The styling approach MUST be documented with examples of component styling, BEM usage, and theme customization.
 - **FR-013**: The project MUST meet WCAG AA accessibility standards and pass AXE automated testing. All components MUST implement proper focus management, use appropriate ARIA attributes, and maintain minimum color contrast ratios. Accessibility validation MUST be integrated into the linting workflow.
 
 ### Key Entities
 
 - **ProjectStructure**: The directory layout and naming conventions for `core/`, `shared/`, `features/`, assets, and config. Defines where code lives and how it is organized.
 - **ExtensionPoint**: A documented integration slot for libraries or frameworks (e.g. store provider, HTTP interceptors, routing). Has clear add/remove behavior.
-- **DesignLayer**: Theming, styling strategy (e.g. SCSS/CSS variables, design tokens), and optional UI component library integration. Separable from domain logic.
+- **DesignLayer**: Theming using SCSS with CSS custom properties (design tokens) and BEM methodology for class naming. Includes optional UI component library integration. Separable from domain logic.
 
 ## Success Criteria *(mandatory)*
 
@@ -113,7 +121,7 @@ As a developer, I can apply or swap design approaches through CSS variables, the
 
 - **SC-001**: A developer new to the project can run the app locally within 5 minutes of cloning (assuming prerequisites met).
 - **SC-002**: The production build completes successfully and produces deployable artifacts.
-- **SC-003**: Vitest runs successfully via `npm test` and at least one baseline test passes (AppComponent or equivalent). Test configuration MUST support component testing with TestBed and DOM queries.
+- **SC-003**: Karma with Jasmine runs successfully via `npm test` and at least one baseline test passes (AppComponent or equivalent). Test configuration MUST support component testing with TestBed and DOM queries.
 - **SC-004**: The project structure is documented with examples showing: (a) where to create a new feature module, (b) how to add it to routing, and (c) how to organize components/services within the feature. A developer MUST be able to add a new feature by following only the project documentation.
 - **SC-005**: At least two extension examples are documented: (1) adding a state management or HTTP library, and (2) adding or customizing the design/theming layer. Each example MUST include file paths, code snippets, and integration steps.
 - **SC-006**: Pre-commit hooks prevent commits when ESLint or Prettier checks fail. A developer attempting to commit poorly formatted or linted code MUST receive clear error messages indicating which files need fixing.
