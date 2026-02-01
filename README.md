@@ -99,22 +99,35 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 ### 5.1 Core Architectural Principles
 
-- **Feature Modularity**  
+- **Feature Modularity**
   Group code by domain feature (e.g., `auth`, `dashboard`, `settings`), rather than by technical layer only.
 
-- **Separation of Concerns**  
+- **Separation of Concerns**
   Distinguish between:
   - UI components (presentational components).
   - Smart/feature components (container components).
   - Services handling domain and integration logic.
 
-- **Reactive and Declarative UIs**  
+- **Reactive and Declarative UIs**
   Encourage the use of observable patterns and unidirectional data flow where appropriate.
 
-- **Configuration over Convention Points**  
+- **Configuration over Convention Points**
   Provide clear extension points (interfaces, tokens, configuration objects) where customization is expected.
 
-### 5.2 Layered View (High-Level)
+### 5.2 Angular Best Practices
+
+This project follows modern Angular development standards. For detailed coding guidelines, see [`angular_guidelines.md`](./angular_guidelines.md).
+
+**Key principles**:
+- **Standalone components** (default in Angular 19+, no NgModules)
+- **Signals for state management** (`signal()`, `computed()`)
+- **Modern control flow** (`@if`, `@for`, `@switch` instead of structural directives)
+- **OnPush change detection** for all components
+- **Functional APIs** (`input()`, `output()`, `inject()` instead of decorators)
+- **Strict TypeScript** with type safety enforcement
+- **Accessibility first** (WCAG AA compliance, AXE testing)
+
+### 5.3 Layered View (High-Level)
 
 - **Presentation Layer**
   - Components, layouts, and routing.
@@ -354,6 +367,7 @@ When reporting issues, please include:
 Additional documentation can be found in:
 
 - `docs/` - Detailed guides and references.
+- `angular_guidelines.md` - Angular coding standards and best practices.
 - `.specify/` - Specification-driven development artifacts.
 - `.cursor/rules/` - Cursor AI agent rules and guidelines.
 
