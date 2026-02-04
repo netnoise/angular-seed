@@ -119,6 +119,7 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 This project follows modern Angular development standards. For detailed coding guidelines, see [`angular_guidelines.md`](./angular_guidelines.md).
 
 **Key principles**:
+
 - **Standalone components** (default in Angular 19+, no NgModules)
 - **Signals for state management** (`signal()`, `computed()`)
 - **Modern control flow** (`@if`, `@for`, `@switch` instead of structural directives)
@@ -208,12 +209,14 @@ Before using Angular Seed, ensure you have the following installed:
 ### 8.2 Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd angular-seed
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -291,12 +294,16 @@ When adding new features:
 
 ### 9.4 Spec-Driven Development
 
-This project supports spec-driven development workflows:
+This project strictly follows Spec-Driven Development (SDD) using the `speckit` toolset. The workflow ensures that implementation never precedes clear, documented intent.
 
-- Use `/speckit.specify` to create feature specifications.
-- Use `/speckit.plan` to generate implementation plans.
-- Use `/speckit.tasks` to break down work into actionable tasks.
-- Reference `.specify/memory/constitution.md` for project principles.
+**Core Workflow:**
+
+1.  **Specify**: Use `/speckit.specify` to define requirements in `specs/`.
+2.  **Clarify**: Use `/speckit.clarify` to resolve ambiguities.
+3.  **Plan**: Use `/speckit.plan` to generate technical strategy and architecture.
+4.  **Task**: Use `/speckit.tasks` to break down the plan into actionable items.
+5.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
+6.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
 
 ---
 
@@ -422,3 +429,31 @@ For questions, issues, or contributions:
 **Last Updated**: 2026-01-25  
 **Version**: 0.1.0  
 **Status**: Draft
+
+---
+
+## 17. AI Agent Interoperability & Handoff
+
+To ensure a seamless experience when switching between different AI agents (e.g., Gemini CLI, Cursor, Claude, etc.), this project employs a "State Snapshot" strategy.
+
+### 17.1 The Handoff Hub
+
+The file `GEMINI.md` (or agent-specific variants like `CLAUDE.md`) serves as the **Active Context Hub**. Before switching agents:
+
+- Ensure `session-summary.md` in the active feature directory is updated.
+- Update the "Task State" and "Active Constraints" in the agent-specific memory file.
+
+### 17.2 Global Context Files
+
+Agents should always read these files upon initialization:
+
+- `README.md` & `README.ng.md`: Project and Tech Stack overview.
+- `.specify/memory/constitution.md`: Core governance principles.
+- `angular_guidelines.md`: Coding standards and prohibited patterns.
+- `GEMINI.md`: Current development state and active focus.
+
+### 17.3 Resuming Work
+
+When a new agent takes over, the recommended first command is:
+
+> "Read the latest `session-summary.md` and `GEMINI.md` to establish context, then check `tasks.md` for the next pending item."
