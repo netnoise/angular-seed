@@ -303,7 +303,8 @@ This project strictly follows Spec-Driven Development (SDD) using the `speckit` 
 3.  **Plan**: Use `/speckit.plan` to generate technical strategy and architecture.
 4.  **Task**: Use `/speckit.tasks` to break down the plan into actionable items.
 5.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
-6.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
+6.  **Verify**: Ensure tests pass and update `CHANGELOG.md` with new features/fixes.
+7.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
 
 ---
 

@@ -5,11 +5,13 @@ This file serves as the primary memory and coordination hub for AI agents (Gemin
 ## 🚀 Spec-Driven Development (SDD) Workflow
 
 All feature development MUST follow this lifecycle:
+
 1.  **Specify** (`spec.md`): Define user stories, requirements, and acceptance criteria.
 2.  **Plan** (`plan.md`): Map technical architecture, stack choices, and constitutional checks.
 3.  **Task** (`tasks.md`): Generate atomic, dependency-ordered implementation checklists.
 4.  **Analyze**: Run cross-artifact consistency checks.
 5.  **Implement**: Execute tasks iteratively with TDD.
+6.  **Polish**: Finalize documentation and publish granular `CHANGELOG` entry.
 
 ---
 
@@ -19,7 +21,7 @@ All feature development MUST follow this lifecycle:
 - **Branch**: `feature/#001-ai-plan`
 - **Active Directory**: `specs/001-initial-app-bootstrap/`
 - **Task List**: `specs/001-initial-app-bootstrap/tasks.md`
-- **Status**: Tasks generated and validated. Ready for implementation.
+- **Status**: Implementation Complete. Project Baseline Established.
 
 ---
 
@@ -28,7 +30,7 @@ All feature development MUST follow this lifecycle:
 - **Stack**: Angular 19.x (Standalone, Signals), TS (Strict), SCSS (BEM), Karma/Jasmine.
 - **Lint/Format**: ESLint 9 (Flat Config), Prettier 3.
 - **Quality**: Husky + lint-staged (A11y validation integrated).
-- **Test**: `npm test` (Karma)
+- **Test**: `npm test` (Karma), `npm run test:ci` (Headless)
 - **Lint**: `npm run lint` (ESLint)
 - **Build**: `npm run build` (Production)
 
@@ -43,16 +45,37 @@ All feature development MUST follow this lifecycle:
 
 ---
 
+## 🔄 Changelog Protocol ("Squash & Merge" Compatible)
+
+1.  **Accumulate**: During development, maintain granular changes in `specs/{id}/changes.md` (or similar scratchpad).
+2.  **Publish**: In the final "Polish" phase of `tasks.md`, append these granular bullets to the root `CHANGELOG.md`.
+3.  **Format**: Use specific headers for features to preserve history after squashing.
+
+**Example Entry in root CHANGELOG:**
+
+```markdown
+## [0.2.0] - YYYY-MM-DD
+
+### Feature #002 - Dashboard
+
+- Added `DashboardComponent` with lazy loading
+- Implemented `WidgetService` using Signals
+- Fixed layout bug in `GridSystem`
+```
+
+---
+
 ## 📚 Knowledge Base
 
-- **Decision Log**: See `specs/001-initial-app-bootstrap/research.md` (e.g., Why Karma vs Vitest).
+- **Decision Log**: See `specs/001-initial-app-bootstrap/research.md`.
 - **Data Model**: See `specs/001-initial-app-bootstrap/data-model.md`.
-- **Extension Patterns**: See `docs/extensions.md` (to be created in Phase 5).
+- **Architecture**: See `docs/structure.md`.
+- **Extensions**: See `docs/extensions.md`.
 
 ---
 
 ## 🕒 Recent Activity
 
-- **2026-02-04**: Generated `tasks.md`.
-- **2026-02-04**: Performed consistency analysis; identified and fixed TDD ordering and A11y linting gaps.
-- **2026-02-04**: Finalized 32 tasks across 7 phases for Initial App Bootstrap.
+- **2026-02-04**: Implementation of Feature #001 complete.
+- **2026-02-04**: Workspace initialized, structure established, tests passing.
+- **2026-02-04**: `CHANGELOG.md` generated for v0.1.0.
