@@ -21,7 +21,7 @@
 - [ ] T002 Update `tsconfig.json` to enable strict mode and align with Angular 19
 - [ ] T003 Create `.nvmrc` file in project root
 - [ ] T004 Create `.editorconfig` file in project root
-- [ ] T005 Install and configure ESLint 9, Prettier 3, and `angular-eslint` in `package.json` and `.eslintrc.json`
+- [ ] T005 Install and configure ESLint 9, Prettier 3, and `angular-eslint` (including a11y plugins) in `package.json` and `.eslintrc.json`
 - [ ] T006 Install and configure Husky and lint-staged in `package.json` and `.husky/`
 
 ## Phase 2: Foundational
@@ -39,11 +39,11 @@
 **Goal**: Deliver a running, testable single-page application shell.
 **Priority**: P1
 
-- [ ] T012 [US1] Implement minimal `AppComponent` in `src/app/app.component.ts`
-- [ ] T013 [US1] Verify `npm start` command in `package.json`
-- [ ] T014 [US1] Verify `npm run build` command in `package.json`
-- [ ] T015 [US1] Configure Karma and Jasmine in `karma.conf.js`
-- [ ] T016 [US1] Create baseline unit test for AppComponent in `src/app/app.component.spec.ts`
+- [ ] T012 [US1] Configure Karma and Jasmine in `karma.conf.js`
+- [ ] T013 [US1] Create baseline unit test for AppComponent in `src/app/app.component.spec.ts` (TDD: Write first)
+- [ ] T014 [US1] Implement minimal `AppComponent` in `src/app/app.component.ts` to pass baseline test
+- [ ] T015 [US1] Verify `npm start` command in `package.json`
+- [ ] T016 [US1] Verify `npm run build` command in `package.json`
 - [ ] T017 [US1] Configure AXE for accessibility testing in `src/test.ts` (or setup script)
 
 ## Phase 4: User Story 2 - Extensible Project Structure
@@ -63,6 +63,8 @@
 
 - [ ] T022 [US3] Create documentation for extension points in `docs/extensions.md`
 - [ ] T023 [US3] Create example HTTP interceptor in `src/app/core/interceptors/example.interceptor.ts`
+- [ ] T023b [US3] [P] Create concrete code example/pattern for State Management integration (e.g. Signal store)
+- [ ] T023c [US3] [P] Create concrete code example/pattern for UI Component Library integration
 - [ ] T024 [US3] Register example interceptor in `src/app/app.config.ts` (or `app.module.ts`)
 
 ## Phase 6: User Story 4 - Design Layer Abstraction
