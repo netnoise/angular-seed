@@ -413,11 +413,20 @@ Significant architectural decisions are documented in:
 
 ## 15. Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes, features, and bug fixes.
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes, features, and bug fixes. The project follows the [Accumulate Local, Publish Global](docs/recipes/changelog-management.md) strategy to ensure a granular history is preserved even in squash-merge workflows.
 
 ---
 
-## 16. Support
+## 16. Versioning
+
+This project adheres to [Semantic Versioning (SemVer)](https://semver.org/). Versioning is managed via a custom local script to ensure all metadata (including the in-app version display) stays in sync.
+
+- **Bump Version**: `npm run version:bump [patch|minor|major]`
+- **In-App Display**: The current version is automatically exposed to the Angular application via `src/app/version.ts`.
+
+---
+
+## 17. Support
 
 For questions, issues, or contributions:
 
@@ -433,18 +442,18 @@ For questions, issues, or contributions:
 
 ---
 
-## 17. AI Agent Interoperability & Handoff
+## 18. AI Agent Interoperability & Handoff
 
 To ensure a seamless experience when switching between different AI agents (e.g., Gemini CLI, Cursor, Claude, etc.), this project employs a "State Snapshot" strategy.
 
-### 17.1 The Handoff Hub
+### 18.1 The Handoff Hub
 
 The file `GEMINI.md` (or agent-specific variants like `CLAUDE.md`) serves as the **Active Context Hub**. Before switching agents:
 
 - Ensure `session-summary.md` in the active feature directory is updated.
 - Update the "Task State" and "Active Constraints" in the agent-specific memory file.
 
-### 17.2 Global Context Files
+### 18.2 Global Context Files
 
 Agents should always read these files upon initialization:
 
@@ -453,7 +462,7 @@ Agents should always read these files upon initialization:
 - `angular_guidelines.md`: Coding standards and prohibited patterns.
 - `GEMINI.md`: Current development state and active focus.
 
-### 17.3 Resuming Work
+### 18.3 Resuming Work
 
 When a new agent takes over, the recommended first command is:
 

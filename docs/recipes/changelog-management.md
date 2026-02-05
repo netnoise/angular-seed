@@ -45,12 +45,52 @@ _During the 'Polish' phase of your feature:_
 
 ### 3. The Publication (Serving)
 
-_Right before the final PR approval:_
+_Right before the final PR approval or merging to main:_
 
 - Copy the refined bullets from `specs/{feature_id}/changes.md`.
 - Open the root `CHANGELOG.md`.
-- Create a heading for the feature under `## [Unreleased]`.
-- Paste the bullets and delete the local `changes.md`.
+- Ensure there is a `## [Unreleased]` section at the top.
+- Paste the bullets under `## [Unreleased]` and delete the local `changes.md`.
+
+### 4. The Release (The Manual Transmission)
+
+Once your changes are on the main branch (or ready to be tagged):
+
+1. **Run the Bump Script**:
+
+   ```bash
+   npm run version:bump [patch|minor|major]
+   ```
+
+   _This updates `package.json`, `package-lock.json`, `CHANGELOG.md`, and `src/app/version.ts`._
+
+   Convenience scripts:
+   - `npm run version:bump:patch|minor|major`
+   - `npm run version:bump:prerelease` (defaults to `rc`)
+   - `npm run version:release:patch|minor|major` (includes strict checks)
+   - `npm run version:release:prerelease` (strict checks + `rc`)
+
+   Optional safety flags:
+   - `--require-specs-clean`: Fails if any `specs/**/changes.md` files remain.
+   - `--require-unreleased`: Fails if `## [Unreleased]` is empty.
+   - `--dry-run`: Prints actions without writing files.
+   - `--preid <id>`: Use with `prerelease` to bump pre-release tags (e.g. `rc`, `beta`).
+   - `--version x.y.z`: Set an explicit version (SemVer).
+
+2. **Commit & Tag (Manual)**:
+
+   ```bash
+   git add .
+   git commit -m "chore: release vX.Y.Z"
+   git tag vX.Y.Z
+   git push origin main --tags
+   ```
+
+3. **Optional Automation**:
+   If you want the script to handle the git steps for you, add the `--git` flag:
+   ```bash
+   npm run version:bump [type] -- --git
+   ```
 
 ---
 

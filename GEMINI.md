@@ -42,14 +42,16 @@ All feature development MUST follow this lifecycle:
 2.  **TDD First**: Write tests (`.spec.ts`) before implementation logic.
 3.  **A11y Standards**: WCAG AA compliance enforced via AXE and linting.
 4.  **Reusability**: Code must be modularized into `core/`, `shared/`, or `features/`.
+5.  **Traceable History**: Mandatory use of SemVer and "Accumulate Local, Publish Global" for changelogs.
 
 ---
 
-## 🔄 Changelog Protocol ("Squash & Merge" Compatible)
+## 🔄 Changelog & Versioning Protocol ("Manual Transmission")
 
-1.  **Accumulate**: During development, maintain granular changes in `specs/{id}/changes.md` (or similar scratchpad).
-2.  **Publish**: In the final "Polish" phase of `tasks.md`, append these granular bullets to the root `CHANGELOG.md`.
-3.  **Format**: Use specific headers for features to preserve history after squashing.
+1.  **Accumulate**: During development, maintain granular changes in `specs/{id}/changes.md`.
+2.  **Publish**: In the final "Polish" phase, append bullets to the root `CHANGELOG.md` under `## [Unreleased]`.
+3.  **Bump**: Run `npm run version:bump [patch|minor|major]` to update project files.
+4.  **Tag**: Manually commit and tag the release (or use `--git` flag if automated tagging is desired).
 
 **Example Entry in root CHANGELOG:**
 
