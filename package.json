@@ -1,6 +1,6 @@
 {
   "name": "angular-seed",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +8,15 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "version:bump": "node tools/version-bump.mjs",
+    "version:bump:patch": "node tools/version-bump.mjs patch",
+    "version:bump:minor": "node tools/version-bump.mjs minor",
+    "version:bump:major": "node tools/version-bump.mjs major",
+    "version:bump:prerelease": "node tools/version-bump.mjs prerelease --preid rc",
+    "version:release:patch": "node tools/version-bump.mjs patch --require-unreleased --require-specs-clean",
+    "version:release:minor": "node tools/version-bump.mjs minor --require-unreleased --require-specs-clean",
+    "version:release:major": "node tools/version-bump.mjs major --require-unreleased --require-specs-clean",
+    "version:release:prerelease": "node tools/version-bump.mjs prerelease --preid rc --require-unreleased --require-specs-clean",
     "lint": "ng lint",
     "prepare": "husky"
   },
@@ -38,7 +47,7 @@
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "21.0.1",
-    "axe-core": "^4.11.1",
+    "axe-core": "^4.10.2",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
