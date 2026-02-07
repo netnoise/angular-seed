@@ -56,41 +56,9 @@ _Right before the final PR approval or merging to main:_
 
 Once your changes are on the main branch (or ready to be tagged):
 
-1. **Run the Bump Script**:
+1. **Run the Bump Script**: Use `npm run version:bump` (or its convenience scripts).
 
-   ```bash
-   npm run version:bump [patch|minor|major]
-   ```
-
-   _This updates `package.json`, `package-lock.json`, `CHANGELOG.md`, and `src/app/version.ts`._
-
-   Convenience scripts:
-   - `npm run version:bump:patch|minor|major`
-   - `npm run version:bump:prerelease` (defaults to `rc`)
-   - `npm run version:release:patch|minor|major` (includes strict checks)
-   - `npm run version:release:prerelease` (strict checks + `rc`)
-
-   Optional safety flags:
-   - `--require-specs-clean`: Fails if any `specs/**/changes.md` files remain.
-   - `--require-unreleased`: Fails if `## [Unreleased]` is empty.
-   - `--dry-run`: Prints actions without writing files.
-   - `--preid <id>`: Use with `prerelease` to bump pre-release tags (e.g. `rc`, `beta`).
-   - `--version x.y.z`: Set an explicit version (SemVer).
-
-2. **Commit & Tag (Manual)**:
-
-   ```bash
-   git add .
-   git commit -m "chore: release vX.Y.Z"
-   git tag vX.Y.Z
-   git push origin main --tags
-   ```
-
-3. **Optional Automation**:
-   If you want the script to handle the git steps for you, add the `--git` flag:
-   ```bash
-   npm run version:bump [type] -- --git
-   ```
+   _For detailed usage, including optional flags and Git automation, refer to [docs/recipes/versioning-scripts.md](docs/recipes/versioning-scripts.md)._
 
 ---
 

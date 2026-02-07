@@ -419,7 +419,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes, features, and
 
 ## 16. Versioning
 
-This project adheres to [Semantic Versioning (SemVer)](https://semver.org/). Versioning is managed via a custom local script to ensure all metadata (including the in-app version display) stays in sync.
+This project adheres to [Semantic Versioning (SemVer)](https://semver.org/). Versioning is managed via a custom local script to ensure all metadata (including the in-app version display) stays in sync. For detailed usage, refer to the [Versioning Scripts & Options](docs/recipes/versioning-scripts.md) guide.
 
 - **Bump Version**: `npm run version:bump [patch|minor|major]`
 - **In-App Display**: The current version is automatically exposed to the Angular application via `src/app/version.ts`.

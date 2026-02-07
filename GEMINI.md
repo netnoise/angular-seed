@@ -7,13 +7,12 @@ This file serves as the primary memory and coordination hub for AI agents (Gemin
 All feature development MUST follow this lifecycle:
 
 1.  **Specify** (`spec.md`): Define user stories, requirements, and acceptance criteria.
-2.  **Plan** (`plan.md`): Map technical architecture, stack choices, and constitutional checks.
-3.  **Task** (`tasks.md`): Generate atomic, dependency-ordered implementation checklists.
-4.  **Analyze**: Run cross-artifact consistency checks.
-5.  **Implement**: Execute tasks iteratively with TDD.
-6.  **Polish**: Finalize documentation and publish granular `CHANGELOG` entry.
-
----
+2.  **Clarify** (`/speckit.clarify`): Resolve ambiguities, updating `spec.md`.
+3.  **Plan** (`/speckit.plan`): Map technical architecture, stack choices, and constitutional checks.
+4.  **Task** (`/speckit.tasks`): Generate atomic, dependency-ordered implementation checklists.
+5.  **Implement**: Execute tasks iteratively with TDD, updating `tasks.md`.
+6.  **Polish**: Finalize documentation, update `CHANGELOG.md`, run version bump, and ensure `session-summary.md` is updated for agent handoff.
+7.  **Analyze**: Run cross-artifact consistency checks (`/speckit.analyze`).
 
 ## 📍 Active Context
 
