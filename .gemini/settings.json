@@ -1,0 +1,21 @@
+{
+  "general": {
+    "previewFeatures": true,
+    "enablePromptCompletion": true
+  },
+  "ui": {
+    "showStatusInTitle": true,
+    "useAlternateBuffer": true,
+    "footer": {
+      "hideContextPercentage": false
+    }
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    }
+  },
+  "experimental": {
+    "plan": true
+  }
+}
