@@ -11,8 +11,8 @@ All feature development MUST follow this lifecycle:
 3.  **Plan** (`/speckit.plan`): Map technical architecture, stack choices, and constitutional checks.
 4.  **Task** (`/speckit.tasks`): Generate atomic, dependency-ordered implementation checklists.
 5.  **Implement**: Execute tasks iteratively with TDD, updating `tasks.md`.
-6.  **Polish**: Finalize documentation, update `CHANGELOG.md`, run version bump, and ensure `session-summary.md` is updated for agent handoff.
-7.  **Analyze**: Run cross-artifact consistency checks (`/speckit.analyze`).
+    /conm6. **Polish**: Finalize documentation, update `CHANGELOG.md`, run version bump, and ensure the feature's `session-summary.md` (now in `docs/session-summaries/`) is updated for agent handoff.
+6.  **Analyze**: Run cross-artifact consistency checks (`/speckit.analyze`).
 
 ## 📍 Active Context
 
@@ -20,6 +20,7 @@ All feature development MUST follow this lifecycle:
 - **Branch**: `feature/#001-ai-plan`
 - **Active Directory**: `specs/001-initial-app-bootstrap/`
 - **Task List**: `specs/001-initial-app-bootstrap/tasks.md`
+- **Session Summary**: `docs/session-summaries/001-initial-app-bootstrap.md`
 - **Status**: Implementation Complete. Project Baseline Established.
 
 ---

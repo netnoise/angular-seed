@@ -104,6 +104,7 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 - **Separation of Concerns**
   Distinguish between:
+
   - UI components (presentational components).
   - Smart/feature components (container components).
   - Services handling domain and integration logic.
@@ -131,10 +132,12 @@ This project follows modern Angular development standards. For detailed coding g
 ### 5.3 Layered View (High-Level)
 
 - **Presentation Layer**
+
   - Components, layouts, and routing.
   - Styling, theming, and UI state.
 
 - **Domain / Application Layer**
+
   - Services encapsulating business logic.
   - Application-level state management (if used).
   - Interactors/use-cases (optional, based on chosen pattern).
@@ -450,7 +453,7 @@ To ensure a seamless experience when switching between different AI agents (e.g.
 
 The file `GEMINI.md` (or agent-specific variants like `CLAUDE.md`) serves as the **Active Context Hub**. Before switching agents:
 
-- Ensure `session-summary.md` in the active feature directory is updated.
+- Ensure `docs/session-summaries/001-initial-app-bootstrap.md` (or the active feature's session summary) is updated.
 - Update the "Task State" and "Active Constraints" in the agent-specific memory file.
 
 ### 18.2 Global Context Files
@@ -461,9 +464,10 @@ Agents should always read these files upon initialization:
 - `.specify/memory/constitution.md`: Core governance principles.
 - `angular_guidelines.md`: Coding standards and prohibited patterns.
 - `GEMINI.md`: Current development state and active focus.
+- `docs/session-summaries/001-initial-app-bootstrap.md` (for current feature context).
 
 ### 18.3 Resuming Work
 
 When a new agent takes over, the recommended first command is:
 
-> "Read the latest `session-summary.md` and `GEMINI.md` to establish context, then check `tasks.md` for the next pending item."
+> "Read the latest `docs/session-summaries/001-initial-app-bootstrap.md` and `GEMINI.md` to establish context, then check `tasks.md` for the next pending item."
