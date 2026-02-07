@@ -39,7 +39,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 0.0.1 - 0.0.20
 
-## [0.0.21] - 2026-02-06
+## [0.0.21] - 2026-02-06 (Merged: Changelog Refinement & Versioning Documentation)
+
+### Summary
+
+This version consolidates the final stages of changelog management, focusing on backfilling historical commit details and documenting the newly established versioning and changelog protocols. It ensures complete historical traceability and provides clear guidance for future releases, especially within the context of the SDD workflow.
+
+### Key changes:
+
+- **Changelog Backfill**: Comprehensive backfilling of `CHANGELOG.md` history from `v0.0.1` up to `v0.0.20`, detailing the progression of specifications, documentation updates, and tool implementations.
+- **Enhanced `v0.1.0` Release Notes**: Expanded `v0.1.0` release notes with a detailed summary of added features, tooling, and architectural decisions for the initial Angular 19 bootstrap.
+- **Versioning Documentation Centralization**: Created `docs/recipes/versioning-scripts.md` to centralize documentation for the custom version bump tool, its flags, and `npm` scripts.
+- **Protocol Refinement**: Updated `docs/recipes/changelog-management.md` and `README.md` to reference the new versioning guide, simplifying process documentation.
+- **SDD Workflow Precision**: Refined `GEMINI.md` to reflect the precise Spec-Driven Development (SDD) workflow commands (e.g., `/speckit.clarify`, `/speckit.analyze`) and expanded polish steps for agent guidance.
 
 ## [0.0.20] - 2026-02-05
 
