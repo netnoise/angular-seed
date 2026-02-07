@@ -1,0 +1,66 @@
+{
+  "name": "angular-seed",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "version:bump": "node tools/version-bump.mjs",
+    "version:bump:patch": "node tools/version-bump.mjs patch",
+    "version:bump:minor": "node tools/version-bump.mjs minor",
+    "version:bump:major": "node tools/version-bump.mjs major",
+    "version:bump:prerelease": "node tools/version-bump.mjs prerelease --preid rc",
+    "version:release:patch": "node tools/version-bump.mjs patch --require-unreleased --require-specs-clean",
+    "version:release:minor": "node tools/version-bump.mjs minor --require-unreleased --require-specs-clean",
+    "version:release:major": "node tools/version-bump.mjs major --require-unreleased --require-specs-clean",
+    "version:release:prerelease": "node tools/version-bump.mjs prerelease --preid rc --require-unreleased --require-specs-clean",
+    "lint": "ng lint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,html,scss,json,md}": [
+      "prettier --write"
+    ],
+    "*.{ts,html}": [
+      "eslint --fix"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/forms": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/router": "^19.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.19",
+    "@angular/cli": "^19.2.19",
+    "@angular/compiler-cli": "^19.2.0",
+    "@types/jasmine": "~5.1.0",
+    "angular-eslint": "21.0.1",
+    "axe-core": "^4.10.2",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "husky": "^9.1.7",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.46.4"
+  }
+}
