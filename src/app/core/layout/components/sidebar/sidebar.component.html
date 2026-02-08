@@ -1,0 +1,27 @@
+<aside [class]="sidebarClasses()">
+  <button
+    class="toggle-btn"
+    (click)="onToggle()"
+    [attr.aria-label]="sidebarOpen() ? 'Collapse sidebar' : 'Expand sidebar'"
+    [attr.aria-expanded]="sidebarOpen()"
+  >
+    <span class="toggle-icon">{{ sidebarOpen() ? '◀' : '▶' }}</span>
+  </button>
+
+  <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+    @for (item of navigationItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        routerLinkActive="active"
+        class="sidebar-item"
+        [attr.title]="item.label"
+      >
+        <span class="item-icon">{{ item.icon }}</span>
+        @if (sidebarOpen()) {
+          <span class="item-label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+</aside>

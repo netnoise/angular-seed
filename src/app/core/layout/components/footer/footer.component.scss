@@ -1,0 +1,22 @@
+.footer {
+  background: var(--color-footer-bg, #0f1419);
+  color: var(--color-footer-text, #8892a6);
+  border-top: 1px solid var(--color-border, #2a2e35);
+}
+
+.footer-content {
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-content {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+}

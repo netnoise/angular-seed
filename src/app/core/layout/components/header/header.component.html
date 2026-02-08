@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="logo">
+    <a routerLink="/">Angular Seed</a>
+  </div>
+
+  <nav class="nav-links">
+    @for (item of navigationItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+</header>

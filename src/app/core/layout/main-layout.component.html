@@ -1,0 +1,30 @@
+<div [class]="shellClasses()">
+  <div class="app-header">
+    <app-header></app-header>
+  </div>
+
+  <div class="sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <div class="app-footer">
+    <app-footer></app-footer>
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <div
+      class="backdrop"
+      role="button"
+      tabindex="0"
+      aria-label="Close menu"
+      (click)="onBackdropClick()"
+      (keydown.escape)="onBackdropClick()"
+      (keydown.enter)="onBackdropClick()"
+      (keydown.space)="onBackdropClick()"
+    ></div>
+  }
+</div>

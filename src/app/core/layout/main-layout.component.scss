@@ -1,0 +1,114 @@
+// Fixed App Frame using CSS Grid
+.app-shell {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  grid-template-rows: auto 1fr auto; // Header, Content, Footer
+  grid-template-columns: auto 1fr; // Sidebar, Main
+  grid-template-areas:
+    'header header'
+    'sidebar main'
+    'footer footer';
+
+  // Desktop: Sidebar Open (default)
+  &.sidebar-open {
+    .sidebar {
+      width: 250px;
+    }
+  }
+
+  // Desktop: Sidebar Collapsed (Mini mode)
+  &.sidebar-closed {
+    .sidebar {
+      width: 60px;
+    }
+  }
+}
+
+.app-header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  position: relative;
+  z-index: 50;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+.main-content {
+  grid-area: main;
+  overflow: auto;
+  position: relative;
+}
+
+.app-footer {
+  grid-area: footer;
+  overflow: hidden;
+}
+
+// Backdrop for mobile drawer
+.backdrop {
+  display: none;
+}
+
+// Mobile Layout (< 768px)
+@media (max-width: 767px) {
+  .app-shell {
+    grid-template-areas:
+      'header header'
+      'main main'
+      'footer footer';
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    z-index: 200;
+    transition: left 0.3s ease-in-out;
+    background: var(--color-background, #ffffff);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .app-shell.mobile-menu-open .sidebar {
+    left: 0;
+  }
+
+  .backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    cursor: pointer;
+  }
+
+  .app-shell.mobile-menu-open .backdrop {
+    display: block;
+  }
+}
+
+// Tablet Layout (768px - 1024px)
+@media (min-width: 768px) and (max-width: 1024px) {
+  .app-shell.sidebar-open .sidebar {
+    width: 200px;
+  }
+
+  .app-shell.sidebar-closed .sidebar {
+    width: 60px;
+  }
+}
