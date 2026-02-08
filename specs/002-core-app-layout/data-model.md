@@ -19,11 +19,10 @@ Represents a navigation link in the Header or Sidebar.
 
 Represents the transient state of the UI.
 
-| Field                | Type                | Description                                 |
-| -------------------- | ------------------- | ------------------------------------------- |
-| `isSidebarCollapsed` | `boolean`           | Desktop: True if sidebar is in "Mini" mode. |
-| `isMobileMenuOpen`   | `boolean`           | Mobile: True if sidebar drawer is visible.  |
-| `activeTheme`        | `'light' \| 'dark'` | Current visual theme.                       |
+| Field                | Type      | Description                                 |
+| -------------------- | --------- | ------------------------------------------- |
+| `isSidebarCollapsed` | `boolean` | Desktop: True if sidebar is in "Mini" mode. |
+| `isMobileMenuOpen`   | `boolean` | Mobile: True if sidebar drawer is visible.  |
 
 ## relationships
 

@@ -5,20 +5,21 @@
 
 ## Implementation Strategy
 
-**Phase 1 (Setup)** establishes the project structure and shared types. **Phase 2 (Foundational)** implements the `LayoutService` state management and the base CSS Grid shell (the "App Frame") using a TDD approach. **Phase 3 (Desktop)** builds the individual components (Header, Sidebar, Panes). **Phase 4 (Navigation)** handles router integration and item selection logic. **Phase 5 (Mobile)** adds the responsive drawer behavior. **Phase 6 (Polish)** covers visual feedback, persistence, and navigation overflow using a dedicated component.
+**Phase 1 (Setup)** establishes the project structure and shared types. **Phase 2 (Foundational)** implements the `LayoutService` state management and the base CSS Grid shell (the "App Frame") using a TDD approach. **Phase 3 (Desktop)** builds the individual components (Header, Sidebar, Panes). **Phase 4 (Navigation)** handles router integration and item selection logic. **Phase 5 (Mobile)** adds the responsive drawer behavior. **Phase 6 (Polish)** covers visual feedback, persistence, accessibility, and navigation overflow using a dedicated component. **Phase 7 (Integration & Traceability)** adds integration tests and release artifacts.
 
 ## Dependencies
 
 - Phase 2 (Foundation) blocks Phase 3, 4, 5.
 - Phase 3 (Components) blocks Phase 4, 5.
 - Phase 1 must be done first.
+- Phase 6 (Polish) follows Phases 3-5; Phase 7 follows Phase 6.
 
 ## Phase 1: Setup
 
 **Goal**: Initialize directory structure and core types.
 
-- [ ] T001 Create feature directory structure `src/app/core/layout/{components,services,models}`
-- [ ] T002 Define `NavigationItem` and `Theme` types in `src/app/core/models/navigation.model.ts`
+- [ ] T001 Create feature directory structure `src/app/core/layout/{components,services}`
+- [ ] T002 Define `NavigationItem`, `ContentItem`, `DetailContent`, and `DashboardSummary` types in `src/app/core/models/layout.types.ts`
 - [ ] T003 [P] Create `MoreMenuComponent` skeleton in `src/app/core/layout/components/more-menu/`
 - [ ] T004 Create `layout.routes.ts` or equivalent route config skeleton in `src/app/core/layout/`
 
@@ -45,14 +46,18 @@
 - [ ] T016 [US1] Integrate components into `MainLayoutComponent` template
 - [ ] T017 [US1] Implement Sidebar Collapse toggle logic in `LayoutService` and UI in `SidebarComponent`
 
-## Phase 4: Item Selection (User Story 2)
+## Phase 4: Navigation & Item Selection (User Story 2)
 
-**Goal**: Split-pane interaction and Detail View logic (FR-008) with TDD.
+**Goal**: Router-linked navigation states plus split-pane interaction and Detail View logic (FR-008, FR-010) with TDD.
 
 - [ ] T018 [P] [US2] Create failing unit tests for `SplitPaneComponent` in `src/app/core/layout/components/split-pane/split-pane.component.spec.ts`
 - [ ] T019 [P] [US2] Implement `SplitPaneComponent` in `src/app/core/layout/components/split-pane/split-pane.component.ts`
 - [ ] T020 [US2] Implement "Summary Mode" vs "Detail Mode" logic in the Detail Pane area (using Router outlet or signal)
 - [ ] T021 [US2] Style independent scrolling for List and Detail panes in `src/app/core/layout/components/split-pane/split-pane.component.scss`
+- [ ] T032 [P] [FR-010] Create failing unit tests for router-linked active states in Header and Sidebar
+- [ ] T033 [FR-010] Implement `routerLinkActive` bindings and active-state styles for Header and Sidebar navigation
+- [ ] T034 [P] [US2] Create failing unit tests for search filtering and "No items found" state in `SplitPaneComponent`
+- [ ] T035 [US2] Implement search input, filtering logic, and "No items found" message in `SplitPaneComponent`
 
 ## Phase 5: Mobile Responsiveness (User Story 3)
 
@@ -62,6 +67,7 @@
 - [ ] T023 [US3] Create failing unit tests for Mobile Drawer behavior in `src/app/core/layout/components/sidebar/sidebar.component.spec.ts`
 - [ ] T024 [US3] Implement Mobile Overlay/Drawer behavior for Sidebar in `src/app/core/layout/components/sidebar/sidebar.component.ts`
 - [ ] T025 [US3] Add Backdrop component/element that closes the drawer on click in `src/app/core/layout/main-layout.component.ts`
+- [ ] T036 [US3] Implement Tablet breakpoint styles (768px-1024px) in `src/app/core/layout/main-layout.component.scss`
 
 ## Phase 6: Polish & Edge Cases
 
@@ -71,5 +77,21 @@
 - [ ] T027 [P] Implement `localStorage` persistence for Sidebar state in `src/app/core/layout/services/layout.service.ts`
 - [ ] T028 [P] Create failing unit tests for `MoreMenuComponent` in `src/app/core/layout/components/more-menu/more-menu.component.spec.ts`
 - [ ] T029 [FR-013] Implement `MoreMenuComponent` and integrate into `HeaderComponent` for navigation overflow
-- [ ] T030 Audit and fix Accessibility (ARIA labels, focus trap for mobile drawer)
-- [ ] T031 Apply "Dashboard Summary" default view logic (SC-003, SC-004 verification)
+- [ ] T030 Implement semantic landmarks, ARIA labels, keyboard navigation support, and mobile drawer focus management
+- [ ] T031 Apply "Dashboard Summary" default view logic (FR-008, Edge Case)
+- [ ] T037 [SC-005] Apply typography and theme tokens matching `dashboard-layout.html` in base and layout styles
+- [ ] T038 [SC-003/SC-004] Add performance checks for item selection updates and search filtering (<=100ms for 100 items)
+- [ ] T039 [SC-002] Run automated a11y audit (configured tool) and record results in `specs/002-core-app-layout/changes.md`
+- [ ] T046 [P] [FR-007] Create failing unit tests for keyboard navigation and focus management (header links, sidebar items, mobile drawer)
+- [ ] T047 [Edge Case] Apply truncation/wrapping rules for long list titles in `src/app/core/layout/components/split-pane/split-pane.component.scss`
+
+## Phase 7: Integration & Traceability
+
+**Goal**: Integration tests and traceable release artifacts.
+
+- [ ] T040 [US1] Create failing integration tests for fixed frame layout and breakpoint rendering in `src/app/core/layout/main-layout.integration.spec.ts`
+- [ ] T041 [US2] Create failing integration tests for item selection and summary fallback in `src/app/core/layout/main-layout.integration.spec.ts`
+- [ ] T042 [US3] Create failing integration tests for mobile drawer/backdrop behavior in `src/app/core/layout/main-layout.integration.spec.ts`
+- [ ] T043 Update `specs/002-core-app-layout/changes.md` with implemented changes (Accumulate)
+- [ ] T044 Append feature entries to root `CHANGELOG.md` under `## [Unreleased]`
+- [ ] T045 Run `npm run version:bump [patch|minor|major]` and verify version artifacts

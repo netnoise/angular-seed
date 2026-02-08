@@ -5,7 +5,7 @@
 
 ## Summary
 
-Implement the foundational application layout using Angular 19 Standalone components and Signals. The layout includes a Header, Collapsible Sidebar, Split-Pane Main Content Area, and Footer. It must be fully responsive (Desktop/Tablet/Mobile), accessible (WCAG AA), and support light/dark themes (base implementation). Navigation state will be router-linked, while UI state (sidebar collapse) will be managed via Signals and persisted to localStorage.
+Implement the foundational application layout using Angular 19 Standalone components and Signals. The layout includes a Header, Collapsible Sidebar, Split-Pane Main Content Area, and Footer. It must be fully responsive (Desktop/Tablet/Mobile) and accessible (WCAG AA). Navigation state will be router-linked, while UI state (sidebar collapse) will be managed via Signals and persisted to localStorage.
 
 ## Technical Context
 
@@ -15,7 +15,7 @@ Implement the foundational application layout using Angular 19 Standalone compon
 **Testing**: Karma, Jasmine
 **Target Platform**: Modern Web Browsers (Mobile, Tablet, Desktop)
 **Project Type**: Web Application
-**Performance Goals**: < 100ms layout render, 60fps sidebar animations
+**Performance Goals**: See SC-003 and SC-004 in the spec for performance targets.
 **Constraints**: WCAG 2.1 AA Compliance, "Fixed App Frame" behavior (internal scrolling)
 **Scale/Scope**: Core application shell, used on every page.
 
@@ -58,7 +58,7 @@ src/app/core/
 │   │   └── layout.service.ts
 │   └── main-layout.component.ts
 └── models/
-    └── navigation.model.ts
+    └── layout.types.ts
 ```
 
 **Structure Decision**: Layout components are Singletons by nature, placing them in `core/layout` ensures they are loaded once. `LayoutService` will handle cross-component communication (e.g., Header toggling Sidebar) using Signals.

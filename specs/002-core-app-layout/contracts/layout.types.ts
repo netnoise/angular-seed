@@ -12,5 +12,3 @@ export interface ContentItem {
   description: string;
   updatedAt: Date;
 }
-
-export type Theme = 'light' | 'dark';

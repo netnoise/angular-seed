@@ -105,8 +105,8 @@ As a mobile user, I want the layout to adapt to my small screen so that I can st
 
 ### Measurable Outcomes
 
-- **SC-001**: 100% of functional components (Header, Sidebar, List, Detail, Footer) are rendered correctly on supported screen sizes.
+- **SC-001**: On Desktop (1920x1080), Tablet (1024x768), and Mobile (375x812), Header, Sidebar, List Pane, Detail Pane, and Footer render once, are visible (not `display: none`), and occupy distinct layout regions without overlap; Header/Footer remain visible while list/detail panes scroll.
 - **SC-002**: Layout achieves WCAG 2.1 AA compliance (verified by automated audit tool).
 - **SC-003**: Item selection in the list updates the detail pane in under 100ms.
-- **SC-004**: Search filtering in the list pane is near-instantaneous for datasets up to 100 items.
+- **SC-004**: Search filtering in the list pane completes within 100ms for datasets up to 100 items.
 - **SC-005**: Visual design matches the `dashboard-layout.html` blueprint (dark theme, Syne/JetBrains fonts, neon accents).

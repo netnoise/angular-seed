@@ -1,8 +1,9 @@
 # Session Summary: Spec #002 Core Application Layout - Planning & Task Decomposition
 
-**Date**: 2026-02-07
+**Date**: 2026-02-07  
+**Updated**: 2026-02-08
 **Branch**: `002-core-app-layout`
-**Phase**: Planning Complete, Ready for Implementation
+**Phase**: Planning Complete, Task List Refined, Ready for Implementation
 **Next Step**: Phase 1: Setup
 
 ---
@@ -40,6 +41,18 @@ This session focused on the comprehensive definition and planning of the "Core A
 - Ensured **Constitution Compliance** (Principle IV) by making TDD steps (failing tests) explicit for all components and services.
 - Integrated "Visual Feedback" (FR-006) and "More Menu" (FR-013) into the implementation workflow.
 
+### 4. **Quality Gates & Process Improvement**
+
+- Added `/speckit.checklist` to the core Spec-Driven Development workflow in `README.md`.
+- Created a formal UX/Accessibility checklist (`specs/002-core-app-layout/checklists/ux.md`) to validate layout stability, responsiveness, and WCAG AA compliance before implementation.
+
+### 5. **Analysis & Task Refinement (2026-02-08)**
+
+- Ran `/speckit.analyze` and resolved cross-artifact gaps.
+- Expanded tasks from 31 to 45, adding Phase 7 for integration tests and traceability (changes.md, `CHANGELOG.md`, version bump).
+- Added tasks for router-linked active states, search/no-results, tablet breakpoint styling, a11y audit, and performance checks.
+- Aligned spec/plan by removing unscoped theme support and making SC-001/SC-004 measurable.
+
 ---
 
 ## Technical Context (Current State)
@@ -65,6 +78,14 @@ Every implementation task MUST be preceded by the creation of its corresponding 
 
 The `dashboard-layout.html` file remains the source of truth for the visual theme (neon accents, specific typography).
 
+### **Quality Gates**
+
+Implementation should be validated against `specs/002-core-app-layout/checklists/ux.md`.
+
+### **Open Gaps (Minor)**
+
+Consider adding explicit tasks for long-title truncation/wrapping and tests for keyboard/focus management to fully align with edge cases and TDD rigor.
+
 ---
 
 ## What Next Agent Should Do
@@ -79,4 +100,4 @@ The `dashboard-layout.html` file remains the source of truth for the visual them
 
 **End of Session Summary**
 **Status**: ✅ Planning Complete. Ready for Implementation.
-**Confidence**: 100% - Spec is robust, plan is grounded, and tasks are dependency-ordered and TDD-ready.
+**Confidence**: 95% - Spec is robust, plan is grounded, tasks are dependency-ordered and TDD-ready, with minor follow-up items noted.

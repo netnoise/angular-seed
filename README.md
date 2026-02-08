@@ -104,7 +104,6 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 - **Separation of Concerns**
   Distinguish between:
-
   - UI components (presentational components).
   - Smart/feature components (container components).
   - Services handling domain and integration logic.
@@ -132,12 +131,10 @@ This project follows modern Angular development standards. For detailed coding g
 ### 5.3 Layered View (High-Level)
 
 - **Presentation Layer**
-
   - Components, layouts, and routing.
   - Styling, theming, and UI state.
 
 - **Domain / Application Layer**
-
   - Services encapsulating business logic.
   - Application-level state management (if used).
   - Interactors/use-cases (optional, based on chosen pattern).
@@ -305,9 +302,10 @@ This project strictly follows Spec-Driven Development (SDD) using the `speckit` 
 2.  **Clarify**: Use `/speckit.clarify` to resolve ambiguities.
 3.  **Plan**: Use `/speckit.plan` to generate technical strategy and architecture.
 4.  **Task**: Use `/speckit.tasks` to break down the plan into actionable items.
-5.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
-6.  **Verify**: Ensure tests pass and update `CHANGELOG.md` with new features/fixes.
-7.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
+5.  **Checklist**: Use `/speckit.checklist` to generate quality gates (UX, A11y, Security) before coding.
+6.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
+7.  **Verify**: Ensure tests pass and update `CHANGELOG.md` with new features/fixes.
+8.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
 
 ---
 
