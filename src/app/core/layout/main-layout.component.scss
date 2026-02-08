@@ -30,8 +30,8 @@
   grid-area: header;
   position: sticky;
   top: 0;
-  z-index: 100;
-  overflow: hidden;
+  z-index: 1000;
+  overflow: visible;
 }
 
 .sidebar {

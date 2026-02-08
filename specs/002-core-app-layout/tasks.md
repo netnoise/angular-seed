@@ -75,23 +75,23 @@
 
 - [x] T026 [P] [FR-006] Implement visual feedback (hover, active, focus states) for all interactive elements in `src/styles/_base.scss`
 - [x] T027 [P] Implement `localStorage` persistence for Sidebar state in `src/app/core/layout/services/layout.service.ts`
-- [ ] T028 [P] Create failing unit tests for `MoreMenuComponent` in `src/app/core/layout/components/more-menu/more-menu.component.spec.ts`
-- [ ] T029 [FR-013] Implement `MoreMenuComponent` and integrate into `HeaderComponent` for navigation overflow
+- [x] T028 [P] Create failing unit tests for `MoreMenuComponent` in `src/app/core/layout/components/more-menu/more-menu.component.spec.ts`
+- [x] T029 [FR-013] Implement `MoreMenuComponent` and integrate into `HeaderComponent` for navigation overflow
 - [x] T030 Implement semantic landmarks, ARIA labels, keyboard navigation support, and mobile drawer focus management
 - [x] T031 Apply "Dashboard Summary" default view logic (FR-008, Edge Case)
-- [ ] T037 [SC-005] Apply typography and theme tokens matching `dashboard-layout.html` in base and layout styles
-- [ ] T038 [SC-003/SC-004] Add performance checks for item selection updates and search filtering (<=100ms for 100 items)
-- [ ] T039 [SC-002] Run automated a11y audit (configured tool) and record results in `specs/002-core-app-layout/changes.md`
-- [ ] T046 [P] [FR-007] Create failing unit tests for keyboard navigation and focus management (header links, sidebar items, mobile drawer)
+- [x] T037 [SC-005] Apply typography and theme tokens matching `dashboard-layout.html` in base and layout styles
+- [x] T038 [SC-003/SC-004] Add performance checks for item selection updates and search filtering (<=100ms for 100 items)
+- [x] T039 [SC-002] Run automated a11y audit (configured tool) and record results in `specs/002-core-app-layout/changes.md`
+- [x] T046 [P] [FR-007] Create failing unit tests for keyboard navigation and focus management (header links, sidebar items, mobile drawer)
 - [x] T047 [Edge Case] Apply truncation/wrapping rules for long list titles in `src/app/core/layout/components/split-pane/split-pane.component.scss`
 
 ## Phase 7: Integration & Traceability
 
 **Goal**: Integration tests and traceable release artifacts.
 
-- [ ] T040 [US1] Create failing integration tests for fixed frame layout and breakpoint rendering in `src/app/core/layout/main-layout.integration.spec.ts`
-- [ ] T041 [US2] Create failing integration tests for item selection and summary fallback in `src/app/core/layout/main-layout.integration.spec.ts`
-- [ ] T042 [US3] Create failing integration tests for mobile drawer/backdrop behavior in `src/app/core/layout/main-layout.integration.spec.ts`
+- [x] T040 [US1] Create failing integration tests for fixed frame layout and breakpoint rendering in `src/app/core/layout/main-layout.integration.spec.ts`
+- [x] T041 [US2] Create failing integration tests for item selection and summary fallback in `src/app/core/layout/main-layout.integration.spec.ts`
+- [x] T042 [US3] Create failing integration tests for mobile drawer/backdrop behavior in `src/app/core/layout/main-layout.integration.spec.ts`
 - [x] T043 Update `specs/002-core-app-layout/changes.md` with implemented changes (Accumulate)
-- [ ] T044 Append feature entries to root `CHANGELOG.md` under `## [Unreleased]`
-- [ ] T045 Run `npm run version:bump [patch|minor|major]` and verify version artifacts
+- [x] T044 Append feature entries to root `CHANGELOG.md` under `## [Unreleased]`
+- [x] T045 Run `npm run version:bump [patch|minor|major]` and verify version artifacts

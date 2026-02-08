@@ -1,0 +1,33 @@
+<div class="more-menu">
+  <button
+    class="more-menu-toggle"
+    (click)="toggle()"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-label]="isOpen() ? 'Close more menu' : 'Open more menu'"
+    type="button"
+  >
+    <span class="more-icon">⋯</span>
+    <span class="more-label">More</span>
+  </button>
+
+  @if (isOpen()) {
+    <div class="more-menu-dropdown">
+      <nav class="more-menu-nav">
+        @if (items().length === 0) {
+          <div class="more-menu-empty">No items</div>
+        }
+        @for (item of items(); track item.route) {
+          <a
+            [routerLink]="item.route"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+            routerLinkActive="active"
+            class="more-menu-item"
+            (click)="close()"
+          >
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+    </div>
+  }
+</div>

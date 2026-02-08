@@ -178,14 +178,73 @@ describe('SplitPaneComponent', () => {
   describe('Scrolling', () => {
     it('should have independent scroll containers', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const listPane = compiled.querySelector('.list-pane') as HTMLElement;
+      const listContent = compiled.querySelector('.list-content') as HTMLElement;
       const detailPane = compiled.querySelector('.detail-pane') as HTMLElement;
 
-      const listOverflow = window.getComputedStyle(listPane).overflowY;
+      const listOverflow = window.getComputedStyle(listContent).overflowY;
       const detailOverflow = window.getComputedStyle(detailPane).overflowY;
 
       expect(['auto', 'scroll']).toContain(listOverflow);
       expect(['auto', 'scroll']).toContain(detailOverflow);
+    });
+  });
+
+  describe('Performance', () => {
+    it('should render 100 items in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      const startTime = performance.now();
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const renderTime = endTime - startTime;
+      expect(renderTime).toBeLessThan(100);
+    });
+
+    it('should handle item selection in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+
+      const startTime = performance.now();
+      component.onItemClick(items[50]);
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const selectionTime = endTime - startTime;
+      expect(selectionTime).toBeLessThan(100);
+    });
+
+    it('should filter 100 items in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+
+      const startTime = performance.now();
+      component.onSearchChange('Item 5');
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const filterTime = endTime - startTime;
+      expect(filterTime).toBeLessThan(100);
     });
   });
 });

@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SidebarComponent } from './sidebar.component';
 import { LayoutService } from '../../services/layout.service';
-import { provideRouter } from '@angular/router';
+import { provideRouter, RouterLink } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -55,8 +56,7 @@ describe('SidebarComponent', () => {
     });
 
     it('should have routerLink on items', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('a[routerLink]');
+      const links = fixture.debugElement.queryAll(By.directive(RouterLink));
       expect(links.length).toBeGreaterThan(0);
     });
 

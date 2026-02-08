@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-02-08
+
+### Added
+
+- **Core Application Layout** (Feature #002): Implemented responsive fixed-frame layout with CSS Grid
+  - Created `MainLayoutComponent` with header, sidebar, footer, and scrollable main content area
+  - Implemented `HeaderComponent` with responsive navigation and overflow menu
+  - Implemented `SidebarComponent` with collapsible state and localStorage persistence
+  - Implemented `SplitPaneComponent` for list-detail views with search and item selection
+  - Implemented `MoreMenuComponent` for navigation overflow handling
+  - Created `LayoutService` using Angular Signals for global layout state management
+  - Added mobile-responsive behavior with backdrop and drawer pattern (<768px)
+  - Integrated tablet breakpoint styles (768px-1024px)
+  - Applied dark theme with JetBrains Mono and Syne fonts, neon green (#00ff9f) accent
+  - Comprehensive accessibility support (WCAG 2.1 AA): semantic landmarks, ARIA labels, keyboard navigation
+  - Performance-tested for 100+ items (<=100ms render/selection/filter)
+  - 92 unit tests + 15 integration tests covering all 3 user stories
+
 ## [0.1.1] - 2026-02-08
 
 docs: add planning artifacts for Core Application Layout (Spec #002)

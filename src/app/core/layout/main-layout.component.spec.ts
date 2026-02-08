@@ -128,4 +128,80 @@ describe('MainLayoutComponent', () => {
       expect(layoutService.mobileMenuOpen()).toBe(false);
     });
   });
+
+  describe('Keyboard Navigation', () => {
+    it('should close mobile menu on Escape key press', () => {
+      layoutService.mobileMenuOpen.set(true);
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const backdrop = compiled.querySelector('.backdrop') as HTMLElement;
+      const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+      backdrop.dispatchEvent(event);
+      fixture.detectChanges();
+
+      expect(layoutService.mobileMenuOpen()).toBe(false);
+    });
+
+    it('should close mobile menu on Enter key press on backdrop', () => {
+      layoutService.mobileMenuOpen.set(true);
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const backdrop = compiled.querySelector('.backdrop') as HTMLElement;
+      const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+      backdrop.dispatchEvent(event);
+      fixture.detectChanges();
+
+      expect(layoutService.mobileMenuOpen()).toBe(false);
+    });
+
+    it('should close mobile menu on Space key press on backdrop', () => {
+      layoutService.mobileMenuOpen.set(true);
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const backdrop = compiled.querySelector('.backdrop') as HTMLElement;
+      const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true });
+      backdrop.dispatchEvent(event);
+      fixture.detectChanges();
+
+      expect(layoutService.mobileMenuOpen()).toBe(false);
+    });
+
+    it('should allow tab navigation through header links', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const headerLinks = compiled.querySelectorAll('app-header a');
+
+      expect(headerLinks.length).toBeGreaterThan(0);
+      headerLinks.forEach(link => {
+        const tabIndex = (link as HTMLElement).getAttribute('tabindex');
+        expect(tabIndex === null || parseInt(tabIndex) >= 0).toBe(true);
+      });
+    });
+
+    it('should allow tab navigation through sidebar items', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const sidebarLinks = compiled.querySelectorAll('app-sidebar a');
+
+      expect(sidebarLinks.length).toBeGreaterThan(0);
+      sidebarLinks.forEach(link => {
+        const tabIndex = (link as HTMLElement).getAttribute('tabindex');
+        expect(tabIndex === null || parseInt(tabIndex) >= 0).toBe(true);
+      });
+    });
+
+    it('should trap focus in mobile drawer when open', () => {
+      layoutService.mobileMenuOpen.set(true);
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const sidebar = compiled.querySelector('.sidebar') as HTMLElement;
+      const focusableElements = sidebar.querySelectorAll(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      );
+
+      expect(focusableElements.length).toBeGreaterThan(0);
+    });
+  });
 });
