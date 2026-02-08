@@ -81,3 +81,12 @@ All feature development MUST follow this lifecycle:
 - **2026-02-04**: Implementation of Feature #001 complete.
 - **2026-02-04**: Workspace initialized, structure established, tests passing.
 - **2026-02-04**: `CHANGELOG.md` generated for v0.1.0.
+
+## Active Technologies
+
+- TypeScript 5.x / Angular 19.x + `@angular/router`, `@angular/common` (002-core-app-layout)
+- `localStorage` (for sidebar state persistence) (002-core-app-layout)
+
+## Recent Changes
+
+- 002-core-app-layout: Added TypeScript 5.x / Angular 19.x + `@angular/router`, `@angular/common`

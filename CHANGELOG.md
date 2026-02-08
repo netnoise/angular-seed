@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-02-08
+
+docs: add planning artifacts for Core Application Layout (Spec #002)
+
+Establishes the comprehensive planning artifacts for Feature #002, defining the technical strategy for the application's core shell.
+
+Key changes:
+
+- **Specification**: Created `spec.md` defining a responsive, fixed-frame layout with header, sidebar, and split-pane content.
+- **Technical Plan**: Defined architecture in `plan.md` using CSS Grid for the app frame and Angular Signals for state management.
+- **Task Decomposition**: Generated `tasks.md` with a 6-phase implementation strategy emphasizing TDD.
+- **Visual Blueprint**: Added `docs/dashboard-layout.html` as the source of truth for the visual design.
+- **Contracts**: Defined core types in `contracts/layout.types.ts`.
+- **Context**: Updated `GEMINI.md` to set Feature #002 as the active development focus.
+
 ## [0.1.0] - 2026-02-05
 
 ### Summary

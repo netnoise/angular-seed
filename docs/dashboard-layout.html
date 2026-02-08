@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Layout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #0a0e1a;
+        --bg-secondary: #151b2e;
+        --bg-tertiary: #1f2937;
+        --accent-primary: #00ff9f;
+        --accent-secondary: #00d4ff;
+        --accent-glow: rgba(0, 255, 159, 0.15);
+        --text-primary: #e5e7eb;
+        --text-secondary: #9ca3af;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --shadow-glow: 0 0 20px rgba(0, 255, 159, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Animated background effect */
+      body::before {
+        content: '';
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(circle at 20% 50%, rgba(0, 255, 159, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+        animation: drift 30s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(5%, -5%) rotate(3deg);
+        }
+        66% {
+          transform: translate(-5%, 5%) rotate(-3deg);
+        }
+      }
+
+      /* Header */
+      header {
+        position: relative;
+        z-index: 100;
+        background: rgba(21, 27, 46, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 2rem;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .logo {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.02em;
+        animation: fadeIn 0.8s ease 0.3s both;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      nav {
+        display: flex;
+        gap: 2.5rem;
+        animation: fadeIn 0.8s ease 0.5s both;
+      }
+
+      nav a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent-primary);
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      nav a:hover {
+        color: var(--accent-primary);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      nav a.active {
+        color: var(--accent-primary);
+      }
+
+      nav a.active::after {
+        width: 100%;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        animation: fadeIn 0.8s ease 0.7s both;
+      }
+
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+      }
+
+      .icon-btn:hover {
+        background: var(--accent-glow);
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-glow);
+      }
+
+      /* Main Container */
+      .main-container {
+        flex: 1;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 280px;
+        background: rgba(21, 27, 46, 0.6);
+        backdrop-filter: blur(20px);
+        border-right: 1px solid var(--border-color);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+      }
+
+      @keyframes slideRight {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .sidebar-section {
+        margin-bottom: 2rem;
+      }
+
+      .sidebar-section h3 {
+        font-family: 'Syne', sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .sidebar-item {
+        padding: 0.875rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid transparent;
+      }
+
+      .sidebar-item:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--border-color);
+        transform: translateX(4px);
+      }
+
+      .sidebar-item.active {
+        background: var(--accent-glow);
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .sidebar-item-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Split Pane Content Area */
+      .content-wrapper {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+        animation: fadeIn 0.8s ease 0.4s both;
+      }
+
+      .list-pane {
+        width: 350px;
+        background: rgba(21, 27, 46, 0.4);
+        backdrop-filter: blur(10px);
+        border-right: 1px solid var(--border-color);
+        overflow-y: auto;
+        padding: 2rem 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .list-pane-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .list-pane-header h2 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .search-box {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .search-box:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .list-item {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: itemFadeIn 0.5s ease both;
+      }
+
+      @keyframes itemFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .list-item:nth-child(1) {
+        animation-delay: 0.6s;
+      }
+      .list-item:nth-child(2) {
+        animation-delay: 0.7s;
+      }
+      .list-item:nth-child(3) {
+        animation-delay: 0.8s;
+      }
+      .list-item:nth-child(4) {
+        animation-delay: 0.9s;
+      }
+
+      .list-item:hover {
+        border-color: var(--accent-primary);
+        transform: translateX(4px);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .list-item.active {
+        border-color: var(--accent-primary);
+        background: var(--accent-glow);
+      }
+
+      .list-item-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      .list-item-meta {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* Detail Pane */
+      .detail-pane {
+        flex: 1;
+        padding: 2rem;
+        overflow-y: auto;
+        background: rgba(10, 14, 26, 0.4);
+      }
+
+      .detail-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .detail-header h1 {
+        font-family: 'Syne', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .detail-meta {
+        display: flex;
+        gap: 2rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .detail-content {
+        line-height: 1.8;
+        font-size: 0.9375rem;
+      }
+
+      .detail-content p {
+        margin-bottom: 1.5rem;
+      }
+
+      .card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        border-color: var(--accent-primary);
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-2px);
+      }
+
+      .card-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--accent-primary);
+      }
+
+      /* Footer */
+      footer {
+        position: relative;
+        z-index: 100;
+        background: rgba(21, 27, 46, 0.8);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-primary);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .list-pane {
+          width: 300px;
+        }
+
+        nav {
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 0 1rem;
+          height: auto;
+          min-height: 70px;
+          flex-wrap: wrap;
+        }
+
+        .logo {
+          font-size: 1.25rem;
+        }
+
+        nav {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+          padding: 1rem 0;
+          gap: 1rem;
+          border-top: 1px solid var(--border-color);
+          margin-top: 1rem;
+        }
+
+        .sidebar {
+          position: fixed;
+          left: -280px;
+          top: 70px;
+          height: calc(100vh - 70px);
+          z-index: 200;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar.mobile-open {
+          left: 0;
+        }
+
+        .content-wrapper {
+          flex-direction: column;
+        }
+
+        .list-pane {
+          width: 100%;
+          max-height: 40vh;
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .detail-pane {
+          padding: 1.5rem 1rem;
+        }
+
+        .detail-header h1 {
+          font-size: 2rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 0.5rem;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-actions {
+          gap: 0.5rem;
+        }
+
+        .icon-btn {
+          width: 36px;
+          height: 36px;
+          font-size: 1rem;
+        }
+
+        nav a {
+          font-size: 0.75rem;
+        }
+
+        .list-pane {
+          padding: 1rem;
+        }
+
+        .detail-header h1 {
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--bg-tertiary);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">⚡ TRYOUT</div>
+
+      <nav>
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Projects</a>
+        <a href="#">Analytics</a>
+        <a href="#">Settings</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" title="Notifications">🔔</button>
+        <button class="icon-btn" title="Messages">💬</button>
+        <button class="icon-btn" title="Profile">👤</button>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3>Workspace</h3>
+          <div class="sidebar-item active">
+            <span class="sidebar-item-icon">📊</span>
+            <span>Overview</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">📁</span>
+            <span>Projects</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">👥</span>
+            <span>Team</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Tools</h3>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">⚙️</span>
+            <span>Settings</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">📈</span>
+            <span>Reports</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">🔌</span>
+            <span>Integrations</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Recent</h3>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">🕐</span>
+            <span>History</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="sidebar-item-icon">⭐</span>
+            <span>Favorites</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="content-wrapper">
+        <div class="list-pane">
+          <div class="list-pane-header">
+            <h2>Items</h2>
+          </div>
+
+          <input type="text" class="search-box" placeholder="Search items..." />
+
+          <div class="list-item active">
+            <div class="list-item-title">First Experiment</div>
+            <div class="list-item-meta">
+              <span>Active</span>
+              <span>2 hours ago</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-item-title">Testing Module A</div>
+            <div class="list-item-meta">
+              <span>Completed</span>
+              <span>5 hours ago</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-item-title">Performance Check</div>
+            <div class="list-item-meta">
+              <span>In Progress</span>
+              <span>Yesterday</span>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-item-title">API Integration Test</div>
+            <div class="list-item-meta">
+              <span>Pending</span>
+              <span>2 days ago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-pane">
+          <div class="detail-header">
+            <h1>First Experiment</h1>
+            <div class="detail-meta">
+              <span>Status: Active</span>
+              <span>Last updated: 2 hours ago</span>
+              <span>Author: System</span>
+            </div>
+          </div>
+
+          <div class="detail-content">
+            <div class="card">
+              <div class="card-title">Overview</div>
+              <p>
+                This is your detail pane where you can display comprehensive information about the
+                selected item from the list. The split-pane design allows users to browse items on
+                the left while viewing full details on the right.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Key Metrics</div>
+              <p>
+                Add your metrics, charts, or any other content here. The layout is fully responsive
+                and will adapt to different screen sizes. On mobile devices, the list and detail
+                panes stack vertically for better usability.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Technical Details</div>
+              <p>
+                The design uses a dark cyberpunk-inspired aesthetic with neon accents, custom fonts
+                (Syne for headings, JetBrains Mono for body), and smooth animations. All colors are
+                managed through CSS variables for easy customization.
+              </p>
+              <p>
+                The layout features a fixed header with centered navigation, a collapsible sidebar
+                for dashboard navigation, a list pane for item browsing, and this detail pane for
+                content display.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Responsive Behavior</div>
+              <p>
+                On tablets (below 1024px), the list pane narrows slightly. On mobile (below 768px),
+                the navigation moves below the logo, the list and detail panes stack vertically, and
+                the sidebar can be toggled with a menu button.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div>&copy; 2024 Tryout Project. Experimental Dashboard.</div>
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Documentation</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Add interactive behavior
+      document.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', function () {
+          document.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.addEventListener('click', function () {
+          document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Mobile menu toggle (you can add a button for this)
+      function toggleSidebar() {
+        document.querySelector('.sidebar').classList.toggle('mobile-open');
+      }
+    </script>
+  </body>
+</html>
