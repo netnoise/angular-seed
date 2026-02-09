@@ -1,4 +1,8 @@
-<aside [class]="sidebarClasses()">
+<aside
+  [class]="sidebarClasses()"
+  [cdkTrapFocus]="layoutService.mobileMenuOpen()"
+  [cdkTrapFocusAutoCapture]="layoutService.mobileMenuOpen()"
+>
   <button
     class="toggle-btn"
     (click)="onToggle()"

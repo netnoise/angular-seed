@@ -84,6 +84,9 @@ All feature development MUST follow this lifecycle:
 
 ## Active Technologies
 
+- TypeScript 5.x / Angular 19.x + `@angular/router`, `@angular/common`, `@angular/cdk` (A11y, Overlay, Portal) (002-core-app-layout)
+- `localStorage` (Sidebar state, Theme preference) (002-core-app-layout)
+
 - TypeScript 5.x / Angular 19.x + `@angular/router`, `@angular/common` (002-core-app-layout)
 - `localStorage` (for sidebar state persistence) (002-core-app-layout)
 

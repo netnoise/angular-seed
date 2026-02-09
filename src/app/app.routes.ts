@@ -11,7 +11,15 @@ export const routes: Routes = [
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
+        path: ':id',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
         path: 'projects',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
+        path: 'projects/:id',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
@@ -19,7 +27,15 @@ export const routes: Routes = [
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
+        path: 'tasks/:id',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
         path: 'calendar',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
+        path: 'calendar/:id',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
@@ -27,11 +43,23 @@ export const routes: Routes = [
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
+        path: 'team/:id',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
         path: 'reports',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
       {
+        path: 'reports/:id',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
         path: 'settings',
+        loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+      },
+      {
+        path: 'settings/:id',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
     ],

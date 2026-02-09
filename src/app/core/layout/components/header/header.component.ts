@@ -24,4 +24,10 @@ export class HeaderComponent {
     { label: 'Team', route: '/team' },
     { label: 'Reports', route: '/reports' },
   ];
+
+  protected readonly toolIcons = [
+    { label: 'Search', icon: '🔍' },
+    { label: 'Quick Settings', icon: '⚙️' },
+    { label: 'Theme Toggle', icon: '🌗' },
+  ];
 }

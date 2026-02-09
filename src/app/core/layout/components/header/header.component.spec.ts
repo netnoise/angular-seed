@@ -28,23 +28,35 @@ describe('HeaderComponent', () => {
       expect(logo).toBeTruthy();
     });
 
-    it('should render navigation links', () => {
+    it('should render navigation links in nav-container', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const nav = compiled.querySelector('nav');
+      const nav = compiled.querySelector('.nav-container');
       expect(nav).toBeTruthy();
     });
 
     it('should render correct number of navigation items', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const navItems = compiled.querySelectorAll('nav a');
+      const navItems = compiled.querySelectorAll('.nav-container a');
       expect(navItems.length).toBeGreaterThan(0);
+    });
+
+    it('should render tool icons section', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const tools = compiled.querySelector('.tools-section');
+      expect(tools).toBeTruthy();
+    });
+
+    it('should render correct number of tool icons', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const toolBtns = compiled.querySelectorAll('.tool-btn');
+      expect(toolBtns.length).toBe(3);
     });
   });
 
   describe('Navigation Items', () => {
     it('should display navigation item labels', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const firstLink = compiled.querySelector('nav a');
+      const firstLink = compiled.querySelector('.nav-container a');
       expect(firstLink?.textContent?.trim()).toBeTruthy();
     });
 
@@ -56,23 +68,23 @@ describe('HeaderComponent', () => {
   });
 
   describe('Logo', () => {
-    it('should have app title in logo', () => {
+    it('should have updated app logo text', () => {
       const compiled = fixture.nativeElement as HTMLElement;
       const logo = compiled.querySelector('.logo');
-      expect(logo?.textContent).toContain('Angular Seed');
+      expect(logo?.textContent).toContain('⚡ TRYOUT');
     });
 
     it('should have link to home in logo', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const logoLink = compiled.querySelector('.logo a');
+      const logoLink = compiled.querySelector('.logo-container a');
       expect(logoLink?.getAttribute('routerLink')).toBe('/');
     });
   });
 
   describe('More Menu Integration', () => {
-    it('should render more-menu component', () => {
+    it('should render more-menu component in nav-container', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const moreMenu = compiled.querySelector('app-more-menu');
+      const moreMenu = compiled.querySelector('.nav-container app-more-menu');
       expect(moreMenu).toBeTruthy();
     });
 
@@ -86,7 +98,7 @@ describe('HeaderComponent', () => {
 
     it('should have more-menu as last item in navigation', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const navChildren = compiled.querySelectorAll('nav > *');
+      const navChildren = compiled.querySelectorAll('.nav-container > *');
       const lastChild = navChildren[navChildren.length - 1];
       expect(lastChild.tagName.toLowerCase()).toBe('app-more-menu');
     });

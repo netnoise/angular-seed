@@ -1,9 +1,9 @@
 <header class="header">
-  <div class="logo">
-    <a routerLink="/">Angular Seed</a>
+  <div class="logo-container">
+    <a routerLink="/" class="logo" aria-label="Home">⚡ TRYOUT</a>
   </div>
 
-  <nav class="nav-links">
+  <nav class="nav-container" aria-label="Main navigation">
     @for (item of navigationItems; track item.route) {
       <a
         [routerLink]="item.route"
@@ -14,6 +14,24 @@
         {{ item.label }}
       </a>
     }
-    <app-more-menu [items]="moreMenuItems" />
+    <app-more-menu [items]="moreMenuItems"></app-more-menu>
   </nav>
+
+  <div class="actions-container">
+    <div class="tools-section">
+      @for (tool of toolIcons; track tool.label) {
+        <button class="action-btn tool-btn" [attr.aria-label]="tool.label" [title]="tool.label">
+          {{ tool.icon }}
+        </button>
+      }
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="actions-section">
+      <button class="action-btn" aria-label="Notifications">🔔</button>
+      <button class="action-btn" aria-label="Messages">💬</button>
+      <button class="action-btn profile-btn" aria-label="Profile">👤</button>
+    </div>
+  </div>
 </header>

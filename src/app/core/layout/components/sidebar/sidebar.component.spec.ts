@@ -3,6 +3,7 @@ import { SidebarComponent } from './sidebar.component';
 import { LayoutService } from '../../services/layout.service';
 import { provideRouter, RouterLink } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -108,6 +109,14 @@ describe('SidebarComponent', () => {
       const compiled = fixture.nativeElement as HTMLElement;
       const nav = compiled.querySelector('nav');
       expect(nav).toBeTruthy();
+    });
+
+    it('should implement focus trap when mobile menu is open', () => {
+      layoutService.mobileMenuOpen.set(true);
+      fixture.detectChanges();
+
+      const trap = fixture.debugElement.query(By.directive(CdkTrapFocus));
+      expect(trap).toBeTruthy();
     });
   });
 });

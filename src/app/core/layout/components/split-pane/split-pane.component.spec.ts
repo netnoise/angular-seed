@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SplitPaneComponent } from './split-pane.component';
 import { ContentItem } from '../../../models/layout.types';
+import { provideRouter, Router, ActivatedRoute } from '@angular/router';
 
 describe('SplitPaneComponent', () => {
   let component: SplitPaneComponent;
   let fixture: ComponentFixture<SplitPaneComponent>;
+  let router: Router;
 
   const mockItems: ContentItem[] = [
     {
@@ -33,16 +35,56 @@ describe('SplitPaneComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SplitPaneComponent],
+      providers: [
+        provideRouter([]),
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: {} } },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SplitPaneComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.componentRef.setInput('items', mockItems);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Deep Linking', () => {
+    it('should select item based on id input', () => {
+      fixture.componentRef.setInput('id', '2');
+      fixture.detectChanges();
+
+      expect(component.selectedItemId()).toBe('2');
+      expect(component.selectedItem()?.title).toBe('Item 2');
+    });
+
+    it('should navigate when an item is clicked', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+      const item = component.items()[0];
+
+      component.onItemClick(item);
+
+      expect(navigateSpy).toHaveBeenCalledWith(['./', '1'], jasmine.any(Object));
+    });
+
+    it('should use parent navigation when an item is already selected', () => {
+      fixture.componentRef.setInput('id', '1');
+      fixture.detectChanges();
+
+      const navigateSpy = spyOn(router, 'navigate');
+      const item = component.items()[1]; // Select item 2
+
+      component.onItemClick(item);
+
+      // Should use '../' because an ID is already in the URL
+      expect(navigateSpy).toHaveBeenCalledWith(['../', '2'], jasmine.any(Object));
+    });
   });
 
   describe('Structure', () => {
@@ -132,7 +174,7 @@ describe('SplitPaneComponent', () => {
     });
 
     it('should apply active class to selected item', () => {
-      component.selectedItemId.set('1');
+      fixture.componentRef.setInput('id', '1');
       fixture.detectChanges();
 
       const compiled = fixture.nativeElement as HTMLElement;
@@ -148,7 +190,7 @@ describe('SplitPaneComponent', () => {
 
   describe('Detail Pane', () => {
     it('should show summary when no item selected', () => {
-      component.selectedItemId.set(null);
+      fixture.componentRef.setInput('id', undefined);
       fixture.detectChanges();
 
       const compiled = fixture.nativeElement as HTMLElement;
@@ -157,7 +199,7 @@ describe('SplitPaneComponent', () => {
     });
 
     it('should show detail when item selected', () => {
-      component.selectedItemId.set('1');
+      fixture.componentRef.setInput('id', '1');
       fixture.detectChanges();
 
       const compiled = fixture.nativeElement as HTMLElement;
@@ -166,7 +208,7 @@ describe('SplitPaneComponent', () => {
     });
 
     it('should display selected item details', () => {
-      component.selectedItemId.set('1');
+      fixture.componentRef.setInput('id', '1');
       fixture.detectChanges();
 
       const compiled = fixture.nativeElement as HTMLElement;
