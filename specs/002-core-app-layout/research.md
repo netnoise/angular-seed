@@ -1,83 +1,75 @@
-# Research: Core Application Layout
+# Research: Core Application Layout Refinement
 
 **Feature**: Core Application Layout (#002)
-**Date**: 2026-02-07
+**Date**: 2026-02-09
 
-## 1. CSS Layout Strategy (Fixed App Frame)
+## 1. Modal Routing Strategy (FR-016)
 
-**Requirement**: Header, Sidebar, and Footer must remain fixed. Only the internal content panes (List/Detail) should scroll.
+**Requirement**: Utility routes (Settings, Profile) must open as overlays _preserving_ the underlying context (Deep Linking supported).
 
-**Alternatives Considered**:
+### Options Analysis
 
-- **Flexbox**: Possible, but requires careful `overflow: hidden` and `flex: 1` nesting. Can be brittle with complex nested scrolls.
-- **Fixed Positioning**: Using `position: fixed` for Header/Sidebar. Causes issues with z-index and responsive overlapping.
-- **CSS Grid**: Allows defining a rigid structure for the viewport.
+- **A. Auxiliary Routes (Named Outlets)**:
+  - _URL_: `/projects/123(modal:settings)`
+  - _Pros_: Native Angular support, lazy loading, independent state.
+  - _Cons_: Complex URL syntax, requires `<router-outlet name="modal">` in the shell.
+- **B. Query Parameters**:
+  - _URL_: `/projects/123?modal=settings`
+  - _Pros_: Simple URL, easy to read.
+  - _Cons_: Requires a "watcher" service to listen to params and dynamically render the component (manual component loading). Harder to genericize lazy loading.
+- **C. Child Routes**:
+  - _URL_: `/projects/123/settings`
+  - _Pros_: Standard routing.
+  - _Cons_: Destroys the parent component unless the parent explicitly keeps the `<router-outlet>` active and renders the child as an overlay. Hard to make "Global".
 
-**Decision**: **CSS Grid** with `grid-template-areas`.
+### Decision
 
-- **Rationale**: Provides the most robust control over the "App Frame". We can define a grid that takes up `100vh` and `100vw`.
-- **Implementation**:
-  ```scss
-  .app-shell {
-    display: grid;
-    height: 100vh;
-    grid-template-rows: auto 1fr auto; /* Header, Content, Footer */
-    grid-template-columns: auto 1fr; /* Sidebar, Main */
-    grid-template-areas:
-      'header header'
-      'sidebar main'
-      'footer footer'; /* Or footer inside main? Spec says persistent Footer. */
-  }
-  ```
-  _Refinement_: To support the "Mobile Drawer" (FR-009), the mobile layout will change the grid or use `position: absolute` for the sidebar.
+**Use Auxiliary Routes (Named Outlets)**.
 
-## 2. State Management & Persistence
+- **Rationale**: It is the idiomatic Angular solution for "side-by-side" or "overlay" content that needs its own routing lifecycle and lazy loading. It satisfies the "Deep Linking" requirement naturally.
+- **Implementation**: Add `<router-outlet name="modal" />` to `MainLayoutComponent`. Define `{ path: 'settings', outlet: 'modal', ... }` in `app.routes.ts`.
 
-**Requirement**: Sidebar collapse state must be persisted (Edge Case). Mobile sidebar is transient.
+## 2. Command Palette Implementation (FR-017)
 
-**Alternatives Considered**:
+**Requirement**: Global `Cmd+K` palette for navigation and actions.
 
-- **Component State**: State lives in `MainLayoutComponent`. Hard to share between Header (toggle button) and Sidebar.
-- **NGRX/Global Store**: Overkill for simple layout state.
-- **Service with Signals**: Lightweight, injectable singleton.
+### Options Analysis
 
-**Decision**: **`LayoutService` using Angular Signals**.
+- **A. Third-party Library**:
+  - _Pros_: Fast implementation.
+  - _Cons_: Dependency bloat, potential styling conflicts (especially with Cyberpunk theme).
+- **B. Custom with CDK Overlay**:
+  - _Pros_: Full control, leverages existing `@angular/cdk` dependency (from Focus Trap), lightweight.
+  - _Cons_: Maintenance ownership.
 
-- **Rationale**: Angular Signals provide fine-grained reactivity. `effect()` makes persistence trivial.
-- **Implementation**:
-  ```typescript
-  sidebarOpen = signal(true);
-  constructor() {
-    effect(() => localStorage.setItem('sidebarOpen', JSON.stringify(this.sidebarOpen())));
-  }
-  ```
+### Decision
 
-## 3. Navigation Data Structure
+**Custom Implementation using `@angular/cdk/overlay`**.
 
-**Requirement**: Header and Sidebar need links. "More" menu for overflow (FR-013).
+- **Rationale**: We already introduced CDK for the Sidebar Focus Trap. Reusing it for the Command Palette keeps the bundle size optimal and allows perfect integration with the "Cyberpunk" theme and Signals-based state (`CommandService`).
 
-**Decision**: **Typed Configuration Object**.
+## 3. Visual FX Toggle (FR-018)
 
-- **Rationale**: Hardcoding links in HTML makes maintenance hard. Defining them in a const/service allows easy updates and testing.
-- **Structure**:
-  ```typescript
-  export interface NavigationItem {
-    label: string;
-    route: string;
-    icon?: string;
-    children?: NavigationItem[];
-  }
-  ```
+**Requirement**: Toggle experimental visual effects without leaving Dark Mode.
 
-## 4. Accessibility (Focus Management)
+### Strategy
 
-**Requirement**: Mobile sidebar drawer.
+- **State**: `LayoutService` holds a `visualMode` signal (`'standard' | 'cyberpunk'`).
+- **Persistence**: Save to `localStorage`.
+- **Implementation**: Apply `data-fx="cyberpunk"` attribute to the `<body>` or App Shell.
+- **CSS**:
+  - Standard: Flat colors, standard borders.
+  - Cyberpunk: `box-shadow` glows, `backdrop-filter`, animated background gradients.
+  - _Performance_: Use `transform: translate3d` for background drifts. Limit `backdrop-filter` usage to Header/Sidebar to minimize repaint cost.
 
-**Best Practice**:
+## 4. Responsive Header (FR-019)
 
-- When drawer opens, trap focus within it (or at least ensure next tab goes into it).
-- When drawer closes, return focus to the trigger button.
-- Use `aria-expanded` on the toggle button.
-- Use `aria-modal="true"` and `role="dialog"` for the mobile drawer.
+**Requirement**: Center Nav -> Hide on small screens.
 
-**Decision**: Implement manual focus restoration in `LayoutService` or the component interactions, using Angular's `FocusMonitor` or standard DOM APIs if needed.
+### Strategy
+
+- **CSS Grid**: Use `grid-template-columns: 1fr auto 1fr` (or similar) to enforce centering.
+- **Media Queries**:
+  - `@media (max-width: 1024px)`: Hide `.nav-container`.
+  - Show "Menu" burger icon (if not already present/visible) to open Sidebar.
+  - Ensure Mobile Sidebar contains the links that were hidden.

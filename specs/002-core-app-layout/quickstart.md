@@ -1,12 +1,16 @@
 # Quickstart: Core Application Layout
 
-## Using the Main Layout
+**Feature**: #002 Core Application Layout
 
-The core layout is the shell for the application. It is typically defined in `app.routes.ts` as a parent route or used directly in `app.component.html`.
+## Overview
 
-### 1. Route Configuration
+The Core Layout provides the application shell, including the Header, Sidebar, Command Palette, and Split-Pane content area.
 
-To use the layout, wrap your feature routes inside the `MainLayoutComponent`:
+## Usage
+
+### 1. Using the Layout
+
+The layout is applied via the Router. Ensure your root route uses `MainLayoutComponent`.
 
 ```typescript
 // app.routes.ts
@@ -15,39 +19,49 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      // ... other routes
+      // Your feature routes here
     ],
   },
 ];
 ```
 
-### 2. Customizing Navigation
+### 2. Registering Commands (Command Palette)
 
-Navigation links are defined in `CoreModule` or `LayoutService`.
-
-**Adding a Sidebar Link:**
-Modify `src/app/core/layout/config/sidebar.config.ts` (or equivalent):
+Inject `CommandService` to register global commands.
 
 ```typescript
-export const SIDEBAR_ITEMS: NavigationItem[] = [
-  { label: 'New Feature', route: '/new-feature', icon: 'star' },
-];
+export class MyFeatureComponent {
+  constructor(private commandService: CommandService) {
+    this.commandService.register({
+      id: 'my-feature:action',
+      label: 'Create New Item',
+      group: 'Actions',
+      action: () => this.createItem(),
+    });
+  }
+}
 ```
 
-### 3. Using the Split-Pane
+### 3. Adding Tool Icons
 
-For features needing the split-pane layout:
+Tool icons in the header are managed by the `HeaderComponent` (currently static, but designed to be driven by configuration).
 
-```html
-<div class="split-pane-container">
-  <div class="list-pane">
-    <!-- List Content -->
-  </div>
-  <div class="detail-pane">
-    <!-- Detail Content -->
-  </div>
-</div>
+### 4. Opening Modals (Settings/Profile)
+
+To open a modal that preserves the underlying view, use the `modal` auxiliary outlet.
+
+```typescript
+// Router Link
+<a [routerLink]='[{ outlets: { modal: [\'settings\'] } }]'>Settings</a>
+
+// Programmatic
+this.router.navigate([{ outlets: { modal: ['settings'] } }]);
 ```
 
-Ensure your component structure adheres to the CSS Grid areas defined in `_layout.scss`.
+### 5. Visual FX Toggle
+
+The layout supports a "Cyberpunk" visual mode. This is toggled via the `LayoutService` or the Theme Toggle tool in the header.
+
+```typescript
+this.layoutService.setVisualMode('cyberpunk');
+```

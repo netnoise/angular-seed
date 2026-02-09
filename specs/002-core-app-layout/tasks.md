@@ -1,97 +1,85 @@
-# Tasks: Core Application Layout (#002)
+# Tasks: Core Application Layout Refinement
 
 **Status**: Pending
 **Branch**: `002-core-app-layout`
 
 ## Implementation Strategy
 
-**Phase 1 (Setup)** establishes the project structure and shared types. **Phase 2 (Foundational)** implements the `LayoutService` state management and the base CSS Grid shell (the "App Frame") using a TDD approach. **Phase 3 (Desktop)** builds the individual components (Header, Sidebar, Panes). **Phase 4 (Navigation)** handles router integration and item selection logic. **Phase 5 (Mobile)** adds the responsive drawer behavior. **Phase 6 (Polish)** covers visual feedback, persistence, accessibility, and navigation overflow using a dedicated component. **Phase 7 (Integration & Traceability)** adds integration tests and release artifacts.
+The project is initialized, and core layout components (Header, Sidebar, Split-Pane) are implemented. This task list focuses on **Phase 8 (Remediation)** and **Phase 9 (Refinement)** to address deep linking, accessibility gaps, and new layout requirements (centered nav, command palette, visual FX). We will also implement the **Phase 10 (Advanced Interactions)** for the Command Palette and **Phase 11 (Modal Routing)** for utility overlays.
+
+**Note on completed phases:** Phases 1-7 (Core Layout) are largely complete. I will list them for context but focus the actionable tasks on the new phases.
 
 ## Dependencies
 
-- Phase 2 (Foundation) blocks Phase 3, 4, 5.
-- Phase 3 (Components) blocks Phase 4, 5.
-- Phase 1 must be done first.
-- Phase 6 (Polish) follows Phases 3-5; Phase 7 follows Phase 6.
+- Phase 8 (Remediation) blocks Phase 11.
+- Phase 9 (Header Refinement) blocks Phase 10.
+- Phase 10 & 11 can be parallelized.
 
-## Phase 1: Setup
+## Phase 8: Remediation (Post-Analysis)
 
-**Goal**: Initialize directory structure and core types.
+**Goal**: Fix critical architectural and accessibility flaws (FR-014, FR-015).
 
-- [x] T001 Create feature directory structure `src/app/core/layout/{components,services}`
-- [x] T002 Define `NavigationItem`, `ContentItem`, `DetailContent`, and `DashboardSummary` types in `src/app/core/models/layout.types.ts`
-- [x] T003 [P] Create `MoreMenuComponent` skeleton in `src/app/core/layout/components/more-menu/`
-- [x] T004 Create `layout.routes.ts` or equivalent route config skeleton in `src/app/core/layout/`
+- [x] T048 [FR-014] Update `app.routes.ts` to support optional `:id` parameter for SplitPane view in `src/app/app.routes.ts`
+- [x] T049 [FR-014] Refactor `SplitPaneComponent` to read selection from Router (params) instead of local signal in `src/app/core/layout/components/split-pane/split-pane.component.ts`
+- [x] T050 [FR-015] Integrate `A11yModule` (CDK) into `SidebarComponent` to trap focus when mobile drawer is open in `src/app/core/layout/components/sidebar/sidebar.component.ts`
 
-## Phase 2: Foundational (State & Shell)
+## Phase 9: Header Layout Refinement
 
-**Goal**: Implement the state management and the fixed CSS grid shell (FR-011) with TDD.
+**Goal**: Reorganize header layout for centered navigation and right-aligned tools icons (FR-001, FR-013, FR-019).
 
-- [x] T005 [P] Create failing unit tests for `LayoutService` (signals, state) in `src/app/core/layout/services/layout.service.spec.ts`
-- [x] T006 [P] Implement `LayoutService` with Signals (`sidebarOpen`, `mobileMenuOpen`) in `src/app/core/layout/services/layout.service.ts`
-- [x] T007 [P] Create failing unit tests for `MainLayoutComponent` (structure, component placement) in `src/app/core/layout/main-layout.component.spec.ts`
-- [x] T008 [P] Implement `MainLayoutComponent` skeleton in `src/app/core/layout/main-layout.component.ts`
-- [x] T009 Implement CSS Grid "App Frame" (Fixed Header/Sidebar/Footer) in `src/app/core/layout/main-layout.component.scss`
+- [x] T051 [FR-001] Update `HeaderComponent` template to create distinct sections: Logo (Left), Nav (Middle), Tools/Actions (Right) in `src/app/core/layout/components/header/header.component.html`
+- [x] T052 [FR-001] Implement "Tools Icons" section in `HeaderComponent` with placeholder utility icons (e.g., Search, Settings) in `src/app/core/layout/components/header/header.component.ts`
+- [x] T053 [FR-001] Adjust Header SCSS for centered alignment of the `nav-container` and right-alignment of `actions-container` in `src/app/core/layout/components/header/header.component.scss`
+- [x] T054 [FR-001] Update Header responsiveness to maintain centered nav or collapse gracefully on mobile in `src/app/core/layout/components/header/header.component.scss`
+- [x] T055 [FR-001] Add unit tests for the new header structure and tools section in `src/app/core/layout/components/header/header.component.spec.ts`
 
-## Phase 3: Desktop Browsing (User Story 1)
+## Phase 10: Advanced Interactions (Command Palette & Visual FX)
 
-**Goal**: Visible Header, Sidebar, and Split-Pane on Desktop (FR-001, FR-002, FR-003, FR-012) with TDD.
+**Goal**: Implement global Command Palette (FR-017) and Visual FX Toggle (FR-018).
 
-- [x] T010 [US1] Create failing unit tests for `HeaderComponent` in `src/app/core/layout/components/header/header.component.spec.ts`
-- [x] T011 [US1] Implement `HeaderComponent` (Logo, Nav Links) in `src/app/core/layout/components/header/header.component.ts`
-- [x] T012 [US1] Create failing unit tests for `SidebarComponent` in `src/app/core/layout/components/sidebar/sidebar.component.spec.ts`
-- [x] T013 [US1] Implement `SidebarComponent` (Nav Items) in `src/app/core/layout/components/sidebar/sidebar.component.ts`
-- [x] T014 [US1] Create failing unit tests for `FooterComponent` in `src/app/core/layout/components/footer/footer.component.spec.ts`
-- [x] T015 [US1] Implement `FooterComponent` in `src/app/core/layout/components/footer/footer.component.ts`
-- [x] T016 [US1] Integrate components into `MainLayoutComponent` template
-- [x] T017 [US1] Implement Sidebar Collapse toggle logic in `LayoutService` and UI in `SidebarComponent`
+- [ ] T056 [US-Cmd] Create `CommandService` to manage command registry and execution in `src/app/core/layout/services/command.service.ts`
+- [ ] T057 [US-Cmd] Implement `CommandPaletteComponent` using CDK Overlay for the modal UI in `src/app/core/layout/components/command-palette/command-palette.component.ts`
+- [ ] T058 [US-Cmd] Wire up "Search" icon in Header to open Command Palette via `CommandService` in `src/app/core/layout/components/header/header.component.ts`
+- [ ] T059 [US-Cmd] Add global keyboard shortcut (`Cmd+K` / `Ctrl+K`) listener in `MainLayoutComponent` to toggle palette
+- [ ] T060 [US-FX] Add `visualMode` signal ('standard' | 'cyberpunk') to `LayoutService` with localStorage persistence in `src/app/core/layout/services/layout.service.ts`
+- [ ] T061 [US-FX] Implement "Cyberpunk" CSS variables and class toggling on `MainLayoutComponent` (e.g., `.mode-cyberpunk`) in `src/app/core/layout/main-layout.component.ts`
+- [ ] T062 [US-FX] Connect "Theme Toggle" icon in Header to switch `visualMode` via `LayoutService` in `src/app/core/layout/components/header/header.component.ts`
 
-## Phase 4: Navigation & Item Selection (User Story 2)
+## Phase 11: Modal Routing Strategy (Utility Overlays)
 
-**Goal**: Router-linked navigation states plus split-pane interaction and Detail View logic (FR-008, FR-010) with TDD.
+**Goal**: Implement "Hybrid" routing for Settings/Profile modals (FR-016).
 
-- [x] T018 [P] [US2] Create failing unit tests for `SplitPaneComponent` in `src/app/core/layout/components/split-pane/split-pane.component.spec.ts`
-- [x] T019 [P] [US2] Implement `SplitPaneComponent` in `src/app/core/layout/components/split-pane/split-pane.component.ts`
-- [x] T020 [US2] Implement "Summary Mode" vs "Detail Mode" logic in the Detail Pane area (using Router outlet or signal)
-- [x] T021 [US2] Style independent scrolling for List and Detail panes in `src/app/core/layout/components/split-pane/split-pane.component.scss`
-- [x] T032 [P] [FR-010] Create failing unit tests for router-linked active states in Header and Sidebar
-- [x] T033 [FR-010] Implement `routerLinkActive` bindings and active-state styles for Header and Sidebar navigation
-- [x] T034 [P] [US2] Create failing unit tests for search filtering and "No items found" state in `SplitPaneComponent`
-- [x] T035 [US2] Implement search input, filtering logic, and "No items found" message in `SplitPaneComponent`
+- [ ] T063 [US-Modal] Add auxiliary router outlet (name="modal") to `MainLayoutComponent` template in `src/app/core/layout/main-layout.component.html`
+- [ ] T064 [US-Modal] Configure auxiliary routes for `settings` and `profile` in `src/app/app.routes.ts`
+- [ ] T065 [US-Modal] Create `SettingsModalComponent` wrapper with dismissible backdrop in `src/app/core/layout/components/settings-modal/settings-modal.component.ts`
+- [ ] T066 [US-Modal] Update "Settings" and "Profile" links in Header/Sidebar to use `[routerLink]="[{ outlets: { modal: ['settings'] } }]"` in `src/app/core/layout/components/header/header.component.html`
 
-## Phase 5: Mobile Responsiveness (User Story 3)
+## Phase 12: Polish & Verification
 
-**Goal**: Adapt layout for mobile screens (FR-005, FR-009).
+**Goal**: Final cleanup, edge cases, and documentation.
 
-- [x] T022 [P] [US3] Implement CSS Media Queries for Mobile Breakpoints (<768px) in `src/app/core/layout/main-layout.component.scss`
-- [x] T023 [US3] Create failing unit tests for Mobile Drawer behavior in `src/app/core/layout/components/sidebar/sidebar.component.spec.ts`
-- [x] T024 [US3] Implement Mobile Overlay/Drawer behavior for Sidebar in `src/app/core/layout/components/sidebar/sidebar.component.ts`
-- [x] T025 [US3] Add Backdrop component/element that closes the drawer on click in `src/app/core/layout/main-layout.component.ts`
-- [x] T036 [US3] Implement Tablet breakpoint styles (768px-1024px) in `src/app/core/layout/main-layout.component.scss`
+- [ ] T067 Ensure "Responsive Hide" logic (FR-019) moves hidden header links to Mobile Sidebar in `src/app/core/layout/components/sidebar/sidebar.component.ts`
 
-## Phase 6: Polish & Edge Cases
+- [ ] T068 Verify Focus Trap works for Command Palette and Settings Modal (A11y check)
 
-**Goal**: Visual Feedback, Persistence, Accessibility, and Overflow handling.
+- [ ] T069 Update `quickstart.md` with examples for Command registration and Modal linking
 
-- [x] T026 [P] [FR-006] Implement visual feedback (hover, active, focus states) for all interactive elements in `src/styles/_base.scss`
-- [x] T027 [P] Implement `localStorage` persistence for Sidebar state in `src/app/core/layout/services/layout.service.ts`
-- [x] T028 [P] Create failing unit tests for `MoreMenuComponent` in `src/app/core/layout/components/more-menu/more-menu.component.spec.ts`
-- [x] T029 [FR-013] Implement `MoreMenuComponent` and integrate into `HeaderComponent` for navigation overflow
-- [x] T030 Implement semantic landmarks, ARIA labels, keyboard navigation support, and mobile drawer focus management
-- [x] T031 Apply "Dashboard Summary" default view logic (FR-008, Edge Case)
-- [x] T037 [SC-005] Apply typography and theme tokens matching `dashboard-layout.html` in base and layout styles
-- [x] T038 [SC-003/SC-004] Add performance checks for item selection updates and search filtering (<=100ms for 100 items)
-- [x] T039 [SC-002] Run automated a11y audit (configured tool) and record results in `specs/002-core-app-layout/changes.md`
-- [x] T046 [P] [FR-007] Create failing unit tests for keyboard navigation and focus management (header links, sidebar items, mobile drawer)
-- [x] T047 [Edge Case] Apply truncation/wrapping rules for long list titles in `src/app/core/layout/components/split-pane/split-pane.component.scss`
+- [ ] T070 Run full test suite and ensure no regressions from new components
 
-## Phase 7: Integration & Traceability
+## Phase 13: Performance Optimization
 
-**Goal**: Integration tests and traceable release artifacts.
+**Goal**: Mitigate Lighthouse FCP (1.8s) and LCP (2.8s) issues for faster initial load.
 
-- [x] T040 [US1] Create failing integration tests for fixed frame layout and breakpoint rendering in `src/app/core/layout/main-layout.integration.spec.ts`
-- [x] T041 [US2] Create failing integration tests for item selection and summary fallback in `src/app/core/layout/main-layout.integration.spec.ts`
-- [x] T042 [US3] Create failing integration tests for mobile drawer/backdrop behavior in `src/app/core/layout/main-layout.integration.spec.ts`
-- [x] T043 Update `specs/002-core-app-layout/changes.md` with implemented changes (Accumulate)
-- [x] T044 Append feature entries to root `CHANGELOG.md` under `## [Unreleased]`
-- [x] T045 Run `npm run version:bump [patch|minor|major]` and verify version artifacts
+- [ ] T071 Analyze critical rendering path for initial page load and identify blocking resources.
+
+- [ ] T072 Implement critical CSS extraction and inline it in `index.html` or `styles.scss` for `MainLayoutComponent`.
+
+- [ ] T073 Preload web fonts (JetBrains Mono, Syne) using `<link rel="preload">` in `index.html`.
+
+- [ ] T074 Add `font-display: swap` to all font declarations in `_variables.scss` or `styles.scss`.
+
+- [ ] T075 Review `MainLayoutComponent` and `HomeComponent` for potential LCP elements and ensure they load efficiently.
+
+- [ ] T076 Implement `preconnect` or `dns-prefetch` for external domains (e.g., Google Fonts).
+
+- [ ] T077 Audit initial bundle size and identify opportunities for further code splitting.

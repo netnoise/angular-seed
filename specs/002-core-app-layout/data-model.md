@@ -1,32 +1,69 @@
 # Data Model: Core Application Layout
 
 **Feature**: #002 Core Application Layout
+**Status**: Draft
 
-## Entities
+## Core Entities
 
 ### NavigationItem
 
-Represents a navigation link in the Header or Sidebar.
+Represents a link in the header or sidebar.
 
-| Field   | Type      | Description                                           |
-| ------- | --------- | ----------------------------------------------------- |
-| `label` | `string`  | Display text for the link.                            |
-| `route` | `string`  | The Angular Router path to navigate to.               |
-| `icon`  | `string`  | (Optional) Icon class or name (e.g., for Sidebar).    |
-| `exact` | `boolean` | (Optional) Whether router link match should be exact. |
+```typescript
+interface NavigationItem {
+  label: string;
+  route: string | any[];
+  icon?: string; // Emoji or SVG path
+  exact?: boolean; // RouterLinkActive exact match
+  children?: NavigationItem[]; // For nested sidebar groups
+  visibleIn?: 'desktop' | 'mobile' | 'both'; // For responsive hide logic
+}
+```
 
-### LayoutState (Internal)
+### ToolIcon
 
-Represents the transient state of the UI.
+Represents a utility action in the header's right section.
 
-| Field                | Type      | Description                                 |
-| -------------------- | --------- | ------------------------------------------- |
-| `isSidebarCollapsed` | `boolean` | Desktop: True if sidebar is in "Mini" mode. |
-| `isMobileMenuOpen`   | `boolean` | Mobile: True if sidebar drawer is visible.  |
+```typescript
+interface ToolIcon {
+  id: string; // unique identifier
+  label: string;
+  icon: string;
+  action: () => void; // Signal/Callback
+  shortcut?: string; // e.g., 'Cmd+K'
+}
+```
 
-## relationships
+### Command
 
-- `LayoutService` manages the `LayoutState`.
-- `MainLayoutComponent` consumes `LayoutState` to adjust CSS classes.
-- `SidebarComponent` renders a list of `NavigationItem`s.
-- `HeaderComponent` renders a list of `NavigationItem`s.
+Represents an action in the Command Palette.
+
+```typescript
+interface Command {
+  id: string;
+  label: string;
+  group: 'Navigation' | 'Actions' | 'Settings';
+  icon?: string;
+  action: () => void;
+  keywords?: string[]; // For fuzzy search
+}
+```
+
+### LayoutState
+
+Managed by `LayoutService`.
+
+```typescript
+interface LayoutState {
+  sidebarOpen: boolean;
+  mobileMenuOpen: boolean;
+  visualMode: 'standard' | 'cyberpunk';
+  activeModal: 'settings' | 'profile' | null; // Tracked via Router, mirrored here for UI state if needed
+}
+```
+
+## Relationships
+
+- **Header**: Contains `NavigationItem[]` (Center) and `ToolIcon[]` (Right).
+- **Sidebar**: Contains `NavigationItem[]` (including those hidden from Header on mobile).
+- **CommandPalette**: Aggregates `Command[]` from all registered features.

@@ -16,6 +16,14 @@
 - Q: Sidebar Collapsibility on Desktop → A: **Collapsible**: User can toggle the sidebar between "Full" (icons + text) and "Mini" (icons only).
 - Q: Header Navigation Overflow → A: **"More" Menu**: Excess links move into a "More" dropdown menu.
 
+### Session 2026-02-09
+
+- Q: Split-Pane Scope & Routing → A: **Hybrid**: Utility routes like **Settings** and **Profile** MUST open as a **Modal/Overlay** on top of the current layout, preserving the underlying Split-Pane context.
+- Q: Search Interaction → A: **Command Palette**: The Header Search icon opens a global **Command Palette (Cmd+K)** for quick navigation and global actions, independent of the local Split-Pane list filter.
+- Q: Theme Toggle Scope → A: **Visual FX Toggle**: The application is strictly **Dark Mode** only. The Theme Toggle switches between a standard dark appearance and a "Cyberpunk" mode featuring experimental visual effects (glows, animated backgrounds).
+- Q: Header Alignment & Overflow → A: **Responsive Hide**: The centered main menu MUST remain centered on desktop. On tablet and smaller screens where space is constrained, the centered nav hides entirely, and all navigation items move to the **Mobile Sidebar** drawer.
+- Q: Modal/Overlay Interaction → A: **Dismissible Backdrop**: Utility modals MUST include a dimmed backdrop that disables interaction with the underlying Split-Pane layout. Clicking the backdrop closes the modal and returns the user to the previous context.
+
 ## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Desktop Browsing (Priority: P1)
@@ -80,7 +88,10 @@ As a mobile user, I want the layout to adapt to my small screen so that I can st
 
 ### Functional Requirements
 
-- **FR-001**: System MUST provide a persistent **Header** containing a logo, primary navigation (Dashboard, Projects, Analytics, Settings), and action icons (Notifications, Messages, Profile).
+- **FR-001**: System MUST provide a persistent **Header** containing:
+  - **Logo Section** (Left): Logo link to home.
+  - **Main Menu Section** (Middle): Primary navigation links (Dashboard, Projects, Analytics, Settings).
+  - **Tools & Actions Section** (Right): Integrated section for tools icons (e.g., Search, Settings, Theme Toggle) and action icons (Notifications, Messages, Profile).
 - **FR-002**: System MUST provide a **Sidebar** with categorized sections (Workspace, Tools, Recent) and interactive items with icons.
 - **FR-003**: System MUST implement a **Split-Pane** main content area with a searchable list on the left and a detail view on the right.
 - **FR-004**: System MUST provide a **Footer** with copyright information and utility links (Privacy, Terms, Documentation, Support).
@@ -93,10 +104,17 @@ As a mobile user, I want the layout to adapt to my small screen so that I can st
 - **FR-011**: System MUST implement a **Fixed App Frame**; the Header, Sidebar, and Footer must remain fixed, while the List and Detail panes allow independent internal scrolling.
 - **FR-012**: On desktop, the sidebar MUST be **collapsible**, allowing users to toggle between a full width (labels + icons) and a mini width (icons only).
 - **FR-013**: The Header MUST handle navigation item overflow by moving excess items into a "More" dropdown menu.
+- **FR-014**: Item selection in the Split Pane MUST be **Deep Linked** via the URL (e.g., `/items/:id`) so that refreshing the page restores the selection.
+- **FR-015**: The mobile sidebar drawer MUST implement a **Focus Trap** to prevent keyboard navigation outside the drawer while open.
+- **FR-016**: Utility routes such as **Settings** and **Profile** MUST open as a **Modal/Overlay** with a dimmed backdrop, disabling the underlying Split-Pane context until dismissed.
+- **FR-017**: The Header Search icon MUST trigger a global **Command Palette** UI (accessible via shortcut `Cmd+K`) for cross-application navigation and actions.
+- **FR-018**: The Theme Toggle MUST control the visibility of experimental visual effects (glows, animated drifts) while maintaining a mandatory dark color scheme.
+- **FR-019**: On screens where the centered navigation menu conflicts with logo or tools, the system MUST hide the header nav and consolidate all primary links into the mobile sidebar drawer.
 
 ### Key Entities _(include if feature involves data)_
 
 - **NavigationItem**: Represents a link in the header or sidebar. Contains a label, destination, and optional icon.
+- **ToolIcon**: Represents a utility icon in the header's right section (e.g., Search, Theme, Settings).
 - **ContentItem**: Represents an entry in the list pane. Contains a title, status, and metadata.
 - **DetailContent**: Represents the data displayed in the detail pane for a selected ContentItem.
 - **DashboardSummary**: Represents the aggregate data or welcome content shown when no specific item is selected.
@@ -109,4 +127,6 @@ As a mobile user, I want the layout to adapt to my small screen so that I can st
 - **SC-002**: Layout achieves WCAG 2.1 AA compliance (verified by automated audit tool).
 - **SC-003**: Item selection in the list updates the detail pane in under 100ms.
 - **SC-004**: Search filtering in the list pane completes within 100ms for datasets up to 100 items.
-- **SC-005**: Visual design matches the `dashboard-layout.html` blueprint (dark theme, Syne/JetBrains fonts, neon accents).
+- **SC-005**: Visual design follows the core branding tokens (dark theme, Syne/JetBrains fonts, neon accents) with a centered main menu and right-aligned tools section.
+- **SC-006 (Performance)**: First Contentful Paint (FCP) MUST be under **1.5s** on a simulated 3G network.
+- **SC-007 (Performance)**: Largest Contentful Paint (LCP) MUST be under **2.5s** on a simulated 3G network.

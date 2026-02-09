@@ -1,7 +1,7 @@
 # Checklist: Core Application Layout - UX & Accessibility
 
 **Purpose**: Validate requirement quality and completeness for the core application layout implementation.
-**Scope**: Full interactive shell, responsive behavior, and accessibility compliance.
+**Scope**: Full interactive shell, responsive behavior, accessibility compliance, and refined navigation patterns.
 **Rigor**: Formal Compliance (Developer Self-Check).
 
 ## 1. Requirement Completeness & Clarity
@@ -16,6 +16,8 @@
   - ✅ Implemented: SplitPane shows summary view when no item selected
 - [x] CHK005 Are layout stability requirements defined for dynamic content loading (e.g., preventing layout shifts)? [Gap, Completeness]
   - ✅ Implemented: Fixed frame layout prevents shifts, CSS Grid maintains stable positions
+- [x] CHK023 Is the "centered" header navigation requirement clearly defined for Desktop? [Clarity, Spec §FR-001]
+  - ✅ Implemented: Header grid layout with 1fr auto 1fr centered nav-container
 
 ## 2. Interactive States & Feedback
 
@@ -27,6 +29,8 @@
   - ✅ Implemented: transition: width 0.3s ease-in-out on sidebar
 - [x] CHK009 Is the behavior of the "More" menu dropdown fully specified (open/close triggers, positioning)? [Completeness, Spec §FR-013]
   - ✅ Implemented: Toggle button, click-to-close on items, positioned with z-index 9999, dropdown closes on selection
+- [ ] CHK024 Are requirements defined for the "Visual FX" Cyberpunk toggle (glows, animated drifts)? [Clarity, Spec §FR-018]
+  - ⏳ Pending: Implementation in Phase 10
 
 ## 3. Mobile Responsiveness
 
@@ -38,6 +42,8 @@
   - ✅ Implemented: Grid layout adjusts to single column on mobile, content scrolls vertically
 - [x] CHK013 Is the location of the mobile navigation toggle button specified? [Clarity, Spec §FR-009]
   - ✅ Implemented: HeaderComponent contains toggle button visible on mobile breakpoint
+- [x] CHK025 Is the "Responsive Hide" logic for centered navigation specified? [Completeness, Spec §FR-019]
+  - ✅ Implemented: Header nav hides at 768px, items consolidated into mobile drawer
 
 ## 4. Accessibility Compliance (WCAG AA)
 
@@ -46,27 +52,43 @@
 - [x] CHK015 Are ARIA label requirements defined for all icon-only buttons (e.g., Sidebar toggle, Mobile menu)? [Completeness, Spec §FR-007]
   - ✅ Implemented: aria-label on backdrop, aria-expanded on more-menu button, descriptive labels on all controls
 - [x] CHK016 Is focus management specified for the mobile drawer (trap focus when open, restore focus on close)? [Gap, Coverage]
-  - ✅ Implemented: Focusable elements verified in tests, keyboard navigation handlers for ESC/Enter/Space
+  - ✅ Implemented: FocusTrap directive from @angular/cdk/a11y integrated (FR-015)
 - [x] CHK017 Are keyboard navigation requirements defined for the "More" menu and sidebar items? [Completeness, Spec §FR-007]
   - ✅ Implemented: All nav items use routerLink, more-menu keyboard tests, tab navigation verified
 - [x] CHK018 Is strict color contrast compliance required for text and interactive elements? [Completeness, Spec §SC-002]
-  - ✅ Implemented: Dark theme with high contrast (text-primary #e5e7eb on #0a0e1a bg >7:1 ratio), neon green accent for visibility
+  - ✅ Implemented: Dark theme with high contrast, neon green accent for visibility
 
 ## 5. Edge Cases & Resilience
 
 - [x] CHK019 Are text truncation or wrapping requirements defined for long navigation labels? [Edge Case, Completeness]
-  - ✅ Implemented: T047 applied truncation rules, text-overflow: ellipsis, overflow: hidden for long titles
+  - ✅ Implemented: text-overflow: ellipsis, overflow: hidden for long titles
 - [x] CHK020 Is the expected behavior defined when the viewport height is very small (e.g., landscape mobile)? [Edge Case, Gap]
-  - ✅ Implemented: Fixed frame with scrollable content areas handles all viewport sizes, height: 100vh constraint
+  - ✅ Implemented: Fixed frame handles all viewport sizes, height: 100vh constraint
 - [x] CHK021 Are requirements specified for handling "No Results" state in the list pane search? [Edge Case, Spec §Edge Cases]
-  - ✅ Implemented: SplitPane shows "No items found" message with .no-results class when filteredItems is empty
+  - ✅ Implemented: SplitPane shows "No items found" message when filteredItems is empty
 - [x] CHK022 Is local storage persistence behavior defined for the sidebar state across sessions? [Completeness, Spec §FR-012/Edge Cases]
-  - ✅ Implemented: LayoutService persists sidebarOpen state to localStorage with effect(), loads on initialization
+  - ✅ Implemented: LayoutService persists sidebarOpen state to localStorage
+- [x] CHK026 Is the "Deep Linking" URL schema requirement clearly defined? [Clarity, Spec §FR-014]
+  - ✅ Implemented: /:id parameter in app.routes.ts, SplitPane reacts to route params
+- [ ] CHK027 Is the behavior of "Settings" and "Profile" routes as Modal/Overlays specified? [Clarity, Spec §FR-016]
+  - ⏳ Pending: Implementation in Phase 11
+- [ ] CHK028 Are the Command Palette interactions and global shortcut (Cmd+K) explicitly defined? [Completeness, Spec §FR-017]
+  - ⏳ Pending: Implementation in Phase 10
+
+---
+
+## QA Coverage Reference
+
+To ensure full requirement quality validation, the following checklists must also be satisfied:
+
+1.  **[Specification Quality](requirements.md)**: Validates baseline spec structure and clarity.
+2.  **[Comprehensive Quality](comprehensive-quality.md)**: Deep dive into architectural gaps and remediation logic.
+3.  **[Refinement Quality](refinement-quality.md)**: Focuses on advanced interactions (Command Palette, Visual FX).
 
 ---
 
 ## Validation Summary
 
-**Completed**: 22/22 items (100%)
-**Status**: ✅ All UX & Accessibility requirements validated and implemented
-**Date**: 2026-02-08
+**Completed**: 24/28 items (~85%)
+**Status**: 🚀 Most UX & Accessibility requirements validated and implemented. Pending Phase 10/11 features (Command Palette, Visual FX, Modals).
+**Updated**: 2026-02-09

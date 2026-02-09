@@ -1,34 +1,34 @@
-# Implementation Plan: Core Application Layout
+# Implementation Plan: Core Application Layout Refinement
 
-**Branch**: `002-core-app-layout` | **Date**: 2026-02-07 | **Spec**: [specs/002-core-app-layout/spec.md](specs/002-core-app-layout/spec.md)
-**Input**: Feature specification from `specs/002-core-app-layout/spec.md`
+**Branch**: `002-core-app-layout` | **Date**: 2026-02-09 | **Spec**: [spec.md](spec.md)
+**Input**: Feature specification from `spec.md` (updated with Phase 8 & 9 requirements)
 
 ## Summary
 
-Implement the foundational application layout using Angular 19 Standalone components and Signals. The layout includes a Header, Collapsible Sidebar, Split-Pane Main Content Area, and Footer. It must be fully responsive (Desktop/Tablet/Mobile) and accessible (WCAG AA). Navigation state will be router-linked, while UI state (sidebar collapse) will be managed via Signals and persisted to localStorage.
+Refine the Core Application Layout to support advanced navigation patterns, visual experimentation, and robust accessibility. Key additions include a "Hybrid" routing strategy for modal-based utility pages (Settings/Profile), a global Command Palette (Cmd+K), a "Visual FX" toggle for Cyberpunk aesthetics, and a responsive "Hide" strategy for the centered header navigation. This plan also incorporates **performance optimizations to improve FCP and LCP** based on Lighthouse reports.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.x / Angular 19.x
-**Primary Dependencies**: `@angular/router`, `@angular/common`
-**Storage**: `localStorage` (for sidebar state persistence)
-**Testing**: Karma, Jasmine
+**Primary Dependencies**: `@angular/router`, `@angular/common`, `@angular/cdk` (A11y, Overlay, Portal)
+**Storage**: `localStorage` (Sidebar state, Theme preference)
+**Testing**: Karma, Jasmine (Unit & Integration)
 **Target Platform**: Modern Web Browsers (Mobile, Tablet, Desktop)
 **Project Type**: Web Application
-**Performance Goals**: See SC-003 and SC-004 in the spec for performance targets.
-**Constraints**: WCAG 2.1 AA Compliance, "Fixed App Frame" behavior (internal scrolling)
-**Scale/Scope**: Core application shell, used on every page.
+**Performance Goals**: FCP < 1.5s, LCP < 2.5s; <100ms interaction latency (Command Palette open, Theme toggle)
+**Constraints**: WCAG 2.1 AA Compliance, Mandatory Dark Mode (Base), Zero-layout-shift on header updates.
+**Scale/Scope**: Core application shell enhancements.
 
 ## Constitution Check
 
 _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-- [x] **I. Modern Angular Standards**: Uses Standalone Components, Signals for state (`sidebarOpen`), and OnPush detection.
-- [x] **II. Template Reusability**: Components structured in `core/layout` for application-wide use.
-- [x] **III. Technology Stack Experimentation**: Uses Angular 19 control flow (`@if`, `@for`).
-- [x] **IV. Testing & Quality Standards**: TDD approach for layout logic and responsiveness.
-- [x] **V. Documentation & Examples**: `quickstart.md` will document layout usage.
-- [x] **VI. Traceable Project History**: Follows SDD (Spec -> Plan -> Tasks).
+- [x] **I. Modern Angular Standards**: Uses Signals for new UI states (Command Palette, FX Toggle), Standalone components for all new features.
+- [x] **II. Template Reusability**: Command Palette designed as a shared service/component.
+- [x] **III. Technology Stack Experimentation**: "Cyberpunk" Visual FX mode allows CSS experimentation. Command Palette explores CDK Overlay.
+- [x] **IV. Testing & Quality Standards**: TDD for all new interaction flows (Focus Trap, Command Palette).
+- [x] **V. Documentation & Examples**: Updates to `quickstart.md` for new shell features.
+- [x] **VI. Traceable Project History**: Follows SDD (Spec -> Plan -> Tasks) for Phase 8/9 updates.
 
 ## Project Structure
 
@@ -37,10 +37,10 @@ _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 ```text
 specs/002-core-app-layout/
 ├── plan.md              # This file
-├── research.md          # Layout strategy and state management
-├── data-model.md        # Types for Navigation and Content items
-├── quickstart.md        # Guide for modifying navigation
-├── contracts/           # TypeScript interfaces
+├── research.md          # Layout strategy, Modal routing, Command Palette tech
+├── data-model.md        # Types for Tools, Commands, Theme State
+├── quickstart.md        # Updated guide for layout usage
+├── contracts/           # Interfaces for CommandService
 └── tasks.md             # Implementation tasks
 ```
 
@@ -50,23 +50,26 @@ specs/002-core-app-layout/
 src/app/core/
 ├── layout/
 │   ├── components/
-│   │   ├── header/
-│   │   ├── sidebar/
-│   │   ├── footer/
-│   │   └── split-pane/
+│   │   ├── header/          # Updated with Center Nav, Tools
+│   │   ├── command-palette/ # NEW: Global command modal
+│   │   ├── settings-modal/  # NEW: Wrapper for settings
+│   │   └── sidebar/
 │   ├── services/
-│   │   └── layout.service.ts
+│   │   ├── layout.service.ts # Updated with FX state, Modal state
+│   │   └── command.service.ts # NEW: Command registry
 │   └── main-layout.component.ts
 └── models/
-    └── layout.types.ts
+    └── layout.types.ts      # Updated with ToolIcon, Command definitions
 ```
 
-**Structure Decision**: Layout components are Singletons by nature, placing them in `core/layout` ensures they are loaded once. `LayoutService` will handle cross-component communication (e.g., Header toggling Sidebar) using Signals.
+**Structure Decision**:
+
+- **Command Palette**: Placed in `core/layout` as it's a fundamental part of the shell.
+- **Routing**: Utility modals (Settings) will likely use **Auxiliary Routes** or **Query Params** to maintain the underlying view state (Split Pane). This requires research.
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-| --------- | ---------- | ------------------------------------ |
-| N/A       |            |                                      |
+| Violation                 | Why Needed                            | Simpler Alternative Rejected Because                             |
+| ------------------------- | ------------------------------------- | ---------------------------------------------------------------- |
+| Auxiliary Routes/Overlays | "Hybrid" routing requirement (FR-016) | Standard routing loses context of the underlying view.           |
+| Command Palette           | Global navigation speed (FR-017)      | Simple search bar is insufficient for "Actions" vs "Navigation". |
