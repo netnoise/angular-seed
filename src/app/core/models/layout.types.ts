@@ -1,8 +1,10 @@
 export interface NavigationItem {
   label: string;
-  route: string;
+  route: string | unknown[];
   icon?: string;
   exact?: boolean;
+  children?: NavigationItem[];
+  visibleIn?: 'desktop' | 'mobile' | 'both';
 }
 
 export interface ContentItem {
@@ -22,4 +24,31 @@ export interface DetailContent {
 export interface DashboardSummary {
   title: string;
   message: string;
+}
+
+export type CommandGroup = 'Navigation' | 'Actions' | 'Settings';
+
+export interface Command {
+  id: string;
+  label: string;
+  group: CommandGroup;
+  icon?: string;
+  keywords?: string[];
+  action?: () => void;
+}
+
+export interface ToolIcon {
+  id: string;
+  label: string;
+  icon: string;
+  shortcut?: string;
+  action?: () => void;
+}
+
+export type VisualMode = 'standard' | 'cyberpunk';
+
+export interface LayoutState {
+  sidebarOpen: boolean;
+  mobileMenuOpen: boolean;
+  visualMode: VisualMode;
 }

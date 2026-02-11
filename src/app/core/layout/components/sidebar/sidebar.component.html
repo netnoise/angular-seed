@@ -1,26 +1,26 @@
 <aside
   [class]="sidebarClasses()"
   [cdkTrapFocus]="layoutService.mobileMenuOpen()"
-  [cdkTrapFocusAutoCapture]="layoutService.mobileMenuOpen()"
->
+  [cdkTrapFocusAutoCapture]="layoutService.mobileMenuOpen()">
   <button
     class="toggle-btn"
     (click)="onToggle()"
     [attr.aria-label]="sidebarOpen() ? 'Collapse sidebar' : 'Expand sidebar'"
-    [attr.aria-expanded]="sidebarOpen()"
-  >
+    [attr.aria-expanded]="sidebarOpen()">
     <span class="toggle-icon">{{ sidebarOpen() ? '◀' : '▶' }}</span>
   </button>
 
-  <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+  <nav
+    class="sidebar-nav"
+    role="navigation"
+    aria-label="Main navigation">
     @for (item of navigationItems; track item.route) {
       <a
         [routerLink]="item.route"
         [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
         routerLinkActive="active"
         class="sidebar-item"
-        [attr.title]="item.label"
-      >
+        [attr.title]="item.label">
         <span class="item-icon">{{ item.icon }}</span>
         @if (sidebarOpen()) {
           <span class="item-label">{{ item.label }}</span>

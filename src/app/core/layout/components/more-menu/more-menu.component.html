@@ -4,8 +4,7 @@
     (click)="toggle()"
     [attr.aria-expanded]="isOpen()"
     [attr.aria-label]="isOpen() ? 'Close more menu' : 'Open more menu'"
-    type="button"
-  >
+    type="button">
     <span class="more-icon">⋯</span>
     <span class="more-label">More</span>
   </button>
@@ -22,8 +21,7 @@
             [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
             routerLinkActive="active"
             class="more-menu-item"
-            (click)="close()"
-          >
+            (click)="close()">
             {{ item.label }}
           </a>
         }

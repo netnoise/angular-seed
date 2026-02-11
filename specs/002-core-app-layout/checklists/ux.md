@@ -29,8 +29,8 @@
   - ✅ Implemented: transition: width 0.3s ease-in-out on sidebar
 - [x] CHK009 Is the behavior of the "More" menu dropdown fully specified (open/close triggers, positioning)? [Completeness, Spec §FR-013]
   - ✅ Implemented: Toggle button, click-to-close on items, positioned with z-index 9999, dropdown closes on selection
-- [ ] CHK024 Are requirements defined for the "Visual FX" Cyberpunk toggle (glows, animated drifts)? [Clarity, Spec §FR-018]
-  - ⏳ Pending: Implementation in Phase 10
+- [x] CHK024 Are requirements defined for the "Visual FX" Cyberpunk toggle (glows, animated drifts)? [Clarity, Spec §FR-018]
+  - ✅ Implemented: LayoutService signal + mode-cyberpunk CSS theme (Phase 10)
 
 ## 3. Mobile Responsiveness
 
@@ -70,10 +70,10 @@
   - ✅ Implemented: LayoutService persists sidebarOpen state to localStorage
 - [x] CHK026 Is the "Deep Linking" URL schema requirement clearly defined? [Clarity, Spec §FR-014]
   - ✅ Implemented: /:id parameter in app.routes.ts, SplitPane reacts to route params
-- [ ] CHK027 Is the behavior of "Settings" and "Profile" routes as Modal/Overlays specified? [Clarity, Spec §FR-016]
-  - ⏳ Pending: Implementation in Phase 11
-- [ ] CHK028 Are the Command Palette interactions and global shortcut (Cmd+K) explicitly defined? [Completeness, Spec §FR-017]
-  - ⏳ Pending: Implementation in Phase 10
+- [x] CHK027 Is the behavior of "Settings" and "Profile" routes as Modal/Overlays specified? [Clarity, Spec §FR-016]
+  - ✅ Implemented: SettingsModalComponent + Auxiliary Routes (Phase 11)
+- [x] CHK028 Are the Command Palette interactions and global shortcut (Cmd+K) explicitly defined? [Completeness, Spec §FR-017]
+  - ✅ Implemented: CommandService + CommandPaletteComponent + HostListener (Phase 10)
 
 ---
 
@@ -89,6 +89,6 @@ To ensure full requirement quality validation, the following checklists must als
 
 ## Validation Summary
 
-**Completed**: 24/28 items (~85%)
-**Status**: 🚀 Most UX & Accessibility requirements validated and implemented. Pending Phase 10/11 features (Command Palette, Visual FX, Modals).
-**Updated**: 2026-02-09
+**Completed**: 27/28 items (~96%)
+**Status**: 🚀 Most UX & Accessibility requirements validated and implemented. Pending final polish.
+**Updated**: 2026-02-11

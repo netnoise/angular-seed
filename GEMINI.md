@@ -43,6 +43,7 @@ All feature development MUST follow this lifecycle:
 3.  **A11y Standards**: WCAG AA compliance enforced via AXE and linting.
 4.  **Reusability**: Code must be modularized into `core/`, `shared/`, or `features/`.
 5.  **Traceable History**: Mandatory use of SemVer and "Accumulate Local, Publish Global" for changelogs.
+6.  **Checklist Enforcement**: During the 'Implement' and 'Verify' phases, all checklists generated in the feature's `specs/<feature-id>/checklists/` directory MUST be actively consulted and enforced as quality gates.
 
 ---
 

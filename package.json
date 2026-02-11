@@ -17,6 +17,8 @@
     "version:release:minor": "node tools/version-bump.mjs minor --require-unreleased --require-specs-clean",
     "version:release:major": "node tools/version-bump.mjs major --require-unreleased --require-specs-clean",
     "version:release:prerelease": "node tools/version-bump.mjs prerelease --preid rc --require-unreleased --require-specs-clean",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss,json,md}\"",
     "lint": "ng lint",
     "prepare": "husky"
   },

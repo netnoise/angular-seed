@@ -7,8 +7,7 @@
         [value]="searchQuery()"
         (input)="onSearchChange($any($event.target).value)"
         class="search-input"
-        aria-label="Search items"
-      />
+        aria-label="Search items" />
     </div>
 
     <div class="list-content">
@@ -24,11 +23,12 @@
             (click)="onItemClick(item)"
             role="button"
             tabindex="0"
-            [attr.aria-selected]="selectedItemId() === item.id"
-          >
+            [attr.aria-selected]="selectedItemId() === item.id">
             <div class="item-header">
               <h3 class="item-title">{{ item.title }}</h3>
-              <span class="item-status" [class]="'status-' + item.status.toLowerCase()">
+              <span
+                class="item-status"
+                [class]="'status-' + item.status.toLowerCase()">
                 {{ item.status }}
               </span>
             </div>
@@ -45,7 +45,9 @@
       <div class="detail-view">
         <h2 class="detail-title">{{ item.title }}</h2>
         <div class="detail-meta">
-          <span class="detail-status" [class]="'status-' + item.status.toLowerCase()">
+          <span
+            class="detail-status"
+            [class]="'status-' + item.status.toLowerCase()">
             {{ item.status }}
           </span>
           <span class="detail-date">Updated: {{ item.updatedAt | date: 'medium' }}</span>

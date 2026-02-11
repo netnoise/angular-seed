@@ -62,6 +62,22 @@ export const routes: Routes = [
         path: 'settings/:id',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },
+      {
+        path: 'settings',
+        outlet: 'modal',
+        loadComponent: () =>
+          import('./core/layout/components/settings-modal/settings-modal.component').then(
+            m => m.SettingsModalComponent,
+          ),
+      },
+      {
+        path: 'profile',
+        outlet: 'modal',
+        loadComponent: () =>
+          import('./core/layout/components/settings-modal/settings-modal.component').then(
+            m => m.SettingsModalComponent,
+          ),
+      },
     ],
   },
 ];

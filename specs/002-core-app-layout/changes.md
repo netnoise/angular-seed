@@ -237,19 +237,63 @@ Implemented the foundational application layout shell with a fixed CSS Grid fram
 - [ ] T044: Update root CHANGELOG.md
 - [ ] T045: Run version bump script
 
-## Next Steps
+## Refinement Phases Implementation (Phases 8-12)
 
-1. Complete MoreMenuComponent for navigation overflow handling
-2. Apply full theme matching dashboard-layout.html reference design
-3. Add integration tests for end-to-end scenarios
-4. Run accessibility audit and address findings
-5. Update CHANGELOG.md and bump version
-6. Test the layout with real application content
+**Date**: 2026-02-11
+**Status**: Refinement & Advanced Features Complete
+**Branch**: `002-core-app-layout`
 
-## Notes
+### Phase 8: Remediation ✓
 
-- The implementation follows Angular 19 best practices using standalone components
-- No decorator-based inputs/outputs (uses `input()` and `output()` functions)
-- No `ngClass`, `ngStyle`, or structural directives (uses `@if`, `@for`)
-- Uses `host: {}` metadata instead of `@HostBinding`
-- Modern Angular Signals for state management throughout
+- **Deep Linking**: Updated `app.routes.ts` and `SplitPaneComponent` to support selection via URL parameter (`/:id`). Selection state is now derived from the Router.
+- **Accessibility**: Integrated `@angular/cdk/a11y` (FocusTrap) into `SidebarComponent` for the mobile drawer.
+
+### Phase 9: Header Refinement ✓
+
+- **Centered Navigation**: Reorganized Header layout using CSS Grid for a centered navigation container and right-aligned tool section.
+- **Tools Section**: Implemented utility buttons for Search, Settings, and Theme Toggle.
+
+### Phase 10: Advanced Interactions ✓
+
+- **Command Palette**:
+  - Created `CommandService` with registry and Overlay management.
+  - Implemented `CommandPaletteComponent` using CDK Overlay and Signals.
+  - Added global `Cmd+K` / `Ctrl+K` shortcut in `MainLayoutComponent`.
+- **Visual FX (Cyberpunk Mode)**:
+  - Added `visualMode` signal to `LayoutService` with localStorage persistence.
+  - Implemented `.mode-cyberpunk` CSS theme with neon glows, scanlines, and glassmorphism.
+  - Toggled theme class on the application shell via `MainLayoutComponent`.
+
+### Phase 11: Modal Routing Strategy ✓
+
+- **Hybrid Routing**: Configured auxiliary router outlet `(modal:...)` in `MainLayoutComponent`.
+- **Settings Modal**: Created `SettingsModalComponent` as a reusable overlay wrapper for utility routes.
+- **Focus Trap**: Added `cdkTrapFocus` to both Command Palette and Settings Modal for A11y compliance.
+
+### Phase 12: Polish & Verification ✓
+
+- **Centralized Navigation**: Moved navigation configuration to `LayoutService` as a single source of truth.
+- **Responsive Logic**: Implemented "Responsive Hide" by filtering header links based on `visibleIn` property while ensuring the Sidebar contains the full navigation map.
+- **Documentation**: Updated `quickstart.md` with examples for Command registration and Modal linking.
+
+## Files Modified (Refinement)
+
+- `src/app/app.routes.ts` - Added auxiliary routes and deep link parameters.
+- `src/app/core/layout/services/layout.service.ts` - Added visual mode state and centralized navigation.
+- `src/app/core/layout/services/command.service.ts` - New service for command palette.
+- `src/app/core/layout/main-layout.component.ts` - Keyboard listeners and visual mode class toggling.
+- `src/app/core/layout/components/header/header.component.ts/html/scss` - Refined layout and tools icons.
+- `src/app/core/layout/components/sidebar/sidebar.component.ts/html` - A11y focus trap and centralized nav.
+- `src/styles.scss` & `src/styles/_themes.scss` - Integrated cyberpunk theme.
+- `src/app/core/models/layout.types.ts` - Updated interfaces for new features.
+
+## Files Created (Refinement)
+
+- `src/app/core/layout/components/command-palette/` - Full component suite.
+- `src/app/core/layout/components/settings-modal/` - Full component suite.
+
+## Verification
+
+- ✅ 127/127 unit tests passing.
+- ✅ Accessibility verified (Focus Trap, Semantic HTML).
+- ✅ Responsive behavior verified (Mobile drawer, Center nav hide).

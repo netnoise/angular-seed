@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Core Application Layout Refinement** (Feature #002):
+  - **Command Palette**: Implemented global action modal (Cmd+K) with `CommandService` and CDK Overlay.
+  - **Visual FX**: Added "Cyberpunk" theme mode with neon glows, scanlines, and glassmorphism, toggled via `LayoutService`.
+  - **Hybrid Routing**: Implemented auxiliary routes (`modal` outlet) for Settings and Profile overlays preserving view context.
+  - **Deep Linking**: Enhanced Split-Pane view to support selection via URL parameters (`/:id`).
+  - **Centralized Navigation**: Unified navigation configuration in `LayoutService` with responsive visibility logic.
+  - **Accessibility**: Added Focus Trap management for mobile drawer, command palette, and utility modals.
+
 ## [0.2.0] - 2026-02-08
 
 ### Added

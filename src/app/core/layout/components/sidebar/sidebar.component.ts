@@ -20,15 +20,7 @@ export class SidebarComponent {
     return this.sidebarOpen() ? 'sidebar-content expanded' : 'sidebar-content collapsed';
   });
 
-  protected readonly navigationItems: NavigationItem[] = [
-    { label: 'Dashboard', route: '/', icon: '📊', exact: true },
-    { label: 'Projects', route: '/projects', icon: '📁' },
-    { label: 'Tasks', route: '/tasks', icon: '✓' },
-    { label: 'Calendar', route: '/calendar', icon: '📅' },
-    { label: 'Team', route: '/team', icon: '👥' },
-    { label: 'Reports', route: '/reports', icon: '📈' },
-    { label: 'Settings', route: '/settings', icon: '⚙️' },
-  ];
+  protected readonly navigationItems: NavigationItem[] = this.layoutService.navigationItems;
 
   onToggle(): void {
     this.layoutService.toggleSidebar();

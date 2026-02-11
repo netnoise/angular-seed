@@ -1,4 +1,8 @@
 @use './styles/variables';
+@use './styles/reset';
+@use './styles/mixins';
+@use './styles/base';
+@use './styles/themes';
 
 * {
   box-sizing: border-box;
