@@ -107,7 +107,7 @@ describe('HeaderComponent', () => {
   describe('Navigation Data', () => {
     it('should have navigationItems defined', () => {
       expect(component['navigationItems']).toBeDefined();
-      expect(component['navigationItems'].length).toBe(4);
+      expect(component['navigationItems'].length).toBe(3);
     });
 
     it('should have correct navigation routes', () => {
@@ -115,7 +115,6 @@ describe('HeaderComponent', () => {
       expect(items[0].route).toBe('/');
       expect(items[1].route).toBe('/projects');
       expect(items[2].route).toBe('/tasks');
-      expect(items[3].route).toEqual([{ outlets: { modal: ['settings'] } }]);
     });
 
     it('should set exact match for home route', () => {

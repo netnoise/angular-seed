@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NavigationItem } from '../../../models/layout.types';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationItem, ToolIcon } from '../../../models/layout.types';
 import { MoreMenuComponent } from '../more-menu/more-menu.component';
 import { CommandService } from '../../services/command.service';
 import { LayoutService } from '../../services/layout.service';
@@ -16,6 +16,7 @@ import { CommandPaletteComponent } from '../command-palette/command-palette.comp
 })
 export class HeaderComponent {
   private commandService = inject(CommandService);
+  private router = inject(Router);
   protected readonly layoutService = inject(LayoutService);
 
   protected readonly navigationItems: NavigationItem[] = this.layoutService.navigationItems.filter(
@@ -28,10 +29,20 @@ export class HeaderComponent {
     { label: 'Reports', route: '/reports' },
   ];
 
-  protected readonly toolIcons = [
-    { label: 'Search', icon: '🔍', action: () => this.openCommandPalette() },
-    { label: 'Quick Settings', icon: '⚙️' },
-    { label: 'Theme Toggle', icon: '🌗', action: () => this.layoutService.toggleVisualMode() },
+  protected readonly toolIcons: ToolIcon[] = [
+    { id: 'search', label: 'Search', icon: '🔍', action: () => this.openCommandPalette() },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: '⚙️',
+      action: () => this.router.navigate([{ outlets: { modal: ['settings'] } }]),
+    },
+    {
+      id: 'theme-toggle',
+      label: 'Theme Toggle',
+      icon: '🌗',
+      action: () => this.layoutService.toggleVisualMode(),
+    },
   ];
 
   openCommandPalette(): void {

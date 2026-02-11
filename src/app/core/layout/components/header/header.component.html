@@ -25,12 +25,12 @@
 
   <div class="actions-container">
     <div class="tools-section">
-      @for (tool of toolIcons; track tool.label) {
+      @for (tool of toolIcons; track tool.id) {
         <button
           class="action-btn tool-btn"
           [attr.aria-label]="tool.label"
           [title]="tool.label"
-          (click)="tool.action ? tool.action() : null">
+          (click)="tool.action?.()">
           {{ tool.icon }}
         </button>
       }

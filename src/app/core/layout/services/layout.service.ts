@@ -16,12 +16,6 @@ export class LayoutService {
     { label: 'Calendar', route: '/calendar', icon: '📅', visibleIn: 'mobile' },
     { label: 'Team', route: '/team', icon: '👥', visibleIn: 'mobile' },
     { label: 'Reports', route: '/reports', icon: '📈', visibleIn: 'mobile' },
-    {
-      label: 'Settings',
-      route: [{ outlets: { modal: ['settings'] } }],
-      icon: '⚙️',
-      visibleIn: 'both',
-    },
   ];
 
   constructor() {
