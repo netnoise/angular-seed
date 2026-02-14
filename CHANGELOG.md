@@ -7,15 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-02-14
+
 ### Added
 
-- **Core Application Layout Refinement** (Feature #002):
-  - **Command Palette**: Implemented global action modal (Cmd+K) with `CommandService` and CDK Overlay.
-  - **Visual FX**: Added "Cyberpunk" theme mode with neon glows, scanlines, and glassmorphism, toggled via `LayoutService`.
-  - **Hybrid Routing**: Implemented auxiliary routes (`modal` outlet) for Settings and Profile overlays preserving view context.
-  - **Deep Linking**: Enhanced Split-Pane view to support selection via URL parameters (`/:id`).
-  - **Centralized Navigation**: Unified navigation configuration in `LayoutService` with responsive visibility logic.
-  - **Accessibility**: Added Focus Trap management for mobile drawer, command palette, and utility modals.
+- **Advanced Interactions & Performance** (Feature #002):
+  - **Command Palette**: Implemented global action modal (Cmd+K) using `@angular/cdk/overlay` and a centralized `CommandService` for efficient action discovery.
+  - **Visual FX**: Added "Cyberpunk" visual mode with neon glows, persistent `visualMode` state in `LayoutService`, and high-fidelity CSS transitions.
+  - **Performance Optimization**: Optimized the critical rendering path with inlined layout CSS, preloaded fonts, and preconnect strategies, achieving zero layout shift (CLS < 0.1).
+  - **Quality & SEO**: Conducted Aesthetic Excellence audit (Principle VII) and added meta description handling to satisfy Lighthouse SEO benchmarks.
+
+## [0.2.2] - 2026-02-12
+
+### Added
+
+- **Navigation & Routing Refinement** (Feature #002):
+  - **Hybrid Routing**: Implemented auxiliary routes (`modal` outlet) for Settings and Profile overlays, allowing utility pages to persist without context loss.
+  - **Header Reorganization**: Redesigned Header layout with distinct Logo, Centered Navigation, and right-aligned Tool Icons.
+  - **Responsive Layout**: Enhanced "Responsive Hide" logic to move centered header links to the mobile sidebar drawer at the 768px breakpoint.
+
+## [0.2.1] - 2026-02-10
+
+### Added
+
+- **Architectural Remediation** (Feature #002):
+  - **Deep Linking**: Enhanced Split-Pane view to support selection via URL parameters (`/:id`), refactoring `SplitPaneComponent` to use the Router as the single source of truth.
+  - **Accessibility**: Integrated `A11yModule` (CDK) into `SidebarComponent` for initial focus management and focus trapping in mobile drawer states.
+  - **Task Refinement**: Expanded quality gates and task decomposition for the refinement phase of the core layout.
 
 ## [0.2.0] - 2026-02-08
 
