@@ -1,0 +1,120 @@
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-sidebar-bg, #16213e);
+  color: var(--color-sidebar-text, #ffffff);
+  height: 100%;
+  position: relative;
+
+  &.expanded {
+    .item-label {
+      display: inline;
+    }
+  }
+
+  &.collapsed {
+    .item-label {
+      display: none;
+    }
+
+    .sidebar-item {
+      justify-content: center;
+    }
+
+    .toggle-btn {
+      justify-content: center;
+    }
+  }
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--color-accent, #00ff88);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent, #00ff88);
+    outline-offset: -2px;
+  }
+}
+
+.toggle-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--color-accent, #00ff88);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent, #00ff88);
+    outline-offset: -2px;
+  }
+
+  &.active {
+    background: rgba(0, 255, 136, 0.15);
+    border-left-color: var(--color-accent, #00ff88);
+    color: var(--color-accent, #00ff88);
+  }
+}
+
+.item-icon {
+  font-size: 1.5rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.item-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 767px) {
+  .sidebar-content {
+    &.collapsed,
+    &.expanded {
+      .item-label {
+        display: inline;
+      }
+
+      .sidebar-item {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+}

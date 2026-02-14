@@ -1,0 +1,63 @@
+.mode-cyberpunk {
+  --bg-primary: #05080f;
+  --bg-secondary: rgba(10, 14, 26, 0.8);
+  --bg-tertiary: rgba(21, 27, 46, 0.9);
+  --accent-primary: #ff00ff; // Neon Pink
+  --accent-secondary: #00ffff; // Cyan
+  --accent-glow: rgba(255, 0, 255, 0.3);
+  --shadow-glow: 0 0 25px rgba(255, 0, 255, 0.4), 0 0 50px rgba(0, 255, 255, 0.2);
+  --border-color: rgba(255, 0, 255, 0.2);
+
+  --color-header-bg: rgba(5, 8, 15, 0.85);
+  --color-sidebar-bg: rgba(5, 8, 15, 0.9);
+
+  // Add glassmorphism
+  --backdrop-filter: blur(12px) saturate(180%);
+
+  // Custom properties for cyberpunk effects
+  --cp-scanline-opacity: 0.1;
+  --cp-grid-color: rgba(0, 255, 255, 0.05);
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size:
+      100% 2px,
+      3px 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: var(--cp-scanline-opacity);
+  }
+
+  .header,
+  .sidebar,
+  .footer,
+  .app-header,
+  .sidebar-container,
+  .app-footer {
+    backdrop-filter: var(--backdrop-filter);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .sidebar {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .nav-link.active {
+    text-shadow: 0 0 10px var(--accent-primary);
+    box-shadow: inset 0 -2px 0 var(--accent-primary);
+  }
+
+  .action-btn:hover {
+    color: var(--accent-secondary);
+    filter: drop-shadow(0 0 5px var(--accent-secondary));
+  }
+}

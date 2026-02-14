@@ -1,0 +1,30 @@
+<div
+  class="command-palette"
+  cdkTrapFocus
+  cdkTrapFocusAutoCapture>
+  <div class="palette-header">
+    <input
+      type="text"
+      [ngModel]="searchQuery()"
+      (ngModelChange)="searchQuery.set($event)"
+      placeholder="Type a command or search..."
+      class="palette-input"
+      cdkFocusInitial />
+  </div>
+  <div class="palette-body">
+    @for (command of filteredCommands(); track command.id) {
+      <button
+        class="command-item"
+        (click)="selectCommand(command)">
+        @if (command.icon) {
+          <span class="command-icon">{{ command.icon }}</span>
+        }
+        <span class="command-label">{{ command.label }}</span>
+        <span class="command-group">{{ command.group }}</span>
+      </button>
+    }
+    @if (filteredCommands().length === 0) {
+      <div class="no-results">No commands found</div>
+    }
+  </div>
+</div>

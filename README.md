@@ -41,6 +41,9 @@ The Angular Seed project aims to achieve the following objectives:
 5. **Spec-Driven Development Alignment**  
    Support workflows where features and changes are driven by written specifications (user stories, API contracts, acceptance criteria), with clear mapping from requirements to implementation.
 
+6. **Aesthetic Excellence & Visual Polish**  
+   Demonstrate how to build high-fidelity, professional-grade user interfaces that "stand out" through refined typography, smooth transitions, and a modern aesthetic.
+
 ---
 
 ## 3. Scope
@@ -104,7 +107,6 @@ Angular Seed adopts a modular, feature-oriented architecture focused on clarity,
 
 - **Separation of Concerns**
   Distinguish between:
-
   - UI components (presentational components).
   - Smart/feature components (container components).
   - Services handling domain and integration logic.
@@ -132,12 +134,10 @@ This project follows modern Angular development standards. For detailed coding g
 ### 5.3 Layered View (High-Level)
 
 - **Presentation Layer**
-
   - Components, layouts, and routing.
   - Styling, theming, and UI state.
 
 - **Domain / Application Layer**
-
   - Services encapsulating business logic.
   - Application-level state management (if used).
   - Interactors/use-cases (optional, based on chosen pattern).
@@ -305,9 +305,10 @@ This project strictly follows Spec-Driven Development (SDD) using the `speckit` 
 2.  **Clarify**: Use `/speckit.clarify` to resolve ambiguities.
 3.  **Plan**: Use `/speckit.plan` to generate technical strategy and architecture.
 4.  **Task**: Use `/speckit.tasks` to break down the plan into actionable items.
-5.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
-6.  **Verify**: Ensure tests pass and update `CHANGELOG.md` with new features/fixes.
-7.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
+5.  **Checklist**: Use `/speckit.checklist` to generate quality gates (UX, A11y, Security) before coding.
+6.  **Implement**: Use `/speckit.implement` to execute tasks and generate code.
+7.  **Verify**: Ensure tests pass and update `CHANGELOG.md` with new features/fixes.
+8.  **Analyze**: Use `/speckit.analyze` for cross-artifact consistency checks.
 
 ---
 
@@ -470,4 +471,4 @@ Agents should always read these files upon initialization:
 
 When a new agent takes over, the recommended first command is:
 
-> "Read the latest `docs/session-summaries/001-initial-app-bootstrap.md` and `GEMINI.md` to establish context, then check `tasks.md` for the next pending item."
+> "Read the latest session summary in `docs/session-summaries/` and `GEMINI.md` to establish context, then check the active feature's `tasks.md` for the next pending item."

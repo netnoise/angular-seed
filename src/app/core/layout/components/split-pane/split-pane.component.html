@@ -1,0 +1,66 @@
+<div class="split-pane-container">
+  <div class="list-pane">
+    <div class="search-box">
+      <input
+        type="search"
+        placeholder="Search items..."
+        [value]="searchQuery()"
+        (input)="onSearchChange($any($event.target).value)"
+        class="search-input"
+        aria-label="Search items" />
+    </div>
+
+    <div class="list-content">
+      @if (filteredItems().length === 0) {
+        <div class="no-results">
+          <p>No items found</p>
+        </div>
+      } @else {
+        @for (item of filteredItems(); track item.id) {
+          <div
+            class="list-item"
+            [class.active]="selectedItemId() === item.id"
+            (click)="onItemClick(item)"
+            role="button"
+            tabindex="0"
+            [attr.aria-selected]="selectedItemId() === item.id">
+            <div class="item-header">
+              <h3 class="item-title">{{ item.title }}</h3>
+              <span
+                class="item-status"
+                [class]="'status-' + item.status.toLowerCase()">
+                {{ item.status }}
+              </span>
+            </div>
+            <p class="item-description">{{ item.description }}</p>
+            <span class="item-date">{{ item.updatedAt | date: 'short' }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="detail-pane">
+    @if (selectedItem(); as item) {
+      <div class="detail-view">
+        <h2 class="detail-title">{{ item.title }}</h2>
+        <div class="detail-meta">
+          <span
+            class="detail-status"
+            [class]="'status-' + item.status.toLowerCase()">
+            {{ item.status }}
+          </span>
+          <span class="detail-date">Updated: {{ item.updatedAt | date: 'medium' }}</span>
+        </div>
+        <div class="detail-content">
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    } @else {
+      <div class="summary-view">
+        <h2>Dashboard Summary</h2>
+        <p>Select an item from the list to view details.</p>
+      </div>
+    }
+  </div>
+</div>

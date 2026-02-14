@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report:
-Version change: 1.0.1 → 1.1.0 (MINOR)
-Modified principles: Added VI (Traceable Project History)
+Version change: 1.1.0 → 1.2.0 (MINOR)
+Modified principles: Added VII (Polished UI/UX & Aesthetic Excellence)
 Added sections: None
 Removed sections: None
 Templates requiring updates:
@@ -52,6 +52,12 @@ Every feature, pattern, and configuration MUST be documented with clear examples
 The project MUST maintain a granular and traceable history of changes. Use Semantic Versioning (SemVer) for all releases. Changelog maintenance MUST follow the "Accumulate Local, Publish Global" strategy to preserve history across squash-merges. Every feature implementation MUST conclude with a version bump and a changelog update.
 
 **Rationale**: Traceability is essential for a template project that serves as a foundation for others. It ensures that the evolution of patterns and technical decisions is preserved and understandable.
+
+### VII. Polished UI/UX & Aesthetic Excellence
+
+Every UI-facing feature MUST aim for professional-grade polish and aesthetic excellence. This includes refined typography, smooth transitions/animations, consistent spacing, and a "standing out" visual identity. Design is not an afterthought but a core requirement of the implementation.
+
+**Rationale**: As a seed project, it must not only be functional but also inspire by demonstrating how to build visually stunning and highly usable Angular applications.
 
 ## Technology Stack Standards
 
@@ -119,4 +125,4 @@ This constitution supersedes all other coding practices and project guidelines. 
 
 **Compliance Review**: All pull requests and feature implementations must verify compliance with the constitution. The Constitution Check section in implementation plans serves as a gate before proceeding with development.
 
-**Version**: 1.1.0 | **Ratified**: 2026-01-25 | **Last Amended**: 2026-02-04
+**Version**: 1.2.0 | **Ratified**: 2026-01-25 | **Last Amended**: 2026-02-13

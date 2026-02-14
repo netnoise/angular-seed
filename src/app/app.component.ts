@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { VERSION } from './version';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,4 @@ import { VERSION } from './version';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'angular-seed';
-  version = VERSION;
-}
+export class AppComponent {}

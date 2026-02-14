@@ -1,0 +1,292 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SplitPaneComponent } from './split-pane.component';
+import { ContentItem } from '../../../models/layout.types';
+import { provideRouter, Router, ActivatedRoute } from '@angular/router';
+
+describe('SplitPaneComponent', () => {
+  let component: SplitPaneComponent;
+  let fixture: ComponentFixture<SplitPaneComponent>;
+  let router: Router;
+
+  const mockItems: ContentItem[] = [
+    {
+      id: '1',
+      title: 'Item 1',
+      status: 'Active',
+      description: 'Description 1',
+      updatedAt: new Date('2024-01-01'),
+    },
+    {
+      id: '2',
+      title: 'Item 2',
+      status: 'Inactive',
+      description: 'Description 2',
+      updatedAt: new Date('2024-01-02'),
+    },
+    {
+      id: '3',
+      title: 'Item 3',
+      status: 'Pending',
+      description: 'Description 3',
+      updatedAt: new Date('2024-01-03'),
+    },
+  ];
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SplitPaneComponent],
+      providers: [
+        provideRouter([]),
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: {} } },
+        },
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SplitPaneComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    fixture.componentRef.setInput('items', mockItems);
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('Deep Linking', () => {
+    it('should select item based on id input', () => {
+      fixture.componentRef.setInput('id', '2');
+      fixture.detectChanges();
+
+      expect(component.selectedItemId()).toBe('2');
+      expect(component.selectedItem()?.title).toBe('Item 2');
+    });
+
+    it('should navigate when an item is clicked', () => {
+      const navigateSpy = spyOn(router, 'navigate');
+      const item = component.items()[0];
+
+      component.onItemClick(item);
+
+      expect(navigateSpy).toHaveBeenCalledWith(['./', '1'], jasmine.any(Object));
+    });
+
+    it('should use parent navigation when an item is already selected', () => {
+      fixture.componentRef.setInput('id', '1');
+      fixture.detectChanges();
+
+      const navigateSpy = spyOn(router, 'navigate');
+      const item = component.items()[1]; // Select item 2
+
+      component.onItemClick(item);
+
+      // Should use '../' because an ID is already in the URL
+      expect(navigateSpy).toHaveBeenCalledWith(['../', '2'], jasmine.any(Object));
+    });
+  });
+
+  describe('Structure', () => {
+    it('should have list pane', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const listPane = compiled.querySelector('.list-pane');
+      expect(listPane).toBeTruthy();
+    });
+
+    it('should have detail pane', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const detailPane = compiled.querySelector('.detail-pane');
+      expect(detailPane).toBeTruthy();
+    });
+
+    it('should have search input', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const searchInput = compiled.querySelector('input[type="search"]');
+      expect(searchInput).toBeTruthy();
+    });
+  });
+
+  describe('List Rendering', () => {
+    it('should render all items', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const items = compiled.querySelectorAll('.list-item');
+      expect(items.length).toBe(3);
+    });
+
+    it('should display item titles', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const firstItem = compiled.querySelector('.list-item .item-title');
+      expect(firstItem?.textContent).toContain('Item 1');
+    });
+
+    it('should display item status', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const firstItem = compiled.querySelector('.list-item .item-status');
+      expect(firstItem?.textContent).toContain('Active');
+    });
+  });
+
+  describe('Search Functionality', () => {
+    it('should filter items by search query', () => {
+      component.searchQuery.set('Item 1');
+      fixture.detectChanges();
+
+      expect(component.filteredItems().length).toBe(1);
+      expect(component.filteredItems()[0].title).toBe('Item 1');
+    });
+
+    it('should be case insensitive', () => {
+      component.searchQuery.set('item 2');
+      fixture.detectChanges();
+
+      expect(component.filteredItems().length).toBe(1);
+      expect(component.filteredItems()[0].title).toBe('Item 2');
+    });
+
+    it('should show all items when search is empty', () => {
+      component.searchQuery.set('');
+      fixture.detectChanges();
+
+      expect(component.filteredItems().length).toBe(3);
+    });
+
+    it('should show "No items found" message when no results', () => {
+      component.searchQuery.set('nonexistent');
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const noResults = compiled.querySelector('.no-results');
+      expect(noResults).toBeTruthy();
+      expect(noResults?.textContent).toContain('No items found');
+    });
+  });
+
+  describe('Item Selection', () => {
+    it('should select item on click', () => {
+      const spy = spyOn(component.itemSelected, 'emit');
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const firstItem = compiled.querySelector('.list-item') as HTMLElement;
+      firstItem.click();
+
+      expect(spy).toHaveBeenCalledWith(mockItems[0]);
+    });
+
+    it('should apply active class to selected item', () => {
+      fixture.componentRef.setInput('id', '1');
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const firstItem = compiled.querySelector('.list-item');
+      expect(firstItem?.classList.contains('active')).toBe(true);
+    });
+
+    it('should update selectedItemId on selection', () => {
+      component.onItemClick(mockItems[1]);
+      expect(component.selectedItemId()).toBe('2');
+    });
+  });
+
+  describe('Detail Pane', () => {
+    it('should show summary when no item selected', () => {
+      fixture.componentRef.setInput('id', undefined);
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const summary = compiled.querySelector('.summary-view');
+      expect(summary).toBeTruthy();
+    });
+
+    it('should show detail when item selected', () => {
+      fixture.componentRef.setInput('id', '1');
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const detail = compiled.querySelector('.detail-view');
+      expect(detail).toBeTruthy();
+    });
+
+    it('should display selected item details', () => {
+      fixture.componentRef.setInput('id', '1');
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const detailTitle = compiled.querySelector('.detail-title');
+      expect(detailTitle?.textContent).toContain('Item 1');
+    });
+  });
+
+  describe('Scrolling', () => {
+    it('should have independent scroll containers', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const listContent = compiled.querySelector('.list-content') as HTMLElement;
+      const detailPane = compiled.querySelector('.detail-pane') as HTMLElement;
+
+      const listOverflow = window.getComputedStyle(listContent).overflowY;
+      const detailOverflow = window.getComputedStyle(detailPane).overflowY;
+
+      expect(['auto', 'scroll']).toContain(listOverflow);
+      expect(['auto', 'scroll']).toContain(detailOverflow);
+    });
+  });
+
+  describe('Performance', () => {
+    it('should render 100 items in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      const startTime = performance.now();
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const renderTime = endTime - startTime;
+      expect(renderTime).toBeLessThan(100);
+    });
+
+    it('should handle item selection in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+
+      const startTime = performance.now();
+      component.onItemClick(items[50]);
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const selectionTime = endTime - startTime;
+      expect(selectionTime).toBeLessThan(100);
+    });
+
+    it('should filter 100 items in under 100ms', () => {
+      const items: ContentItem[] = Array.from({ length: 100 }, (_, i) => ({
+        id: `${i}`,
+        title: `Item ${i}`,
+        description: `Description ${i}`,
+        status: 'Active' as const,
+        updatedAt: new Date(),
+      }));
+      fixture.componentRef.setInput('items', items);
+      fixture.detectChanges();
+
+      const startTime = performance.now();
+      component.onSearchChange('Item 5');
+      fixture.detectChanges();
+      const endTime = performance.now();
+
+      const filterTime = endTime - startTime;
+      expect(filterTime).toBeLessThan(100);
+    });
+  });
+});

@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-02-14
+
+### Added
+
+- **Advanced Interactions & Performance** (Feature #002):
+  - **Command Palette**: Implemented global action modal (Cmd+K) using `@angular/cdk/overlay` and a centralized `CommandService` for efficient action discovery.
+  - **Visual FX**: Added "Cyberpunk" visual mode with neon glows, persistent `visualMode` state in `LayoutService`, and high-fidelity CSS transitions.
+  - **Performance Optimization**: Optimized the critical rendering path with inlined layout CSS, preloaded fonts, and preconnect strategies, achieving zero layout shift (CLS < 0.1).
+  - **Quality & SEO**: Conducted Aesthetic Excellence audit (Principle VII) and added meta description handling to satisfy Lighthouse SEO benchmarks.
+
+## [0.2.2] - 2026-02-12
+
+### Added
+
+- **Navigation & Routing Refinement** (Feature #002):
+  - **Hybrid Routing**: Implemented auxiliary routes (`modal` outlet) for Settings and Profile overlays, allowing utility pages to persist without context loss.
+  - **Header Reorganization**: Redesigned Header layout with distinct Logo, Centered Navigation, and right-aligned Tool Icons.
+  - **Responsive Layout**: Enhanced "Responsive Hide" logic to move centered header links to the mobile sidebar drawer at the 768px breakpoint.
+
+## [0.2.1] - 2026-02-10
+
+### Added
+
+- **Architectural Remediation** (Feature #002):
+  - **Deep Linking**: Enhanced Split-Pane view to support selection via URL parameters (`/:id`), refactoring `SplitPaneComponent` to use the Router as the single source of truth.
+  - **Accessibility**: Integrated `A11yModule` (CDK) into `SidebarComponent` for initial focus management and focus trapping in mobile drawer states.
+  - **Task Refinement**: Expanded quality gates and task decomposition for the refinement phase of the core layout.
+
+## [0.2.0] - 2026-02-08
+
+### Added
+
+- **Core Application Layout** (Feature #002): Implemented responsive fixed-frame layout with CSS Grid
+  - Created `MainLayoutComponent` with header, sidebar, footer, and scrollable main content area
+  - Implemented `HeaderComponent` with responsive navigation and overflow menu
+  - Implemented `SidebarComponent` with collapsible state and localStorage persistence
+  - Implemented `SplitPaneComponent` for list-detail views with search and item selection
+  - Implemented `MoreMenuComponent` for navigation overflow handling
+  - Created `LayoutService` using Angular Signals for global layout state management
+  - Added mobile-responsive behavior with backdrop and drawer pattern (<768px)
+  - Integrated tablet breakpoint styles (768px-1024px)
+  - Applied dark theme with JetBrains Mono and Syne fonts, neon green (#00ff9f) accent
+  - Comprehensive accessibility support (WCAG 2.1 AA): semantic landmarks, ARIA labels, keyboard navigation
+  - Performance-tested for 100+ items (<=100ms render/selection/filter)
+  - 92 unit tests + 15 integration tests covering all 3 user stories
+
+## [0.1.1] - 2026-02-08
+
+docs: add planning artifacts for Core Application Layout (Spec #002)
+
+Establishes the comprehensive planning artifacts for Feature #002, defining the technical strategy for the application's core shell.
+
+Key changes:
+
+- **Specification**: Created `spec.md` defining a responsive, fixed-frame layout with header, sidebar, and split-pane content.
+- **Technical Plan**: Defined architecture in `plan.md` using CSS Grid for the app frame and Angular Signals for state management.
+- **Task Decomposition**: Generated `tasks.md` with a 6-phase implementation strategy emphasizing TDD.
+- **Visual Blueprint**: Added `docs/dashboard-layout.html` as the source of truth for the visual design.
+- **Contracts**: Defined core types in `contracts/layout.types.ts`.
+- **Context**: Updated `GEMINI.md` to set Feature #002 as the active development focus.
+
 ## [0.1.0] - 2026-02-05
 
 ### Summary

@@ -1,0 +1,62 @@
+<header class="header">
+  <div class="logo-container">
+    <a
+      routerLink="/"
+      class="logo"
+      aria-label="Home"
+      >⚡ TRYOUT</a
+    >
+  </div>
+
+  <nav
+    class="nav-container"
+    aria-label="Main navigation">
+    @for (item of navigationItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        routerLinkActive="active"
+        class="nav-link">
+        {{ item.label }}
+      </a>
+    }
+    <app-more-menu [items]="moreMenuItems"></app-more-menu>
+  </nav>
+
+  <div class="actions-container">
+    <div class="tools-section">
+      @for (tool of toolIcons; track tool.id) {
+        <button
+          class="action-btn tool-btn"
+          [attr.aria-label]="tool.label"
+          [title]="tool.label"
+          (click)="tool.action?.()">
+          {{ tool.icon }}
+        </button>
+      }
+    </div>
+
+    <div
+      class="divider"
+      aria-hidden="true"></div>
+
+    <div class="actions-section">
+      <button
+        class="action-btn"
+        aria-label="Notifications">
+        🔔
+      </button>
+      <button
+        class="action-btn"
+        aria-label="Messages">
+        💬
+      </button>
+      <button
+        class="action-btn profile-btn"
+        aria-label="Profile"
+        [routerLink]="[{ outlets: { modal: ['profile'] } }]">
+        👤
+      </button>
+    </div>
+  </div>
+</header>
