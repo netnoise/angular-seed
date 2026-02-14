@@ -21,6 +21,13 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - It MUST pass all AXE checks.
 - It MUST follow all WCAG AA minimums, including focus management, color contrast, and ARIA attributes.
 
+## Design & UX
+
+- **Aesthetic Excellence**: Aim for professional-grade visual polish.
+- **Motion**: Use smooth, purposeful transitions and animations to enhance the user experience.
+- **Typography**: Maintain consistent and refined typography using defined design tokens.
+- **Layout**: Use a consistent spacing system (e.g., 4px or 8px grid) to ensure alignment and rhythm.
+
 ### Components
 
 - Keep components small and focused on a single responsibility

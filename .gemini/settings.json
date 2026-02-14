@@ -1,7 +1,8 @@
 {
   "general": {
-    "previewFeatures": true,
-    "enablePromptCompletion": true
+    "defaultApprovalMode": "plan",
+    "enablePromptCompletion": true,
+    "previewFeatures": true
   },
   "ui": {
     "showStatusInTitle": true,

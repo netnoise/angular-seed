@@ -15,7 +15,7 @@ Refine the Core Application Layout to support advanced navigation patterns, visu
 **Testing**: Karma, Jasmine (Unit & Integration)
 **Target Platform**: Modern Web Browsers (Mobile, Tablet, Desktop)
 **Project Type**: Web Application
-**Performance Goals**: FCP < 1.5s, LCP < 2.5s; <100ms interaction latency (Command Palette open, Theme toggle)
+**Performance Goals**: FCP < 1.5s, LCP < 2.5s, TBT < 200ms, CLS < 0.1 on Fast 3G (1.6 Mbps / 150ms RTT); <100ms interaction latency
 **Constraints**: WCAG 2.1 AA Compliance, Mandatory Dark Mode (Base), Zero-layout-shift on header updates.
 **Scale/Scope**: Core application shell enhancements.
 
@@ -29,6 +29,7 @@ _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 - [x] **IV. Testing & Quality Standards**: TDD for all new interaction flows (Focus Trap, Command Palette).
 - [x] **V. Documentation & Examples**: Updates to `quickstart.md` for new shell features.
 - [x] **VI. Traceable Project History**: Follows SDD (Spec -> Plan -> Tasks) for Phase 8/9 updates.
+- [x] **VII. Polished UI/UX & Aesthetic Excellence**: Audit task T078 ensures high-fidelity polish and transition smoothness.
 
 ## Project Structure
 

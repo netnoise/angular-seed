@@ -41,6 +41,9 @@ The Angular Seed project aims to achieve the following objectives:
 5. **Spec-Driven Development Alignment**  
    Support workflows where features and changes are driven by written specifications (user stories, API contracts, acceptance criteria), with clear mapping from requirements to implementation.
 
+6. **Aesthetic Excellence & Visual Polish**  
+   Demonstrate how to build high-fidelity, professional-grade user interfaces that "stand out" through refined typography, smooth transitions, and a modern aesthetic.
+
 ---
 
 ## 3. Scope
@@ -468,4 +471,4 @@ Agents should always read these files upon initialization:
 
 When a new agent takes over, the recommended first command is:
 
-> "Read the latest `docs/session-summaries/001-initial-app-bootstrap.md` and `GEMINI.md` to establish context, then check `tasks.md` for the next pending item."
+> "Read the latest session summary in `docs/session-summaries/` and `GEMINI.md` to establish context, then check the active feature's `tasks.md` for the next pending item."

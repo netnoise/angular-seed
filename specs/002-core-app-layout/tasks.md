@@ -66,20 +66,24 @@ The project is initialized, and core layout components (Header, Sidebar, Split-P
 
 - [x] T070 Run full test suite and ensure no regressions from new components
 
+- [x] T078 [Principle VII] Conduct a "High-Fidelity UI/UX Audit" to verify aesthetic excellence, transition smoothness, and consistency of the "Cyberpunk" visual identity across all shell components.
+
 ## Phase 13: Performance Optimization
 
 **Goal**: Mitigate Lighthouse FCP (1.8s) and LCP (2.8s) issues for faster initial load.
 
-- [ ] T071 Analyze critical rendering path for initial page load and identify blocking resources.
+- [x] T071 Analyze critical rendering path for initial page load and identify blocking resources (specifically targeting TBT/CLS bottlenecks).
 
-- [ ] T072 Implement critical CSS extraction and inline it in `index.html` or `styles.scss` for `MainLayoutComponent`.
+- [x] T072 Implement critical CSS extraction and inline it in `index.html` or `styles.scss` for `MainLayoutComponent`.
 
-- [ ] T073 Preload web fonts (JetBrains Mono, Syne) using `<link rel="preload">` in `index.html`.
+- [x] T073 Preload web fonts (JetBrains Mono, Syne) using `<link rel="preload">` in `index.html`.
 
-- [ ] T074 Add `font-display: swap` to all font declarations in `_variables.scss` or `styles.scss`.
+- [x] T074 Add `font-display: swap` to all font declarations in `_variables.scss` or `styles.scss`.
 
-- [ ] T075 Review `MainLayoutComponent` and `HomeComponent` for potential LCP elements and ensure they load efficiently.
+- [x] T075 Review `MainLayoutComponent` and `HomeComponent` for potential LCP elements and ensure they load efficiently.
 
-- [ ] T076 Implement `preconnect` or `dns-prefetch` for external domains (e.g., Google Fonts).
+- [x] T076 Implement `preconnect` or `dns-prefetch` for external domains (e.g., Google Fonts).
 
-- [ ] T077 Audit initial bundle size and identify opportunities for further code splitting.
+- [x] T077 Audit initial bundle size and identify opportunities for further code splitting.
+
+- [x] T079 Implement a performance verification step using Lighthouse/Chrome DevTools to confirm SC-008 (TBT < 200ms) and SC-009 (CLS < 0.1).

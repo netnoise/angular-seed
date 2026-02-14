@@ -128,5 +128,7 @@ As a mobile user, I want the layout to adapt to my small screen so that I can st
 - **SC-003**: Item selection in the list updates the detail pane in under 100ms.
 - **SC-004**: Search filtering in the list pane completes within 100ms for datasets up to 100 items.
 - **SC-005**: Visual design follows the core branding tokens (dark theme, Syne/JetBrains fonts, neon accents) with a centered main menu and right-aligned tools section.
-- **SC-006 (Performance)**: First Contentful Paint (FCP) MUST be under **1.5s** on a simulated 3G network.
-- **SC-007 (Performance)**: Largest Contentful Paint (LCP) MUST be under **2.5s** on a simulated 3G network.
+- **SC-006 (Performance)**: First Contentful Paint (FCP) MUST be under **1.5s** on a **quantified simulated network (Fast 3G: 1.6 Mbps / 150ms RTT)**.
+- **SC-007 (Performance)**: Largest Contentful Paint (LCP) MUST be under **2.5s** on the same simulated network profile.
+- **SC-008 (Performance)**: Total Blocking Time (TBT) MUST be under **200ms** to ensure smooth interaction during the boot sequence.
+- **SC-009 (Performance)**: Cumulative Layout Shift (CLS) MUST be under **0.1** to ensure visual stability, especially in the centered header and sidebar regions.
