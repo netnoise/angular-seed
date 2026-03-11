@@ -11,7 +11,13 @@ export class LayoutService {
 
   readonly navigationItems: NavigationItem[] = [
     { label: 'Dashboard', route: '/', exact: true, icon: '📊', visibleIn: 'both' },
-    { label: 'Projects', route: '/projects', icon: '📁', visibleIn: 'both' },
+    {
+      label: 'Projects',
+      route: '/projects',
+      icon: '📁',
+      visibleIn: 'both',
+      children: [{ label: 'NBA Stats', route: '/nba', icon: '🏀', visibleIn: 'both' }],
+    },
     { label: 'Tasks', route: '/tasks', icon: '✓', visibleIn: 'both' },
     { label: 'Calendar', route: '/calendar', icon: '📅', visibleIn: 'mobile' },
     { label: 'Team', route: '/team', icon: '👥', visibleIn: 'mobile' },

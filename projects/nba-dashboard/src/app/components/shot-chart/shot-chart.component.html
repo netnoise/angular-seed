@@ -1,0 +1,36 @@
+<div class="nba-shot-chart">
+  <div class="nba-shot-chart__header">
+    <h2 class="nba-shot-chart__title">Shot Selection</h2>
+  </div>
+
+  <div class="nba-shot-chart__content">
+    @if (isLoading()) {
+      <div class="nba-shot-chart__loading">
+        <div class="nba-shot-chart__spinner"></div>
+        <p class="nba-shot-chart__loading-text">Analyzing shot tracking data...</p>
+      </div>
+    } @else if (hasData()) {
+      <div
+        #chartContainer
+        class="nba-shot-chart__svg-container"></div>
+      <div class="nba-shot-chart__legend">
+        <div class="nba-shot-chart__legend-item">
+          <span class="nba-shot-chart__dot nba-shot-chart__dot--made"></span>
+          <span class="nba-shot-chart__legend-label">Made</span>
+        </div>
+        <div class="nba-shot-chart__legend-item">
+          <span class="nba-shot-chart__dot nba-shot-chart__dot--missed"></span>
+          <span class="nba-shot-chart__legend-label">Missed</span>
+        </div>
+      </div>
+    } @else {
+      <div class="nba-shot-chart__empty">
+        <div class="nba-shot-chart__empty-icon">🏀</div>
+        <p class="nba-shot-chart__empty-text">No data available</p>
+        <p class="nba-shot-chart__empty-hint">
+          Select a player to generate their spatial shot distribution
+        </p>
+      </div>
+    }
+  </div>
+</div>

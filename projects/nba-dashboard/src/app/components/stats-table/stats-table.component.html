@@ -1,0 +1,65 @@
+<div class="nba-stats">
+  <div class="nba-stats__header">
+    <h2 class="nba-stats__title">Season Averages</h2>
+  </div>
+
+  <div class="nba-stats__content">
+    @if (isLoading()) {
+      <div class="nba-stats__loading">
+        <p-table
+          [value]="skeletonRows"
+          styleClass="p-datatable-sm">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="nba-stats__th">Statistic</th>
+              <th class="nba-stats__th">Value</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body">
+            <tr>
+              <td class="nba-stats__td">
+                <p-skeleton
+                  width="8rem"
+                  height="1.25rem"></p-skeleton>
+              </td>
+              <td class="nba-stats__td">
+                <p-skeleton
+                  width="3rem"
+                  height="1.25rem"></p-skeleton>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    } @else if (hasData()) {
+      <div class="nba-stats__table-wrapper">
+        <p-table
+          [value]="statsRows()"
+          styleClass="p-datatable-sm nba-stats__table">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="nba-stats__th">Statistic</th>
+              <th class="nba-stats__th nba-stats__th--right">Value</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-row>
+            <tr class="nba-stats__tr">
+              <td class="nba-stats__td">{{ row.stat }}</td>
+              <td class="nba-stats__td nba-stats__td--value">{{ row.value }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    } @else {
+      <div class="nba-stats__empty">
+        <div class="nba-stats__empty-icon">📊</div>
+        <p class="nba-stats__empty-text">No player selected</p>
+        <p class="nba-stats__empty-hint">
+          Search for a player above to see their performance metrics
+        </p>
+      </div>
+    }
+  </div>
+</div>

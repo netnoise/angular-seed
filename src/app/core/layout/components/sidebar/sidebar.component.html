@@ -26,6 +26,19 @@
           <span class="item-label">{{ item.label }}</span>
         }
       </a>
+      @if (item.children && sidebarOpen()) {
+        @for (child of item.children; track child.route) {
+          <a
+            [routerLink]="child.route"
+            [routerLinkActiveOptions]="{ exact: child.exact ?? false }"
+            routerLinkActive="active"
+            class="sidebar-item sidebar-child"
+            [attr.title]="child.label">
+            <span class="item-icon">{{ child.icon }}</span>
+            <span class="item-label">{{ child.label }}</span>
+          </a>
+        }
+      }
     }
   </nav>
 </aside>

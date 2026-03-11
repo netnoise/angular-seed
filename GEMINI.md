@@ -1,4 +1,4 @@
-# Angular Seed: AI Development Context
+because of # Angular Seed: AI Development Context
 
 This file serves as the primary memory and coordination hub for AI agents (Gemini CLI) working on this project. It tracks the **Spec-Driven Development (SDD)** state and project-specific mandates.
 

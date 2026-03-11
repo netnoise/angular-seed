@@ -1,0 +1,16 @@
+/* Global styles for NBA Dashboard standalone */
+@import 'primeicons/primeicons.css';
+
+/* Only basic resets and core PrimeNG structural styles if needed */
+/* The actual component themes are provided by providePrimeNG in app.config.ts */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0e1a;
+  color: #e5e7eb;
+}

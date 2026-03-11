@@ -1,0 +1,66 @@
+<div class="nba-player-search">
+  <div class="nba-player-search__form-group">
+    <label
+      for="player-search"
+      class="nba-player-search__label">
+      Search for a Player
+    </label>
+    <div class="nba-player-search__input-group">
+      <input
+        id="player-search"
+        type="text"
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event); onSearchChange()"
+        (keyup.enter)="onSearchChange()"
+        placeholder="Type player name..."
+        class="nba-player-search__input" />
+      <button
+        class="nba-player-search__button"
+        (click)="onSearchChange()"
+        [disabled]="searchTerm().length < 2 || isLoading()">
+        {{ isLoading() ? 'Searching...' : 'Send' }}
+      </button>
+      @if (searchTerm()) {
+        <button
+          class="nba-player-search__clear"
+          (click)="onClear()">
+          <i class="pi pi-times"></i>
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (players().length > 0 && !selectedPlayer()) {
+    <div class="nba-player-search__results">
+      <ul class="nba-player-search__results-list">
+        @for (player of players(); track player.id) {
+          <li class="nba-player-search__results-item">
+            <button
+              type="button"
+              class="nba-player-search__results-button"
+              (click)="onSelectPlayer(player)">
+              <span class="nba-player-search__results-name">{{ player.fullName }}</span>
+              <span class="nba-player-search__results-team">{{
+                player.teamAbbreviation || 'Free Agent'
+              }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (selectedPlayer()) {
+    <div class="nba-player-search__selected-info">
+      <p class="nba-player-search__selected-text">
+        Current view:
+        <span class="nba-player-search__selected-name">{{ selectedPlayer()?.fullName }}</span>
+        <button
+          class="nba-player-search__change-button"
+          (click)="selectedPlayer.set(null)">
+          Change
+        </button>
+      </p>
+    </div>
+  }
+</div>

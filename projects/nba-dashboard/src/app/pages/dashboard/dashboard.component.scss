@@ -1,0 +1,74 @@
+.nba-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family-headings);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px var(--accent-glow));
+  }
+
+  &__search-bar {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-glow);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    &--stats {
+      // Custom styles for stats section if needed
+    }
+
+    &--chart {
+      // Custom styles for chart section if needed
+    }
+  }
+}

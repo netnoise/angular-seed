@@ -7,6 +7,13 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
+        path: 'nba',
+        loadComponent: () =>
+          import('../../projects/nba-dashboard/src/app/pages/dashboard/dashboard.component').then(
+            m => m.DashboardComponent,
+          ),
+      },
+      {
         path: '',
         loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
       },

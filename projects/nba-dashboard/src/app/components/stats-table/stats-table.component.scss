@@ -1,0 +1,99 @@
+.nba-stats {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: var(--spacing-sm);
+    display: inline-block;
+  }
+
+  &__title {
+    font-family: var(--font-family-headings);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  ::ng-deep {
+    .p-datatable {
+      .p-datatable-thead > tr > th {
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border-color);
+        padding: var(--spacing-sm) 0;
+      }
+
+      .p-datatable-tbody > tr {
+        background: transparent;
+        color: var(--text-primary);
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        > td {
+          border-bottom: 1px solid var(--border-color);
+          padding: var(--spacing-md) 0;
+          font-family: var(--font-family);
+        }
+      }
+    }
+
+    .p-skeleton {
+      background: var(--bg-tertiary);
+      &::after {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      }
+    }
+  }
+
+  &__td--value {
+    text-align: right;
+    font-weight: 700;
+    color: var(--accent-secondary);
+  }
+
+  &__th--right {
+    text-align: right;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing-lg) * 2);
+    text-align: center;
+    color: var(--text-secondary);
+  }
+
+  &__empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+  }
+
+  &__empty-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+  }
+
+  &__empty-hint {
+    font-size: 0.875rem;
+  }
+}

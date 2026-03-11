@@ -1,0 +1,28 @@
+<div
+  class="nba-rate-limit"
+  [class.nba-rate-limit--reached]="isLimitReached()"
+  [class.nba-rate-limit--warning]="isWarning()">
+  <div class="nba-rate-limit__header">
+    <h3 class="nba-rate-limit__title">API Capacity</h3>
+    <span
+      class="nba-rate-limit__count"
+      [class.nba-rate-limit__count--critical]="isLimitReached()">
+      {{ requestsRemaining() }}/5
+    </span>
+  </div>
+
+  <div class="nba-rate-limit__progress-container">
+    <div
+      class="nba-rate-limit__progress-bar"
+      [style.width.%]="usagePercentage()"
+      [class.nba-rate-limit__progress-bar--reached]="isLimitReached()"
+      [class.nba-rate-limit__progress-bar--warning]="isWarning()"></div>
+  </div>
+
+  @if (timeToReset() > 0) {
+    <div class="nba-rate-limit__countdown">
+      Next reset in:
+      <span class="nba-rate-limit__timer">{{ timeToReset() / 1000 | number: '1.1-1' }}s</span>
+    </div>
+  }
+</div>

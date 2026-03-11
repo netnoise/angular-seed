@@ -9,6 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:nba": "ng test nba-dashboard",
+    "test:nba:ci": "ng test nba-dashboard --watch=false --browsers=ChromeHeadless",
+    "test:e2e": "playwright test",
     "version:bump": "node tools/version-bump.mjs",
     "version:bump:patch": "node tools/version-bump.mjs patch",
     "version:bump:minor": "node tools/version-bump.mjs minor",
@@ -20,8 +23,8 @@
     "version:release:prerelease": "node tools/version-bump.mjs prerelease --preid rc --require-unreleased --require-specs-clean",
     "format": "prettier --write \"src/**/*.{ts,html,scss,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,scss,json,md}\"",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -34,6 +37,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.18",
     "@angular/common": "^19.2.18",
     "@angular/compiler": "^19.2.18",
     "@angular/core": "^19.2.18",
@@ -41,15 +45,26 @@
     "@angular/platform-browser": "^19.2.18",
     "@angular/platform-browser-dynamic": "^19.2.18",
     "@angular/router": "^19.2.18",
+    "@types/d3": "^7.4.3",
+    "autoprefixer": "^10.4.27",
+    "d3": "^7.9.0",
+    "postcss": "^8.5.6",
+    "primeicons": "^7.0.0",
+    "primeng": "^19.1.4",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.2.1",
     "tslib": "^2.3.0",
+    "zod": "^4.3.6",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-architects/module-federation": "^20.0.0",
     "@angular-devkit/build-angular": "^19.2.19",
     "@angular/cdk": "^19.2.19",
     "@angular/cli": "^19.2.19",
     "@angular/compiler-cli": "^19.2.18",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "^4.2.1",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "21.0.1",
     "axe-core": "^4.10.2",
@@ -64,8 +79,14 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.2.7",
+    "msw": "^2.12.10",
     "prettier": "^3.8.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.46.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
