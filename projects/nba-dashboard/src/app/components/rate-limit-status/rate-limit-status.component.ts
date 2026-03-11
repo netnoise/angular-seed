@@ -1,4 +1,11 @@
-import { Component, inject, signal, computed, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  computed,
+  PLATFORM_ID,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RateLimiterService } from '../../core/services/rate-limiter.service';
 import { toSignal } from '@angular/core/rxjs-interop';

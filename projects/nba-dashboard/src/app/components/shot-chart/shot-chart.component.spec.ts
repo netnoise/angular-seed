@@ -46,6 +46,10 @@ describe('ShotChartComponent', () => {
     mockShotChart.set({
       playerId: 237,
       playerName: 'LeBron James',
+      season: '2024',
+      totalShots: 2,
+      shotsMade: 1,
+      fieldGoalPercentage: 0.5,
       shots: [
         { x: 0, y: 0, made: true, shotType: '2PT' },
         { x: 10, y: 10, made: false, shotType: '3PT' },
@@ -66,6 +70,10 @@ describe('ShotChartComponent', () => {
     mockShotChart.set({
       playerId: 237,
       playerName: 'LeBron James',
+      season: '2024',
+      totalShots: 0,
+      shotsMade: 0,
+      fieldGoalPercentage: 0,
       shots: [],
     });
 

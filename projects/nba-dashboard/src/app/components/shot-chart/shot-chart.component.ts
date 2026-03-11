@@ -114,16 +114,17 @@ export class ShotChartComponent {
       .attr('stroke-width', 2);
 
     // Draw three-point arc (simplified)
-    const arcPath = d3
-      .arc()
-      .innerRadius(237)
-      .outerRadius(239)
-      .startAngle(-Math.PI / 2.2)
-      .endAngle(Math.PI / 2.2);
+    const arcPath = d3.arc();
+    const arcData: d3.DefaultArcObject = {
+      innerRadius: 237,
+      outerRadius: 239,
+      startAngle: -Math.PI / 2.2,
+      endAngle: Math.PI / 2.2,
+    };
 
     courtGroup
       .append('path')
-      .attr('d', arcPath({}) as string)
+      .attr('d', arcPath(arcData))
       .attr('transform', `translate(${width / 2}, 50)`)
       .attr('fill', 'var(--border-color)');
   }

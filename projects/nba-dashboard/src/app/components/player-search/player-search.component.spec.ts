@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { PlayerSearchComponent } from './player-search.component';
 import { NbaApiService } from '../../core/services/nba-api.service';
+import { PlayerListItem } from '../../core/models/player.schema';
 import { signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 

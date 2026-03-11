@@ -8,7 +8,6 @@ async function prepareApp() {
     // We try to import the mocks from the main app's src folder
     // This assumes they are shared in the monorepo context
     try {
-      // @ts-expect-error: Mocks are outside of the project root
       const { worker } = await import('../../../src/mocks/browser');
       return worker.start({
         onUnhandledRequest: 'bypass',

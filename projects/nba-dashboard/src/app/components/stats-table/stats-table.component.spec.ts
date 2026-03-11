@@ -53,6 +53,17 @@ describe('StatsTableComponent', () => {
       blk: 0.5,
       turnover: 3.5,
       games_played: 71,
+      player_id: 237,
+      season: 2024,
+      min: '35:18',
+      fgm: 9.6,
+      fga: 17.9,
+      fg3m: 2.1,
+      fg3a: 5.1,
+      ftm: 4.3,
+      fta: 5.7,
+      oreb: 0.9,
+      dreb: 6.4,
     };
     mockPlayerStats.set(stats);
     fixture.detectChanges();
