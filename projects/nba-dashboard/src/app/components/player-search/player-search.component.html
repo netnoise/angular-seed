@@ -17,7 +17,7 @@
       <button
         class="nba-player-search__button"
         (click)="onSearchChange()"
-        [disabled]="searchTerm().length < 2 || isLoading()">
+        [disabled]="searchTerm().length < 3 || isLoading()">
         {{ isLoading() ? 'Searching...' : 'Send' }}
       </button>
       @if (searchTerm()) {

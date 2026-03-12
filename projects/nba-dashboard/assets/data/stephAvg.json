@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "pts": 26.4,
+      "ast": 5.1,
+      "reb": 4.5,
+      "stl": 0.7,
+      "blk": 0.4,
+      "turnover": 2.8,
+      "games_played": 74,
+      "min": "32:42",
+      "fg_pct": 0.45,
+      "fg3_pct": 0.408,
+      "ft_pct": 0.923,
+      "player_id": 1,
+      "season": 2024,
+      "fgm": 9,
+      "fga": 20,
+      "fg3m": 4,
+      "fg3a": 10,
+      "ftm": 4.4,
+      "fta": 5,
+      "oreb": 0.7,
+      "dreb": 3.8
+    }
+  ]
+}

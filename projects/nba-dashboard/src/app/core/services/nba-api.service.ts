@@ -1,23 +1,29 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { map, catchError, of } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
   NbaPlayerListResponseSchema,
   NbaSeasonAveragesResponseSchema,
+  PlayerListItem,
   ShotChartResponseSchema,
   toPlayerListItem,
+  NbaPlayerListResponse,
 } from '../models/player.schema';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NbaApiService {
   private http = inject(HttpClient);
+  private cache = inject(CacheService);
 
   private readonly API_BASE_URL = environment.apiUrl;
   private readonly SEASON_START_MONTH = 9; // October (0-based)
+  private readonly PLAYER_CACHE_TTL = 3600000; // 1 hour
+  private readonly STATS_CACHE_TTL = 600000; // 10 minutes
 
   // Selected player state
   private selectedPlayerIdSignal = signal<number | null>(null);
@@ -32,16 +38,28 @@ export class NbaApiService {
   playersResource = rxResource({
     request: () => this.searchTermSignal(),
     loader: ({ request: searchTerm }) => {
-      const params: Record<string, string | number | boolean> = {};
-      if (searchTerm) {
-        params['search'] = searchTerm;
+      if (!searchTerm || searchTerm.length < 3) {
+        return of([]);
       }
 
-      return this.http.get(`${this.API_BASE_URL}/v1/players/active`, { params }).pipe(
+      // Check if we can filter locally from a broader cached search
+      const cachedResult = this.findRefinementInCache(searchTerm);
+      if (cachedResult) {
+        return of(cachedResult);
+      }
+
+      const params: Record<string, string | number | boolean> = {
+        search: searchTerm,
+      };
+
+      return this.http.get(`${this.API_BASE_URL}/v1/players`, { params }).pipe(
         map(response => {
           const parsed = NbaPlayerListResponseSchema.safeParse(response);
           if (parsed.success) {
-            return parsed.data.data.map(toPlayerListItem);
+            const players = parsed.data.data.map(toPlayerListItem);
+            // Explicitly cache with longer TTL since it's a GET call that interceptor will also cache
+            // But here we're doing it to ensure we can find it for refinements
+            return players;
           }
           console.error('Player list validation failed:', parsed.error);
           return [];
@@ -53,6 +71,34 @@ export class NbaApiService {
       );
     },
   });
+
+  /**
+   * Tries to find a broader search in cache to filter locally
+   */
+  private findRefinementInCache(term: string): PlayerListItem[] | null {
+    const normalizedTerm = term.toLowerCase();
+
+    // Iterate backwards through the string to find the longest parent match
+    for (let i = term.length - 1; i >= 3; i--) {
+      const parentTerm = term.substring(0, i);
+      // The interceptor uses urlWithParams as key
+      const cacheKey = `${this.API_BASE_URL}/v1/players?search=${encodeURIComponent(parentTerm)}`;
+      const cachedData = this.cache.get(cacheKey) as NbaPlayerListResponse | null;
+
+      if (cachedData && Array.isArray(cachedData.data)) {
+        const players = cachedData.data.map(p => toPlayerListItem(p));
+        const filtered = players.filter((p: PlayerListItem) =>
+          p.fullName.toLowerCase().includes(normalizedTerm),
+        );
+
+        // If we have results, or if the parent search was specific enough to return NO results
+        // we can trust the local filter.
+        // Note: This is a PoC optimization.
+        return filtered;
+      }
+    }
+    return null;
+  }
 
   /**
    * Resource for fetching player stats

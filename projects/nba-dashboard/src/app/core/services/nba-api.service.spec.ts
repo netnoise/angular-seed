@@ -70,112 +70,74 @@ describe('NbaApiService', () => {
     httpMock.verify();
   });
 
-  it('should be created', done => {
-    service.players();
-    setTimeout(() => {
-      const initialReq = httpMock.expectOne(
-        req => req.url.includes('/v1/players/active') && !req.params.has('search'),
-      );
-      initialReq.flush({ data: [], meta: {} });
-      expect(service).toBeTruthy();
-      done();
-    }, 0);
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 
   it('should fetch players when searchPlayers is called', done => {
-    service.players();
+    const searchTerm = 'LeBron';
+    const mockResponse = {
+      data: [mockPlayer],
+      meta: { per_page: 25 },
+    };
+
+    TestBed.runInInjectionContext(() => {
+      effect(() => {
+        const players = service.players();
+        if (players.length > 0) {
+          expect(players[0].fullName).toBe('LeBron James');
+          done();
+        }
+      });
+    });
+
+    service.searchPlayers(searchTerm);
 
     setTimeout(() => {
-      // Flush initial
-      const initialReq = httpMock.expectOne(
-        req => req.url.includes('/v1/players/active') && !req.params.has('search'),
+      const req = httpMock.expectOne(
+        req => req.url.includes('/v1/players') && req.params.get('search') === searchTerm,
       );
-      initialReq.flush({ data: [], meta: {} });
-
-      const searchTerm = 'LeBron';
-      const mockResponse = {
-        data: [mockPlayer],
-        meta: { per_page: 25 },
-      };
-
-      TestBed.runInInjectionContext(() => {
-        effect(() => {
-          const players = service.players();
-          if (players.length > 0) {
-            expect(players[0].fullName).toBe('LeBron James');
-            done();
-          }
-        });
-      });
-
-      service.searchPlayers(searchTerm);
-
-      setTimeout(() => {
-        const req = httpMock.expectOne(
-          req => req.url.includes('/v1/players/active') && req.params.get('search') === searchTerm,
-        );
-        req.flush(mockResponse);
-      }, 0);
+      req.flush(mockResponse);
     }, 0);
   });
 
   it('should fetch player stats when selectPlayer is called', done => {
-    service.players();
+    const playerId = 237;
+    const mockResponse = {
+      data: [mockStats],
+    };
+
+    TestBed.runInInjectionContext(() => {
+      effect(() => {
+        const stats = service.playerStats();
+        if (stats) {
+          expect(stats.pts).toBe(25.7);
+          done();
+        }
+      });
+    });
+
+    service.selectPlayer(playerId);
 
     setTimeout(() => {
-      // Flush initial
-      const initialReq = httpMock.expectOne(
-        req => req.url.includes('/v1/players/active') && !req.params.has('search'),
-      );
-      initialReq.flush({ data: [], meta: {} });
-
-      const playerId = 237;
-      const mockResponse = {
-        data: [mockStats],
-      };
-
-      TestBed.runInInjectionContext(() => {
-        effect(() => {
-          const stats = service.playerStats();
-          if (stats) {
-            expect(stats.pts).toBe(25.7);
-            done();
-          }
-        });
-      });
-
-      service.selectPlayer(playerId);
-
-      setTimeout(() => {
-        const req = httpMock.expectOne(req => req.url.includes('/v1/season_averages'));
-        expect(req.request.params.get('player_id')).toBe(playerId.toString());
-        req.flush(mockResponse);
-      }, 0);
+      const req = httpMock.expectOne(req => req.url.includes('/v1/season_averages'));
+      expect(req.request.params.get('player_id')).toBe(playerId.toString());
+      req.flush(mockResponse);
     }, 0);
   });
 
   it('should handle API errors gracefully', done => {
-    service.players();
+    service.searchPlayers('error');
 
     setTimeout(() => {
-      // Flush initial
-      const initialReq = httpMock.expectOne(
-        req => req.url.includes('/v1/players/active') && !req.params.has('search'),
+      const req = httpMock.expectOne(
+        req => req.url.includes('/v1/players') && req.params.get('search') === 'error',
       );
-      initialReq.flush({ data: [], meta: {} });
-
-      service.searchPlayers('error');
+      req.error(new ErrorEvent('Network error'));
 
       setTimeout(() => {
-        const req = httpMock.expectOne(
-          req => req.url.includes('/v1/players/active') && req.params.get('search') === 'error',
-        );
-        req.error(new ErrorEvent('Network error'));
-
-        setTimeout(() => {
-          expect(service.players()).toEqual([]);
-          done();
-        }, 0);
+        expect(service.players()).toEqual([]);
+        done();
       }, 0);
     }, 0);
   });

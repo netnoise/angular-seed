@@ -1,0 +1,10 @@
+{
+  "/v1": {
+    "target": "https://api.balldontlie.io",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/v1": "/v1"
+    }
+  }
+}

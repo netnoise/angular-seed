@@ -9,7 +9,7 @@ export const nbaApiInterceptor: HttpInterceptorFn = (req, next) => {
   const rateLimiter = inject(RateLimiterService);
   const cache = inject(CacheService);
 
-  if (req.url.startsWith(environment.apiUrl)) {
+  if (req.url.startsWith('/v1')) {
     // 1. Check Cache (only for GET requests)
     if (req.method === 'GET') {
       const cacheKey = req.urlWithParams;
@@ -40,7 +40,12 @@ export const nbaApiInterceptor: HttpInterceptorFn = (req, next) => {
     return next(authReq).pipe(
       tap(event => {
         if (event instanceof HttpResponse && req.method === 'GET') {
-          cache.set(req.urlWithParams, event.body);
+          // Determine TTL based on endpoint
+          let ttl = 600000; // Default 10 mins
+          if (req.url.includes('/v1/players')) {
+            ttl = 3600000; // 1 hour for player profiles
+          }
+          cache.set(req.urlWithParams, event.body, ttl);
         }
       }),
       catchError(error => {

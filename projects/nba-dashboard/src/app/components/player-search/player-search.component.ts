@@ -28,7 +28,7 @@ export class PlayerSearchComponent implements OnDestroy {
     this.searchSubject
       .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(query => {
-        if (query.length >= 2) {
+        if (query.length >= 3) {
           this.nbaApi.searchPlayers(query);
         }
       });

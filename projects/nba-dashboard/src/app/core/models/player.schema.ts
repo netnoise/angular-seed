@@ -16,18 +16,18 @@ export type NbaTeam = z.infer<typeof NbaTeamSchema>;
 // NBA player schema (OpenAPI)
 export const NbaPlayerSchema = z.object({
   id: z.number(),
-  first_name: z.string(),
-  last_name: z.string(),
-  position: z.string(),
-  height: z.string(),
-  weight: z.string(),
-  jersey_number: z.string(),
-  college: z.string(),
-  country: z.string(),
-  draft_year: z.number(),
-  draft_round: z.number(),
-  draft_number: z.number(),
-  team: NbaTeamSchema,
+  first_name: z.string().nullable().optional(),
+  last_name: z.string().nullable().optional(),
+  position: z.string().nullable().optional(),
+  height: z.string().nullable().optional(),
+  weight: z.string().nullable().optional(),
+  jersey_number: z.string().nullable().optional(),
+  college: z.string().nullable().optional(),
+  country: z.string().nullable().optional(),
+  draft_year: z.number().nullable().optional(),
+  draft_round: z.number().nullable().optional(),
+  draft_number: z.number().nullable().optional(),
+  team: NbaTeamSchema.nullable().optional(),
 });
 
 export type NbaPlayer = z.infer<typeof NbaPlayerSchema>;
@@ -41,37 +41,41 @@ export interface PlayerListItem {
   teamAbbreviation: string | null;
 }
 
-export const toPlayerListItem = (player: NbaPlayer): PlayerListItem => ({
-  id: player.id,
-  firstName: player.first_name,
-  lastName: player.last_name,
-  fullName: `${player.first_name} ${player.last_name}`,
-  teamAbbreviation: player.team?.abbreviation ?? null,
-});
+export const toPlayerListItem = (player: NbaPlayer): PlayerListItem => {
+  const firstName = player.first_name ?? '';
+  const lastName = player.last_name ?? '';
+  return {
+    id: player.id,
+    firstName,
+    lastName,
+    fullName: `${firstName} ${lastName}`.trim() || 'Unknown Player',
+    teamAbbreviation: player.team?.abbreviation ?? null,
+  };
+};
 
 // Season averages schema (OpenAPI)
 export const NbaSeasonAveragesSchema = z.object({
-  games_played: z.number(),
-  player_id: z.number(),
-  season: z.number(),
-  min: z.string(),
-  fgm: z.number(),
-  fga: z.number(),
-  fg3m: z.number(),
-  fg3a: z.number(),
-  ftm: z.number(),
-  fta: z.number(),
-  oreb: z.number(),
-  dreb: z.number(),
-  reb: z.number(),
-  ast: z.number(),
-  stl: z.number(),
-  blk: z.number(),
-  turnover: z.number(),
-  pts: z.number(),
-  fg_pct: z.number(),
-  fg3_pct: z.number(),
-  ft_pct: z.number(),
+  games_played: z.number().nullable().optional(),
+  player_id: z.number().nullable().optional(),
+  season: z.number().nullable().optional(),
+  min: z.string().nullable().optional(),
+  fgm: z.number().nullable().optional(),
+  fga: z.number().nullable().optional(),
+  fg3m: z.number().nullable().optional(),
+  fg3a: z.number().nullable().optional(),
+  ftm: z.number().nullable().optional(),
+  fta: z.number().nullable().optional(),
+  oreb: z.number().nullable().optional(),
+  dreb: z.number().nullable().optional(),
+  reb: z.number().nullable().optional(),
+  ast: z.number().nullable().optional(),
+  stl: z.number().nullable().optional(),
+  blk: z.number().nullable().optional(),
+  turnover: z.number().nullable().optional(),
+  pts: z.number().nullable().optional(),
+  fg_pct: z.number().nullable().optional(),
+  fg3_pct: z.number().nullable().optional(),
+  ft_pct: z.number().nullable().optional(),
 });
 
 export type NbaSeasonAverages = z.infer<typeof NbaSeasonAveragesSchema>;

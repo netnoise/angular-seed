@@ -28,16 +28,16 @@ export class StatsTableComponent {
     if (!stats) return [];
 
     return [
-      { stat: 'Games Played', value: stats.games_played },
-      { stat: 'Points Per Game', value: stats.pts.toFixed(1) },
-      { stat: 'Rebounds Per Game', value: stats.reb.toFixed(1) },
-      { stat: 'Assists Per Game', value: stats.ast.toFixed(1) },
-      { stat: 'Field Goal %', value: (stats.fg_pct * 100).toFixed(1) + '%' },
-      { stat: 'Three Point %', value: (stats.fg3_pct * 100).toFixed(1) + '%' },
-      { stat: 'Free Throw %', value: (stats.ft_pct * 100).toFixed(1) + '%' },
-      { stat: 'Steals Per Game', value: stats.stl.toFixed(1) },
-      { stat: 'Blocks Per Game', value: stats.blk.toFixed(1) },
-      { stat: 'Turnovers Per Game', value: stats.turnover.toFixed(1) },
+      { stat: 'Games Played', value: stats.games_played ?? 0 },
+      { stat: 'Points Per Game', value: (stats.pts ?? 0).toFixed(1) },
+      { stat: 'Rebounds Per Game', value: (stats.reb ?? 0).toFixed(1) },
+      { stat: 'Assists Per Game', value: (stats.ast ?? 0).toFixed(1) },
+      { stat: 'Field Goal %', value: ((stats.fg_pct ?? 0) * 100).toFixed(1) + '%' },
+      { stat: 'Three Point %', value: ((stats.fg3_pct ?? 0) * 100).toFixed(1) + '%' },
+      { stat: 'Free Throw %', value: ((stats.ft_pct ?? 0) * 100).toFixed(1) + '%' },
+      { stat: 'Steals Per Game', value: (stats.stl ?? 0).toFixed(1) },
+      { stat: 'Blocks Per Game', value: (stats.blk ?? 0).toFixed(1) },
+      { stat: 'Turnovers Per Game', value: (stats.turnover ?? 0).toFixed(1) },
     ];
   });
 

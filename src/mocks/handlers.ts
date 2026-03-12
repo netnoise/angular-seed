@@ -1,8 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  // 1. Mocking the 'active' players endpoint
-  http.get('https://api.balldontlie.io/v1/players/active', ({ request }) => {
+  // 1. Mocking the players endpoint
+  http.get('/v1/players', ({ request }) => {
     const url = new URL(request.url);
     const searchTerm = url.searchParams.get('search');
 
@@ -101,7 +101,7 @@ export const handlers = [
   }),
 
   // 2. Mocking season averages endpoint
-  http.get('https://api.balldontlie.io/v1/season_averages', ({ request }) => {
+  http.get('/v1/season_averages', ({ request }) => {
     const url = new URL(request.url);
     const playerId = url.searchParams.get('player_id');
 

@@ -41,9 +41,9 @@ describe('NbaApiInterceptor', () => {
     rateLimiterSpy.canMakeRequest.and.returnValue(true);
     cacheSpy.get.and.returnValue(null);
 
-    httpClient.get(`${environment.apiUrl}/test`).subscribe();
+    httpClient.get('/v1/test').subscribe();
 
-    const req = httpMock.expectOne(`${environment.apiUrl}/test`);
+    const req = httpMock.expectOne('/v1/test');
     expect(req.request.headers.has('Authorization')).toBeTrue();
     expect(req.request.headers.get('Authorization')).toBe(environment.nbaApiKey);
   });
@@ -52,14 +52,14 @@ describe('NbaApiInterceptor', () => {
     rateLimiterSpy.canMakeRequest.and.returnValue(false);
     cacheSpy.get.and.returnValue(null);
 
-    httpClient.get(`${environment.apiUrl}/test`).subscribe({
+    httpClient.get('/v1/test').subscribe({
       error: err => {
         expect(err.message).toContain('API Rate Limit Exceeded');
         done();
       },
     });
 
-    httpMock.expectNone(`${environment.apiUrl}/test`);
+    httpMock.expectNone('/v1/test');
   });
 
   it('should return cached data if available and bypass rate limit check', done => {
@@ -68,14 +68,14 @@ describe('NbaApiInterceptor', () => {
     // Rate limit should not even be checked if it's a cache hit
     // But let's verify if interceptor behavior matches our "Quota Efficiency" requirement
 
-    httpClient.get(`${environment.apiUrl}/test`).subscribe(response => {
+    httpClient.get('/v1/test').subscribe(response => {
       expect(response).toEqual(cachedBody);
       expect(rateLimiterSpy.canMakeRequest).not.toHaveBeenCalled();
       expect(rateLimiterSpy.registerRequest).not.toHaveBeenCalled();
       done();
     });
 
-    httpMock.expectNone(`${environment.apiUrl}/test`);
+    httpMock.expectNone('/v1/test');
   });
 
   it('should cache successful GET responses', () => {
@@ -83,26 +83,26 @@ describe('NbaApiInterceptor', () => {
     cacheSpy.get.and.returnValue(null);
     const responseBody = { live: 'data' };
 
-    httpClient.get(`${environment.apiUrl}/test`).subscribe();
+    httpClient.get('/v1/test').subscribe();
 
-    const req = httpMock.expectOne(`${environment.apiUrl}/test`);
+    const req = httpMock.expectOne('/v1/test');
     req.flush(responseBody);
 
-    expect(cacheSpy.set).toHaveBeenCalledWith(`${environment.apiUrl}/test`, responseBody);
+    expect(cacheSpy.set).toHaveBeenCalledWith('/v1/test', responseBody, 600000);
   });
 
   it('should exhaust quota on 429 error from backend', done => {
     rateLimiterSpy.canMakeRequest.and.returnValue(true);
     cacheSpy.get.and.returnValue(null);
 
-    httpClient.get(`${environment.apiUrl}/test`).subscribe({
+    httpClient.get('/v1/test').subscribe({
       error: () => {
         expect(rateLimiterSpy.exhaustQuota).toHaveBeenCalled();
         done();
       },
     });
 
-    const req = httpMock.expectOne(`${environment.apiUrl}/test`);
+    const req = httpMock.expectOne('/v1/test');
     req.flush('Rate Limit Exceeded', { status: 429, statusText: 'Too Many Requests' });
   });
 });
